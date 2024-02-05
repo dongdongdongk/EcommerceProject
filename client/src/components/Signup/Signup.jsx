@@ -137,9 +137,9 @@ const Signup = () => {
                 </button>
               </div>
               <div className={`${styles.noramlFlex} w-full`}>
-                <h4>회원이 아니십니까?</h4>
-                <Link to="/sign-up" className="text-blue-600 pl-2">
-                  회원가입
+                <h4>이미 회원이십니까?</h4>
+                <Link to="/login" className="text-blue-600 pl-2">
+                  로그인
                 </Link>
               </div>
             </form>
