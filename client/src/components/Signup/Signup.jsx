@@ -3,6 +3,8 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { FiFilePlus } from "react-icons/fi";
 import styles from "../../styles/styles.js";
 import { Link } from "react-router-dom";
+import axios from 'axios';
+
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -10,12 +12,26 @@ const Signup = () => {
   const [visible, setVisible] = useState(false);
   const [avatar, setAvatar] = useState(null);
 
-  const handleSubmit = () => {
-    console.log("제출");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const config = { headers : {"Content-Type":"multipart/form-data"}}
+
+    const newForm = new FormData();
+
+    newForm.append("file", avatar);
+    newForm.append("name", name);
+    newForm.append("email", email);
+    newForm.append("password", password);
+    
+    axios.post('http://localhost:5000/api/v2/user/create-user', newForm, config).then((res) => {
+      console.log(res)
+    }).catch((error) => {
+      console.log(error);
+    })
   };
 
   const handlerFileInputChange = (e) => {
-    const file = e.target.files(0);
+    const file = e.target.files[0];
     setAvatar(file);
   };
 
@@ -27,7 +43,7 @@ const Signup = () => {
         </h2>
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div>
                 <label
                   htmlFor="email"
@@ -41,7 +57,7 @@ const Signup = () => {
                     name="name"
                     required
                     value={name}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => setName(e.target.value)}
                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   />
                 </div>
@@ -122,7 +138,7 @@ const Signup = () => {
                       name="avatar"
                       id="file-input"
                       accept=".jpg,.jpeg,.png"
-                      onChange={""}
+                      onChange={handlerFileInputChange}
                       className="sr-only"
                     />
                   </label>

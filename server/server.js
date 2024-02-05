@@ -7,7 +7,7 @@ const connectDatabase = require("./db/Database");
 // 알수없는 에러 
 process.on("uncaughtException", (error) => {
     console.log(`ERROR :${error.message}`);
-    console.log(`서버 다운 알수없는 오류`)
+    console.log(`서버 다운, 알수없는 오류`)
 });
 
 
