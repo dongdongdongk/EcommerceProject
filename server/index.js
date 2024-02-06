@@ -1,5 +1,5 @@
 const express = require("express");
-const ErrorHandler = require("./util/ErrorHandler")
+const ErrorHandler = require("./middleware/error")
 const cookieParser = require("cookie-parser");
 const bodyParser = require('body-parser')
 const app = express();
@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
     cors({
-      origin: "http://localhost:5000",
+      origin: "http://localhost:3000",
       credentials: true,
     })
   );

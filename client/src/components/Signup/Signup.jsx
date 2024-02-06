@@ -3,6 +3,7 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { FiFilePlus } from "react-icons/fi";
 import styles from "../../styles/styles.js";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import axios from 'axios';
 
 const Signup = () => {
@@ -24,9 +25,9 @@ const Signup = () => {
     newForm.append("password", password);
     
     axios.post('http://localhost:5000/api/v2/user/create-user', newForm, config).then((res) => {
-      console.log(res)
+      toast.success(res.data.message)
     }).catch((error) => {
-      console.log(error);
+      toast.error(error.response.data.message)
     })
   };
 
