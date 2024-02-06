@@ -37,9 +37,9 @@ const ActivationPage = () => {
       }}
     >
       {error ? (
-        <p>Your token is expired!</p>
+        <p>토큰이 만료 되었습니다!</p>
       ) : (
-        <p>Your account has been created suceessfully!</p>
+        <p>계정이 성공적으로 생성되었습니다!</p>
       )}
     </div>
   );

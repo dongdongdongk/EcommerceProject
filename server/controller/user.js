@@ -73,7 +73,6 @@ router.post(
     catchAsyncErrors(async (req, res, next) => {
       try {
         const { activation_token } = req.body;
-  
         const newUser = jwt.verify(
           activation_token,
           process.env.ACTIVATION_SECRET
