@@ -26,6 +26,10 @@ const Signup = () => {
     
     axios.post('http://localhost:5000/api/v2/user/create-user', newForm, config).then((res) => {
       toast.success(res.data.message)
+      setName("");
+      setEmail("");
+      setPassword("");
+      setAvatar();
     }).catch((error) => {
       toast.error(error.response.data.message)
     })

@@ -7,8 +7,9 @@ const fs = require("fs");
 const ErrorHandler = require("../util/ErrorHandler");
 const jwt = require("jsonwebtoken");
 const sendMail = require("../util/sendMail");
-const sendToken = require('../util/jwtToken');
-const catchAsyncErrors = require('../middleware/catchAsyncErrors')
+const sendToken = require("../util/jwtToken");
+const catchAsyncErrors = require("../middleware/catchAsyncErrors");
+const { isAuthenticated } = require("../middleware/auth");
 
 router.post("/create-user", upload.single("file"), async (req, res, next) => {
   try {
@@ -69,37 +70,93 @@ const createActivationToken = (user) => {
 
 // activate user
 router.post(
-    "/activation",
+  "/activation",
+  catchAsyncErrors(async (req, res, next) => {
+    try {
+      const { activation_token } = req.body;
+      const newUser = jwt.verify(
+        activation_token,
+        process.env.ACTIVATION_SECRET
+      );
+
+      if (!newUser) {
+        return next(new ErrorHandler("Invalid token", 400));
+      }
+      const { name, email, password, avatar } = newUser;
+
+      let user = await User.findOne({ email });
+
+      if (user) {
+        return next(new ErrorHandler("User already exists", 400));
+      }
+      user = await User.create({
+        name,
+        email,
+        avatar,
+        password,
+      });
+
+      sendToken(user, 201, res);
+    } catch (error) {
+      return next(new ErrorHandler(error.message, 500));
+    }
+  })
+);
+
+// 로그인 유저
+router.post(
+  "/login-user",
+  catchAsyncErrors(async (req, res, next) => {
+    try {
+      const { email, password } = req.body;
+
+      if (!email || !password) {
+        return next(new ErrorHandler("모든 필드를 입력하세요!", 400));
+      }
+
+      const user = await User.findOne({ email }).select("+password");
+
+      if (!user) {
+        return next(new ErrorHandler("사용자가 존재하지 않습니다!", 400));
+      }
+
+      const isPasswordValid = await user.comparePassword(password);
+
+      if (!isPasswordValid) {
+        return next(
+          new ErrorHandler("올바른 정보를 입력해 주세요.", 400)
+        );
+      }
+
+      sendToken(user, 201, res);
+    } catch (error) {
+      return next(new ErrorHandler(error.message, 500));
+    }
+  })
+);
+
+
+// 유저 불러오기 
+router.get(
+    "/getuser",
+    isAuthenticated,
     catchAsyncErrors(async (req, res, next) => {
       try {
-        const { activation_token } = req.body;
-        const newUser = jwt.verify(
-          activation_token,
-          process.env.ACTIVATION_SECRET
-        );
+        const user = await User.findById(req.user.id);
   
-        if (!newUser) {
-          return next(new ErrorHandler("Invalid token", 400));
+        if (!user) {
+          return next(new ErrorHandler("유저가 존재하지 않습니다!", 400));
         }
-        const { name, email, password, avatar } = newUser;
   
-        let user = await User.findOne({ email });
-  
-        if (user) {
-          return next(new ErrorHandler("User already exists", 400));
-        }
-        user = await User.create({
-          name,
-          email,
-          avatar,
-          password,
+        res.status(200).json({
+          success: true,
+          user,
         });
-  
-        sendToken(user, 201, res);
       } catch (error) {
         return next(new ErrorHandler(error.message, 500));
       }
     })
   );
+  
 
 module.exports = router;
