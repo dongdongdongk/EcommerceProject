@@ -25,7 +25,7 @@ const Login = () => {
       .then((res) => {
         toast.success("로그인 성공!");
         navigate("/");
-        window.location.reload(true);
+        window.location.reload();
       })
       .catch((err) => {
         toast.error(err.response.data.message);

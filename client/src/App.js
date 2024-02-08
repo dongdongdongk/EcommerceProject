@@ -8,12 +8,13 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 import Store from "./redux/store";
-import { loadUser } from "./redux/actions/user";
+import { loadUser, clearErrors } from "./redux/user/userAction";
 
 const App = () => {
 
   useEffect(() => {
     Store.dispatch(loadUser());
+    Store.dispatch(clearErrors());
   }, []);
 
   return (
