@@ -7,17 +7,14 @@ import ActivationPage from "./pages/ActivationPage";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
+import Store from "./redux/store";
+import { loadUser } from "./redux/actions/user";
 
 const App = () => {
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/v2/user/getuser',{withCredentials:true}).then((res) => {
-      toast.success("로그인 성공!")
-    })
-    .catch((err) =>{
-      toast.error("로그인 실패!");
-    })
-  },[])
+    Store.dispatch(loadUser());
+  }, []);
 
   return (
     <BrowserRouter>
