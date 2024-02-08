@@ -9,17 +9,20 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 import Store from "./redux/store";
 import { loadUser, clearErrors } from "./redux/user/userAction";
+import HomePage from "./pages/HomePage";
 
 const App = () => {
 
   useEffect(() => {
     Store.dispatch(loadUser());
-    Store.dispatch(clearErrors());
+    // Store.dispatch(clearErrors());
   }, []);
 
   return (
     <BrowserRouter>
       <Routes>
+
+        <Route path="/" element={<HomePage/>} />
         <Route path="/login" element={<LoginPage/>} />
         <Route path="/sign-up" element={<SignupPage/>} />
         <Route
