@@ -4,6 +4,8 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require('body-parser')
 const app = express();
 const cors = require("cors");
+const fs = require('fs');
+const path = require('path');
 
 
 app.use(express.json());
@@ -17,7 +19,7 @@ app.use(
 app.use("/", express.static("uploads"))
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
+app.use('/images', express.static('images'));
 
 
 // config
