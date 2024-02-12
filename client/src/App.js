@@ -10,6 +10,7 @@ import axios from "axios";
 import Store from "./redux/store";
 import { loadUser, clearErrors } from "./redux/user/userAction";
 import HomePage from "./pages/HomePage";
+import EventsPage from "./pages/EventsPage";
 
 const App = () => {
 
@@ -29,6 +30,8 @@ const App = () => {
               path="/activation/:activation_token"
               element={<ActivationPage />}
             />
+        <Route path="/events" element={<EventsPage />} />
+        
       </Routes>
       <ToastContainer
             position="bottom-center"

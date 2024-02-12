@@ -26,8 +26,8 @@ export const navItems = [
   export const brandingData = [
     {
       id: 1,
-      title: "Free Shipping",
-      Description: "From all orders over 100$",
+      title: "무료 배송",
+      Description: "2만원 이상 모든 주문시",
       icon: (
         <svg
           width="36"
@@ -76,8 +76,8 @@ export const navItems = [
     },
     {
       id: 2,
-      title: "Daily Surprise Offers",
-      Description: "Save up to 25% off",
+      title: "일일 깜짝 이벤트",
+      Description: "최대 25% 할인",
       icon: (
         <svg
           width="32"
@@ -104,8 +104,8 @@ export const navItems = [
     },
     {
       id: 4,
-      title: "Affortable Prices",
-      Description: "Get Factory direct price",
+      title: "저렴한 가격",
+      Description: "출고 가격으로 판매 합니다",
       icon: (
         <svg
           width="32"
@@ -151,8 +151,8 @@ export const navItems = [
     },
     {
       id: 5,
-      title: "Secure Payments",
-      Description: "100% protected payments",
+      title: "보안 결제",
+      Description: "100% 안전한 결제",
       icon: (
         <svg
           width="32"
@@ -191,72 +191,72 @@ export const navItems = [
   export const categoriesData = [
     {
       id: 1,
-      title: "Computers and Laptops",
+      title: "컴퓨터 및 노트북",
       subTitle: "",
       image_Url:
-        "https://cdn.shopify.com/s/files/1/1706/9177/products/NEWAppleMacbookProwithM1ProChip14InchLaptop2021ModelMKGQ3LL_A_16GB_1TBSSD_custommacbd.jpg?v=1659592838",
+        "http://localhost:5000/images/TV.jpg",
     },
     {
       id: 2,
-      title: "cosmetics and body care",
+      title: "화장품 및 영양제",
       subTitle: "",
       image_Url:
-        "https://indian-retailer.s3.ap-south-1.amazonaws.com/s3fs-public/2021-07/kosme1.png",
+        "http://localhost:5000/images/HG.jpg",
     },
     {
       id: 3,
-      title: "Accesories",
+      title: "액세서리",
       subTitle: "",
       image_Url:
-        "https://img.freepik.com/free-vector/ordering-goods-online-internet-store-online-shopping-niche-e-commerce-website-mother-buying-babies-clothes-footwear-toys-infant-accessories_335657-2345.jpg?w=2000",
+        "http://localhost:5000/images/accessory.jpg",
     },
     {
       id: 4,
-      title: "Cloths",
+      title: "의류",
       subTitle: "",
       image_Url:
-        "https://www.shift4shop.com/2015/images/industries/clothing/clothing-apparel.png",
+        "http://localhost:5000/images/cloth.jpg",
     },
     {
       id: 5,
-      title: "Shoes",
+      title: "신발",
       subTitle: "",
       image_Url:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvBQPQMVNRd6TtDkGs2dCri0Y-rxKkFOiEWw&usqp=CAU",
+        "http://localhost:5000/images/shoose.jpg",
     },
     {
       id: 6,
-      title: "Gifts",
+      title: "선물",
       subTitle: "",
       image_Url:
-        "https://securecdn.pymnts.com/wp-content/uploads/2014/11/Gifts-Photo-700x489.jpg",
+       "http://localhost:5000/images/gift.jpg",
     },
     {
       id: 7,
-      title: "Pet Care",
+      title: "애완 용품",
       subTitle: "",
-      image_Url: "https://cdn.openpr.com/T/c/Tc15444071_g.jpg",
+      image_Url: "http://localhost:5000/images/cat.jpg",
     },
     {
       id: 8,
-      title: "Mobile and Tablets",
+      title: "모바일 및 태블릿",
       subTitle: "",
       image_Url:
-        "https://st-troy.mncdn.com/mnresize/1500/1500/Content/media/ProductImg/original/mpwp3tua-apple-iphone-14-256gb-mavi-mpwp3tua-637986832343472449.jpg",
+      "http://localhost:5000/images/phone.jpg",
     },
     {
       id: 9,
-      title: "Music and Gaming",
+      title: "음악 및 게임 용품",
       subTitle: "",
       image_Url:
-        "https://static.vecteezy.com/system/resources/previews/011/996/555/original/3d-black-headphone-illustration-ecommerce-icon-png.png",
+      "http://localhost:5000/images/mouse.jpg",
     },
     {
       id: 10,
-      title: "Others",
+      title: "기타 상품",
       subTitle: "",
       image_Url:
-        "https://searchspring.com/wp-content/uploads/2022/10/Hero-Image-Platform-Others-2.png",
+      "http://localhost:5000/images/JD.jpg",
     },
   ];
   

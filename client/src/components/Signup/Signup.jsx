@@ -63,7 +63,7 @@ const Signup = () => {
                     required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
                   />
                 </div>
               </div>
@@ -81,7 +81,7 @@ const Signup = () => {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
                   />
                 </div>
               </div>
@@ -99,7 +99,7 @@ const Signup = () => {
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
                   />
                   {visible ? (
                     <AiOutlineEye
@@ -152,14 +152,14 @@ const Signup = () => {
               <div>
                 <button
                   type="submit"
-                  className="group relative w-full h-[40px] flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+                  className="group relative w-full h-[40px] flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-500 hover:bg-yellow-600"
                 >
                   Submit
                 </button>
               </div>
               <div className={`${styles.noramlFlex} w-full`}>
                 <h4>이미 회원이십니까?</h4>
-                <Link to="/login" className="text-blue-600 pl-2">
+                <Link to="/login" className="text-yellow-600 pl-2">
                   로그인
                 </Link>
               </div>
