@@ -1,19 +1,19 @@
 // navigation Data
 export const navItems = [
     {
-      title: "Home",
+      title: "메인 페이지",
       url: "/",
     },
     {
-      title: "Best Selling",
+      title: "인기 상품",
       url: "/best-selling",
     },
     {
-      title: "Products",
+      title: "전체 상품",
       url: "/products",
     },
     {
-      title: "Events",
+      title: "이벤트 상품",
       url: "/events",
     },
     {
