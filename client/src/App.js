@@ -15,9 +15,12 @@ import ProductsPage from "./pages/ProductsPage";
 import BestSellingPage from "./pages/BestSellingPage";
 import FAQPage from "./pages/FAQPage";
 import { useSelector } from "react-redux";
+import ProductDetailsPage from "./pages/ProductDetailsPage";
+import ProfilePage from "./pages/ProfilePage";
+import ProtectedRoute from "./ProtectedRoute";
 
 const App = () => {
-  const { loading } = useSelector((state) => state.user);
+  const { loading, isAuthenticated  } = useSelector((state) => state.user);
   useEffect(() => {
     Store.dispatch(loadUser());
     // Store.dispatch(clearErrors());
@@ -39,8 +42,17 @@ const App = () => {
             />
             <Route path="/events" element={<EventsPage />} />
             <Route path="/products" element={<ProductsPage />} />
+            <Route path="/product/:name" element={<ProductDetailsPage />} />
             <Route path="/best-selling" element={<BestSellingPage />} />
             <Route path="/faq" element={<FAQPage />} />
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute isAuthenticated={isAuthenticated}>
+                  <ProfilePage />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
           <ToastContainer
             position="bottom-center"

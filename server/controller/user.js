@@ -135,6 +135,25 @@ router.post(
   })
 );
 
+// 로그아웃 유저
+router.get(
+  "/logout",
+  catchAsyncErrors(async (req, res, next) => {
+    try {
+      res.cookie("token", null, {
+        expires: new Date(Date.now()),
+        httpOnly: true,
+      });
+      res.status(201).json({
+        success: true,
+        message: "로그아웃 성공!",
+      });
+    } catch (error) {
+      return next(new ErrorHandler(error.message, 500));
+    }
+  })
+);
+
 
 // 유저 불러오기 
 router.get(

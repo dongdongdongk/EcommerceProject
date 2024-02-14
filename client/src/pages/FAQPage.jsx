@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Footer from "../components/Layout/Footer";
 import Header from "../components/Layout/Header";
 import styles from "../styles/styles";
+import Lottie from "lottie-react";
+import QNA from "../Lottie/QNA.json"
 
 const FAQPage = () => {
   return (
@@ -25,7 +27,14 @@ const Faq = () => {
   };
 
   return (
-    <div className={`${styles.section} my-8`}>
+    <div className={`${styles.section} my-8 min-h-[800px]`}>
+        <div className="flex flex-col items-center">
+            <Lottie
+              animationData={QNA}
+              style={{ width: "300px", height: "300px" }}
+              loop ={false}
+            />
+        </div>
       <h2 className="text-3xl font-bold text-gray-900 mb-8">FAQ</h2>
       <div className="mx-auto space-y-4">
         {/* single Faq */}

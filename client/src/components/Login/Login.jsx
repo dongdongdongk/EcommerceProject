@@ -23,9 +23,9 @@ const Login = () => {
         { withCredentials: true }
       )
       .then((res) => {
+        window.location.replace("/");
         toast.success("로그인 성공!");
-        navigate("/");
-        window.location.reload(true);
+        // navigate("/");
       })
       .catch((err) => {
         toast.error(err.response.data.message);
