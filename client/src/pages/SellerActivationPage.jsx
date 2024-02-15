@@ -3,24 +3,24 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 
-
-const ActivationPage = () => {
+const SellerActivationPage = () => {
   const { activation_token } = useParams();
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    const sendRequest = async () => {
-      try {
-        const response = await axios.post(`http://localhost:5000/api/v2/user/activation`, {
-          activation_token,
-        });
-        console.log("이거 맞나??", response);
-      } catch (err) {
-        setError(true);
-      }
-    };
-  
     if (activation_token) {
+      const sendRequest = async () => {
+        await axios
+          .post(`http://localhost:5000/api/v2/shop/activation`, {
+            activation_token,
+          })
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            setError(true);
+          });
+      };
       sendRequest();
     }
   }, [activation_token]);
@@ -44,4 +44,4 @@ const ActivationPage = () => {
   );
 };
 
-export default ActivationPage;
+export default SellerActivationPage;

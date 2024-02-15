@@ -5,7 +5,9 @@ const userSlice = createSlice({
   name: 'seller',
   initialState: {
     isSeller: false,
+    loading: false,
     error: null,
+    seller : null,
   },
   extraReducers: (builder) => {
     builder
@@ -14,12 +16,13 @@ const userSlice = createSlice({
       })
       .addCase(loadSeller.fulfilled, (state, action) => {
         state.isSeller = true;
-        state.loading = false;
-        state.user = action.payload;
+        state.loading = true;
+        state.seller = action.payload;
       })
       .addCase(loadSeller.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
+        state.isSeller = false;
       })
       .addCase(clearErrors.fulfilled, (state) => {
         state.error = null;

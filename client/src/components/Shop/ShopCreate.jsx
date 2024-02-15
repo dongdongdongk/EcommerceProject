@@ -9,11 +9,11 @@ import { RxAvatar } from "react-icons/rx";
 const ShopCreate = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
-  const [name,setName] = useState("");
-  const [phoneNumber,setPhoneNumber] = useState();
-  const [address,setAddress] = useState("");
-  const [zipCode,setZipCode] = useState();
-  const [avatar,setAvatar] = useState();
+  const [name, setName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState();
+  const [address, setAddress] = useState("");
+  const [zipCode, setZipCode] = useState();
+  const [avatar, setAvatar] = useState();
   const [password, setPassword] = useState("");
   const [visible, setVisible] = useState(false);
 
@@ -56,19 +56,18 @@ const ShopCreate = () => {
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-         Register as a seller
+          판매자 등록
         </h2>
       </div>
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-[35rem]">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <form className="space-y-6" onSubmit={handleSubmit}>
-
-          <div>
+            <div>
               <label
                 htmlFor="email"
                 className="block text-sm font-medium text-gray-700"
               >
-                Shop Name
+                가게명
               </label>
               <div className="mt-1">
                 <input
@@ -87,7 +86,7 @@ const ShopCreate = () => {
                 htmlFor="email"
                 className="block text-sm font-medium text-gray-700"
               >
-                Phone Number
+                휴대폰 번호
               </label>
               <div className="mt-1">
                 <input
@@ -106,7 +105,7 @@ const ShopCreate = () => {
                 htmlFor="email"
                 className="block text-sm font-medium text-gray-700"
               >
-                Email address
+                이메일
               </label>
               <div className="mt-1">
                 <input
@@ -126,7 +125,7 @@ const ShopCreate = () => {
                 htmlFor="email"
                 className="block text-sm font-medium text-gray-700"
               >
-                Address
+                주소
               </label>
               <div className="mt-1">
                 <input
@@ -145,7 +144,7 @@ const ShopCreate = () => {
                 htmlFor="email"
                 className="block text-sm font-medium text-gray-700"
               >
-                Zip Code
+                우편번호
               </label>
               <div className="mt-1">
                 <input
@@ -164,7 +163,7 @@ const ShopCreate = () => {
                 htmlFor="password"
                 className="block text-sm font-medium text-gray-700"
               >
-                Password
+                비밀번호
               </label>
               <div className="mt-1 relative">
                 <input
@@ -213,7 +212,7 @@ const ShopCreate = () => {
                   htmlFor="file-input"
                   className="ml-5 flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
                 >
-                  <span>Upload a file</span>
+                  <span>프로필 등록</span>
                   <input
                     type="file"
                     name="avatar"
@@ -235,9 +234,9 @@ const ShopCreate = () => {
               </button>
             </div>
             <div className={`${styles.noramlFlex} w-full`}>
-              <h4>Already have an account?</h4>
+              <h4>이미 회원이십니까?</h4>
               <Link to="/shop-login" className="text-blue-600 pl-2">
-                Sign in
+                로그인
               </Link>
             </div>
           </form>

@@ -12,4 +12,4 @@ root.render(
   </Provider>
 );
 
-reportWebVitals();
+// reportWebVitals();

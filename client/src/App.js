@@ -21,6 +21,9 @@ import ProtectedRoute from "./ProtectedRoute";
 import CheckoutPage from "./pages/CheckoutPage";
 import ShopCreatePage from "./pages/ShopCreate";
 import { loadSeller } from "./redux/seller/sellerAction";
+import SellerActivationPage from "./pages/SellerActivationPage";
+import ShopLoginPage from "./pages/ShopLoginPage";
+import SellerProtectedRoute from "./SellerProtectedRoute";
 
 const App = () => {
   const { loading, isAuthenticated } = useSelector((state) => state.user);
@@ -29,59 +32,71 @@ const App = () => {
   useEffect(() => {
     Store.dispatch(loadUser());
     Store.dispatch(loadSeller());
+    console.log("두번실행 되는가?");
   }, []);
 
   return (
     <>
-      {loading ? (
-        <div style={{ textAlign: "center", marginTop: "50vh" }}>로딩 중...</div>
-      ) : (
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/sign-up" element={<SignupPage />} />
-            <Route
-              path="/activation/:activation_token"
-              element={<ActivationPage />}
-            />
-            <Route path="/events" element={<EventsPage />} />
-            <Route path="/products" element={<ProductsPage />} />
-            <Route path="/product/:name" element={<ProductDetailsPage />} />
-            <Route path="/best-selling" element={<BestSellingPage />} />
-            <Route path="/faq" element={<FAQPage />} />
-            <Route path="/shop-create" element={<ShopCreatePage />} />
-            <Route
-              path="/profile"
-              element={
-                <ProtectedRoute isAuthenticated={isAuthenticated}>
-                  <ProfilePage />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/checkout"
-              element={
-                <ProtectedRoute isAuthenticated={isAuthenticated}>
-                  <CheckoutPage />
-                </ProtectedRoute>
-              }
-            />
-          </Routes>
-          <ToastContainer
-            position="bottom-center"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="dark"
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/sign-up" element={<SignupPage />} />
+          <Route
+            path="/seller/activation/:activation_token"
+            element={<SellerActivationPage />}
           />
-        </BrowserRouter>
-      )}
+          <Route
+            path="/activation/:activation_token"
+            element={<ActivationPage />}
+          />
+          <Route path="/events" element={<EventsPage />} />
+          <Route path="/products" element={<ProductsPage />} />
+          <Route path="/product/:name" element={<ProductDetailsPage />} />
+          <Route path="/best-selling" element={<BestSellingPage />} />
+          <Route path="/faq" element={<FAQPage />} />
+
+          {/* 샵 라우터 */}
+          <Route path="/shop-create" element={<ShopCreatePage />} />
+          <Route path="/shop-login" element={<ShopLoginPage />} />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute isAuthenticated={isAuthenticated}>
+                <ProfilePage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/checkout"
+            element={
+              <ProtectedRoute isAuthenticated={isAuthenticated}>
+                <CheckoutPage />
+              </ProtectedRoute>
+            }
+          />
+          {/* <Route
+            path="/shop/:id"
+            element={
+              <SellerProtectedRoute isSeller={isSeller}>
+                <ShopHomePage />
+              </SellerProtectedRoute>
+            }
+          /> */}
+        </Routes>
+        <ToastContainer
+          position="bottom-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+        />
+      </BrowserRouter>
     </>
   );
 };
