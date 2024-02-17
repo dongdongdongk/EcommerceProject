@@ -25,7 +25,7 @@ const ShopLogin = () => {
       )
       .then((res) => {
         toast.success("로그인 성공!");
-        window.location.replace("/"); 
+        window.location.replace("/dashboard"); 
       })
       .catch((err) => {
         toast.error(err.response.data.message);
@@ -57,7 +57,7 @@ const ShopLogin = () => {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
                 />
               </div>
             </div>
@@ -76,7 +76,7 @@ const ShopLogin = () => {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
                 />
                 {visible ? (
                   <AiOutlineEye
@@ -99,7 +99,7 @@ const ShopLogin = () => {
                   type="checkbox"
                   name="remember-me"
                   id="remember-me"
-                  className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                  className="h-4 w-4 text-yellow-600 focus:ring-yellow-500 border-gray-300 rounded"
                 />
                 <label
                   htmlFor="remember-me"
@@ -111,7 +111,7 @@ const ShopLogin = () => {
               <div className="text-sm">
                 <a
                   href=".forgot-password"
-                  className="font-medium text-blue-600 hover:text-blue-500"
+                  className="font-medium text-yellow-600 hover:text-yellow-500"
                 >
                   비밀번호를 잊으셨습니까?
                 </a>
@@ -120,14 +120,14 @@ const ShopLogin = () => {
             <div>
               <button
                 type="submit"
-                className="group relative w-full h-[40px] flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+                className="group relative w-full h-[40px] flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-500 hover:bg-yellow-600"
               >
                 Submit
               </button>
             </div>
             <div className={`${styles.noramlFlex} w-full`}>
               <h4>회원이 아니십니까?</h4>
-              <Link to="/shop-create" className="text-blue-600 pl-2">
+              <Link to="/shop-create" className="text-yellow-600 pl-2">
                 Sign Up
               </Link>
             </div>

@@ -6,7 +6,6 @@ import SignupPage from "./pages/SignupPage";
 import ActivationPage from "./pages/ActivationPage";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import axios from "axios";
 import Store from "./redux/store";
 import { loadUser, clearErrors } from "./redux/user/userAction";
 import HomePage from "./pages/HomePage";
@@ -17,22 +16,21 @@ import FAQPage from "./pages/FAQPage";
 import { useSelector } from "react-redux";
 import ProductDetailsPage from "./pages/ProductDetailsPage";
 import ProfilePage from "./pages/ProfilePage";
-import ProtectedRoute from "./ProtectedRoute";
+import ProtectedRoute from "./Routes/ProtectedRoute";
 import CheckoutPage from "./pages/CheckoutPage";
-import ShopCreatePage from "./pages/ShopCreate";
+import ShopCreatePage from "./pages/Shop/ShopCreate";
 import { loadSeller } from "./redux/seller/sellerAction";
 import SellerActivationPage from "./pages/SellerActivationPage";
-import ShopLoginPage from "./pages/ShopLoginPage";
-import SellerProtectedRoute from "./SellerProtectedRoute";
+import ShopLoginPage from "./pages/Shop/ShopLoginPage";
+import SellerProtectedRoute from "./Routes/SellerProtectedRoute";
+import ShopHomePage from "./pages/Shop/ShopHomePage";
+import ShopDashboardPage from "./pages/Shop/ShopDashboardPage";
 
 const App = () => {
-  const { loading, isAuthenticated } = useSelector((state) => state.user);
-
-  const { isLoading, isSeller } = useSelector((state) => state.seller);
+  
   useEffect(() => {
     Store.dispatch(loadUser());
     Store.dispatch(loadSeller());
-    console.log("두번실행 되는가?");
   }, []);
 
   return (
@@ -59,10 +57,11 @@ const App = () => {
           {/* 샵 라우터 */}
           <Route path="/shop-create" element={<ShopCreatePage />} />
           <Route path="/shop-login" element={<ShopLoginPage />} />
+          
           <Route
             path="/profile"
             element={
-              <ProtectedRoute isAuthenticated={isAuthenticated}>
+              <ProtectedRoute>
                 <ProfilePage />
               </ProtectedRoute>
             }
@@ -70,19 +69,27 @@ const App = () => {
           <Route
             path="/checkout"
             element={
-              <ProtectedRoute isAuthenticated={isAuthenticated}>
+              <ProtectedRoute>
                 <CheckoutPage />
               </ProtectedRoute>
             }
           />
-          {/* <Route
+          <Route
             path="/shop/:id"
             element={
-              <SellerProtectedRoute isSeller={isSeller}>
+              <SellerProtectedRoute>
                 <ShopHomePage />
               </SellerProtectedRoute>
             }
-          /> */}
+          />
+          <Route
+          path="/dashboard"
+          element={
+            <SellerProtectedRoute>
+              <ShopDashboardPage />
+            </SellerProtectedRoute>
+          }
+        />
         </Routes>
         <ToastContainer
           position="bottom-center"

@@ -4,19 +4,20 @@ import { loadSeller, clearErrors } from "./sellerAction";
 const userSlice = createSlice({
   name: 'seller',
   initialState: {
+    loading: true,
     isSeller: false,
-    loading: false,
-    error: null,
-    seller : null,
+    seller: null,
+    error: null
   },
   extraReducers: (builder) => {
     builder
       .addCase(loadSeller.pending, (state) => {
-        state.loading = false;
+        state.loading = true;
       })
       .addCase(loadSeller.fulfilled, (state, action) => {
+        // console.log("Fulfilled", action.payload);
         state.isSeller = true;
-        state.loading = true;
+        state.loading = false;
         state.seller = action.payload;
       })
       .addCase(loadSeller.rejected, (state, action) => {

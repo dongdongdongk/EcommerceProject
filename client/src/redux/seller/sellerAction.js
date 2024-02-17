@@ -10,8 +10,7 @@ export const loadSeller = createAsyncThunk('seller/loadSeller', async () => {
     const { data } = await axios.get(`http://localhost:5000/api/v2/shop/getSeller`, {
       withCredentials: true,
     });
-    console.log(data.user)
-    return data.user;
+    return data.seller;
   } catch (error) {
     throw error.response.data.message;
   }
