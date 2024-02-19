@@ -25,6 +25,7 @@ import ShopLoginPage from "./pages/Shop/ShopLoginPage";
 import SellerProtectedRoute from "./Routes/SellerProtectedRoute";
 import ShopHomePage from "./pages/Shop/ShopHomePage";
 import ShopDashboardPage from "./pages/Shop/ShopDashboardPage";
+import ShopCreateProduct from "./pages/Shop/ShopCreateProduct";
 
 const App = () => {
   
@@ -90,6 +91,15 @@ const App = () => {
             </SellerProtectedRoute>
           }
         />
+        <Route
+          path="/dashboard-create-product"
+          element={
+            <SellerProtectedRoute>
+              <ShopCreateProduct />
+            </SellerProtectedRoute>
+          }
+        />
+        
         </Routes>
         <ToastContainer
           position="bottom-center"
