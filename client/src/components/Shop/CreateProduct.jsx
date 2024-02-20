@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-// import { createProduct } from "../../redux/actions/product";
+import { createProduct } from "../../redux/product/productAction"
 import { categoriesData } from "../../static/data";
 import { toast } from "react-toastify";
 
 const CreateProduct = () => {
   const { seller } = useSelector((state) => state.seller);
-//   const { success, error } = useSelector((state) => state.products);
+  const { success, error } = useSelector((state) => state.products);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -21,16 +21,16 @@ const CreateProduct = () => {
   const [discountPrice, setDiscountPrice] = useState();
   const [stock, setStock] = useState();
 
-//   useEffect(() => {
-//     if (error) {
-//       toast.error(error);
-//     }
-//     if (success) {
-//       toast.success("Product created successfully!");
-//       navigate("/dashboard");
-//       window.location.reload();
-//     }
-//   }, [dispatch, error, success]);
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+    if (success) {
+      toast.success("Product created successfully!");
+      navigate("/dashboard");
+      window.location.reload();
+    }
+  }, [dispatch, error, success]);
 
   const handleImageChange = (e) => {
     e.preventDefault();
@@ -57,7 +57,7 @@ const CreateProduct = () => {
     newForm.append("discountPrice", discountPrice);
     newForm.append("stock", stock);
     newForm.append("shopId", seller._id);
-    // dispatch(createProduct(newForm));
+    dispatch(createProduct(newForm));
   };
 
   return (

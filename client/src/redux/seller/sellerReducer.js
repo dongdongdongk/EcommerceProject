@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { loadSeller, clearErrors } from "./sellerAction";
 
-const userSlice = createSlice({
+const sellerSlice = createSlice({
   name: 'seller',
   initialState: {
     loading: true,
@@ -31,4 +31,4 @@ const userSlice = createSlice({
   },
 });
 
-export default userSlice.reducer;
+export default sellerSlice.reducer;

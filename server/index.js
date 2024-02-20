@@ -35,9 +35,11 @@ if (process.env.NODE_ENV !== "PRODUCTION") {
   // 라우터 부분
 const user = require("./controller/user")
 const shop = require("./controller/shop")
+const product = require("./controller/product")
 
 app.use("/api/v2/user", user)
 app.use("/api/v2/shop", shop)
+app.use("/api/v2/product", product)
 
 // 에러 핸들링 
 app.use(ErrorHandler);

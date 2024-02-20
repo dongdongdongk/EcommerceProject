@@ -20,6 +20,7 @@ import ProtectedRoute from "./Routes/ProtectedRoute";
 import CheckoutPage from "./pages/CheckoutPage";
 import ShopCreatePage from "./pages/Shop/ShopCreate";
 import { loadSeller } from "./redux/seller/sellerAction";
+import { getAllProductsShop , createProduct } from "./redux/product/productAction";
 import SellerActivationPage from "./pages/SellerActivationPage";
 import ShopLoginPage from "./pages/Shop/ShopLoginPage";
 import SellerProtectedRoute from "./Routes/SellerProtectedRoute";
@@ -32,6 +33,8 @@ const App = () => {
   useEffect(() => {
     Store.dispatch(loadUser());
     Store.dispatch(loadSeller());
+    Store.dispatch(getAllProductsShop());
+    Store.dispatch(createProduct());
   }, []);
 
   return (

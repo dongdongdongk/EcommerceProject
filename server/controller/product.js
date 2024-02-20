@@ -5,7 +5,7 @@ const router = express.Router();
 const Product = require("../model/product");
 const Shop = require("../model/shop");
 const { upload } = require("../multer");
-const ErrorHandler = require("../utils/ErrorHandler");
+const ErrorHandler = require("../util/ErrorHandler");
 const fs = require("fs");
 
 // create product
