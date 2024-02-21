@@ -25,6 +25,7 @@ import {
   createProduct,
   deleteProduct,
 } from "./redux/product/productAction";
+import { createEvent ,deleteEvent, getAllEventsShop } from "./redux/event/eventAction"
 import SellerActivationPage from "./pages/SellerActivationPage";
 import ShopLoginPage from "./pages/Shop/ShopLoginPage";
 import SellerProtectedRoute from "./Routes/SellerProtectedRoute";
@@ -32,6 +33,8 @@ import ShopHomePage from "./pages/Shop/ShopHomePage";
 import ShopDashboardPage from "./pages/Shop/ShopDashboardPage";
 import ShopCreateProduct from "./pages/Shop/ShopCreateProduct";
 import ShopAllProducts from "./pages/Shop/ShopAllProducts";
+import ShopCreateEvents from "./pages/Shop/ShopCreateEvents";
+import ShopAllEvents from "./pages/Shop/ShopAllEvents";
 
 const App = () => {
   useEffect(() => {
@@ -40,6 +43,9 @@ const App = () => {
     Store.dispatch(getAllProductsShop());
     Store.dispatch(createProduct());
     Store.dispatch(deleteProduct());
+    Store.dispatch(createEvent());
+    Store.dispatch(deleteEvent());
+    Store.dispatch(getAllEventsShop());
   }, []);
 
   return (
@@ -116,6 +122,22 @@ const App = () => {
               </SellerProtectedRoute>
             }
           />
+          <Route
+          path="/dashboard-create-event"
+          element={
+            <SellerProtectedRoute>
+              <ShopCreateEvents />
+            </SellerProtectedRoute>
+          }
+        />
+        <Route
+          path="/dashboard-events"
+          element={
+            <SellerProtectedRoute>
+              <ShopAllEvents />
+            </SellerProtectedRoute>
+          }
+        />
         </Routes>
         <ToastContainer
           position="bottom-center"
