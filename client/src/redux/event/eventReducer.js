@@ -54,34 +54,6 @@ const eventSlice = createSlice({
 
 export default eventSlice.reducer;
 
-
-
-//   // delete event of a shop
-//   deleteeventRequest: (state) => {
-//     state.isLoading = true;
-//   },
-//   deleteeventSuccess: (state, action) => {
-//     state.isLoading = false;
-//     state.message = action.payload;
-//   },
-//   deleteeventFailed: (state, action) => {
-//     state.isLoading = false;
-//     state.error = action.payload;
-//   },
-
-//   // get all events 
-//   getAlleventsRequest: (state) => {
-//     state.isLoading = true;
-//   },
-//   getAlleventsSuccess: (state, action) => {
-//     state.isLoading = false;
-//     state.allEvents = action.payload;
-//   },
-//   getAlleventsFailed: (state, action) => {
-//     state.isLoading = false;
-//     state.error = action.payload;
-//   },
-
 //   clearErrors: (state) => {
 //     state.error = null;
 //   },

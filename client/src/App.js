@@ -35,6 +35,7 @@ import ShopCreateProduct from "./pages/Shop/ShopCreateProduct";
 import ShopAllProducts from "./pages/Shop/ShopAllProducts";
 import ShopCreateEvents from "./pages/Shop/ShopCreateEvents";
 import ShopAllEvents from "./pages/Shop/ShopAllEvents";
+import ShopAllCoupons from "./pages/Shop/ShopAllCoupons";
 
 const App = () => {
   useEffect(() => {
@@ -135,6 +136,14 @@ const App = () => {
           element={
             <SellerProtectedRoute>
               <ShopAllEvents />
+            </SellerProtectedRoute>
+          }
+        />
+        <Route
+          path="/dashboard-coupons"
+          element={
+            <SellerProtectedRoute>
+              <ShopAllCoupons />
             </SellerProtectedRoute>
           }
         />

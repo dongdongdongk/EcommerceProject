@@ -7,27 +7,26 @@ import { RxCross1 } from "react-icons/rx";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "../../styles/styles";
 import Loader from "../Layout/Loader";
-import { server } from "../../server";
 import { toast } from "react-toastify";
 
 const AllCoupons = () => {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [coupons,setcoupons] = useState([]);
+  const [coupons, setcoupons] = useState([]);
   const [minAmount, setMinAmout] = useState(null);
   const [maxAmount, setMaxAmount] = useState(null);
   const [selectedProducts, setSelectedProducts] = useState(null);
   const [value, setValue] = useState(null);
   const { seller } = useSelector((state) => state.seller);
-  const { products } = useSelector((state) => state.products);
+  const { products } = useSelector((state) => state.product);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     setIsLoading(true);
     axios
-      .get(`${server}/coupon/get-coupon/${seller._id}`, {
+      .get(`http://localhost:5000/api/v2/coupon/get-coupon/${seller._id}`, {
         withCredentials: true,
       })
       .then((res) => {
@@ -40,9 +39,13 @@ const AllCoupons = () => {
   }, [dispatch]);
 
   const handleDelete = async (id) => {
-    axios.delete(`${server}/coupon/delete-coupon/${id}`,{withCredentials: true}).then((res) => {
-      toast.success("Coupon code deleted succesfully!")
-    })
+    axios
+      .delete(`http://localhost:5000/api/v2/coupon/delete-coupon/${id}`, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        toast.success("Coupon code deleted succesfully!");
+      });
     window.location.reload();
   };
 
@@ -51,7 +54,7 @@ const AllCoupons = () => {
 
     await axios
       .post(
-        `${server}/coupon/create-coupon-code`,
+        `http://localhost:5000/api/v2/coupon/create-coupon-code`,
         {
           name,
           minAmount,
@@ -63,9 +66,9 @@ const AllCoupons = () => {
         { withCredentials: true }
       )
       .then((res) => {
-       toast.success("Coupon code created successfully!");
-       setOpen(false);
-       window.location.reload();
+        toast.success("Coupon code created successfully!");
+        setOpen(false);
+        window.location.reload();
       })
       .catch((error) => {
         toast.error(error.response.data.message);
@@ -108,7 +111,7 @@ const AllCoupons = () => {
   const row = [];
 
   coupons &&
-  coupons.forEach((item) => {
+    coupons.forEach((item) => {
       row.push({
         id: item._id,
         name: item.name,
@@ -128,7 +131,7 @@ const AllCoupons = () => {
               className={`${styles.button} !w-max !h-[45px] px-3 !rounded-[5px] mr-3 mb-3`}
               onClick={() => setOpen(true)}
             >
-              <span className="text-white">Create Coupon Code</span>
+              <span className="text-white">쿠폰 코드 만들기</span>
             </div>
           </div>
           <DataGrid
@@ -149,75 +152,74 @@ const AllCoupons = () => {
                   />
                 </div>
                 <h5 className="text-[30px] font-Poppins text-center">
-                  Create Coupon code
+                  쿠폰 코드 만들기
                 </h5>
                 {/* create coupoun code */}
                 <form onSubmit={handleSubmit} aria-required={true}>
                   <br />
                   <div>
                     <label className="pb-2">
-                      Name <span className="text-red-500">*</span>
+                      쿠폰코드명 <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="text"
                       name="name"
                       required
                       value={name}
-                      className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                      className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
                       onChange={(e) => setName(e.target.value)}
-                      placeholder="Enter your coupon code name..."
+                      placeholder="쿠폰 코드 이름 입력"
                     />
                   </div>
                   <br />
                   <div>
                     <label className="pb-2">
-                      Discount Percentenge{" "}
-                      <span className="text-red-500">*</span>
+                      할인율 <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="text"
                       name="value"
                       value={value}
                       required
-                      className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                      className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
                       onChange={(e) => setValue(e.target.value)}
-                      placeholder="Enter your coupon code value..."
+                      placeholder="쿠폰 코드 할인율 입력"
                     />
                   </div>
                   <br />
                   <div>
-                    <label className="pb-2">Min Amount</label>
+                    <label className="pb-2">최소금액</label>
                     <input
                       type="number"
                       name="value"
                       value={minAmount}
-                      className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                      className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
                       onChange={(e) => setMinAmout(e.target.value)}
-                      placeholder="Enter your coupon code min amount..."
+                      placeholder="쿠폰 코드 최소 금액 입력"
                     />
                   </div>
                   <br />
                   <div>
-                    <label className="pb-2">Max Amount</label>
+                    <label className="pb-2">최대금액</label>
                     <input
                       type="number"
                       name="value"
                       value={maxAmount}
-                      className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                      className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
                       onChange={(e) => setMaxAmount(e.target.value)}
-                      placeholder="Enter your coupon code max amount..."
+                      placeholder="쿠폰 코드 최대 금액 입력"
                     />
                   </div>
                   <br />
                   <div>
-                    <label className="pb-2">Selected Product</label>
+                    <label className="pb-2">제품선택</label>
                     <select
                       className="w-full mt-2 border h-[35px] rounded-[5px]"
                       value={selectedProducts}
                       onChange={(e) => setSelectedProducts(e.target.value)}
                     >
                       <option value="Choose your selected products">
-                        Choose a selected product
+                        제품을 선택해주세요
                       </option>
                       {products &&
                         products.map((i) => (
@@ -232,7 +234,7 @@ const AllCoupons = () => {
                     <input
                       type="submit"
                       value="Create"
-                      className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                      className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
                     />
                   </div>
                 </form>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef  } from "react";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -23,12 +23,17 @@ const CreateEvent = () => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
 
+   // useRef를 사용하여 "end-date" 요소에 접근
+   const endDateRef = useRef(null);
+
   const handleStartDateChange = (e) => {
     const startDate = new Date(e.target.value);
     const minEndDate = new Date(startDate.getTime() + 3 * 24 * 60 * 60 * 1000);
     setStartDate(startDate);
     setEndDate(null);
-    document.getElementById("end-date").min = minEndDate.toISOString().slice(0, 10);
+    //document.getElementById("end-date").min = minEndDate.toISOString().slice(0, 10);
+    // useRef로 얻은 "end-date" 요소의 min 속성 설정
+    endDateRef.current.min = minEndDate.toISOString().slice(0, 10);
   };
 
   const handleEndDateChange = (e) => {
@@ -49,7 +54,7 @@ const CreateEvent = () => {
       toast.error(error);
     }
     if (success) {
-      toast.success("Event created successfully!");
+      toast.success("이벤트 추가완료!");
       navigate("/dashboard-events");
       window.location.reload();
     }
@@ -97,7 +102,7 @@ const CreateEvent = () => {
             type="text"
             name="name"
             value={name}
-            className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
             onChange={(e) => setName(e.target.value)}
             placeholder="이벤트 제품명 입력"
           />
@@ -114,7 +119,7 @@ const CreateEvent = () => {
             type="text"
             name="description"
             value={description}
-            className="mt-2 appearance-none block w-full pt-2 px-3 border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            className="mt-2 appearance-none block w-full pt-2 px-3 border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
             onChange={(e) => setDescription(e.target.value)}
             placeholder="이벤트 제품 설명 입력"
           ></textarea>
@@ -145,7 +150,7 @@ const CreateEvent = () => {
             type="text"
             name="tags"
             value={tags}
-            className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
             onChange={(e) => setTags(e.target.value)}
             placeholder="이벤트 제품 태그 입력"
           />
@@ -157,7 +162,7 @@ const CreateEvent = () => {
             type="number"
             name="price"
             value={originalPrice}
-            className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
             onChange={(e) => setOriginalPrice(e.target.value)}
             placeholder="이벤트 제품 가격 입력"
           />
@@ -171,7 +176,7 @@ const CreateEvent = () => {
             type="number"
             name="price"
             value={discountPrice}
-            className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
             onChange={(e) => setDiscountPrice(e.target.value)}
             placeholder="이벤트 할인 가격"
           />
@@ -185,7 +190,7 @@ const CreateEvent = () => {
             type="number"
             name="price"
             value={stock}
-            className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
             onChange={(e) => setStock(e.target.value)}
             placeholder="이벤트 제품 재고 입력"
           />
@@ -200,7 +205,7 @@ const CreateEvent = () => {
             name="price"
             id="start-date"
             value={startDate ? startDate.toISOString().slice(0, 10) : ""}
-            className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
             onChange={handleStartDateChange}
             min={today}
             placeholder="이벤트 제품 시작 입력"
@@ -215,8 +220,9 @@ const CreateEvent = () => {
             type="date"
             name="price"
             id="end-date"
+            ref={endDateRef}  // useRef로 "end-date" 요소에 ref 설정
             value={endDate ? endDate.toISOString().slice(0, 10) : ""}
-            className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
             onChange={handleEndDateChange}
             min={minEndDate}
             placeholder="이벤트 제품 종료 입력"
@@ -254,7 +260,7 @@ const CreateEvent = () => {
             <input
               type="submit"
               value="이벤트 등록"
-              className="mt-2 cursor-pointer appearance-none text-center block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              className="mt-2 cursor-pointer appearance-none text-center block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
             />
           </div>
         </div>

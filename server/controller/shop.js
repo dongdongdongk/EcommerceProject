@@ -179,7 +179,7 @@ router.get(
       });
       res.status(201).json({
         success: true,
-        message: "Log out successful!",
+        message: "로그아웃 성공!",
       });
     } catch (error) {
       return next(new ErrorHandler(error.message, 500));
