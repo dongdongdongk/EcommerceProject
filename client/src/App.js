@@ -20,21 +20,26 @@ import ProtectedRoute from "./Routes/ProtectedRoute";
 import CheckoutPage from "./pages/CheckoutPage";
 import ShopCreatePage from "./pages/Shop/ShopCreate";
 import { loadSeller } from "./redux/seller/sellerAction";
-import { getAllProductsShop , createProduct } from "./redux/product/productAction";
+import {
+  getAllProductsShop,
+  createProduct,
+  deleteProduct,
+} from "./redux/product/productAction";
 import SellerActivationPage from "./pages/SellerActivationPage";
 import ShopLoginPage from "./pages/Shop/ShopLoginPage";
 import SellerProtectedRoute from "./Routes/SellerProtectedRoute";
 import ShopHomePage from "./pages/Shop/ShopHomePage";
 import ShopDashboardPage from "./pages/Shop/ShopDashboardPage";
 import ShopCreateProduct from "./pages/Shop/ShopCreateProduct";
+import ShopAllProducts from "./pages/Shop/ShopAllProducts";
 
 const App = () => {
-  
   useEffect(() => {
     Store.dispatch(loadUser());
     Store.dispatch(loadSeller());
     Store.dispatch(getAllProductsShop());
     Store.dispatch(createProduct());
+    Store.dispatch(deleteProduct());
   }, []);
 
   return (
@@ -61,7 +66,7 @@ const App = () => {
           {/* 샵 라우터 */}
           <Route path="/shop-create" element={<ShopCreatePage />} />
           <Route path="/shop-login" element={<ShopLoginPage />} />
-          
+
           <Route
             path="/profile"
             element={
@@ -87,22 +92,30 @@ const App = () => {
             }
           />
           <Route
-          path="/dashboard"
-          element={
-            <SellerProtectedRoute>
-              <ShopDashboardPage />
-            </SellerProtectedRoute>
-          }
-        />
-        <Route
-          path="/dashboard-create-product"
-          element={
-            <SellerProtectedRoute>
-              <ShopCreateProduct />
-            </SellerProtectedRoute>
-          }
-        />
-        
+            path="/dashboard"
+            element={
+              <SellerProtectedRoute>
+                <ShopDashboardPage />
+              </SellerProtectedRoute>
+            }
+          />
+          <Route
+            path="/dashboard-create-product"
+            element={
+              <SellerProtectedRoute>
+                <ShopCreateProduct />
+              </SellerProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/dashboard-products"
+            element={
+              <SellerProtectedRoute>
+                <ShopAllProducts />
+              </SellerProtectedRoute>
+            }
+          />
         </Routes>
         <ToastContainer
           position="bottom-center"

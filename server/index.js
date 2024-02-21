@@ -6,10 +6,12 @@ const app = express();
 const cors = require("cors");
 const fs = require('fs');
 const path = require('path');
+const morgan = require('morgan');
 
 
 app.use(express.json());
 app.use(cookieParser());
+app.use(morgan('dev'));
 app.use(
     cors({
       origin: "http://localhost:3000",

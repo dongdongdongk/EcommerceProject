@@ -1,7 +1,7 @@
 // Redux Toolkit을 사용하여 동기 액션들을 처리하는 슬라이스 및 리듀서 생성
 
 import { createSlice } from "@reduxjs/toolkit";
-import { createProduct,getAllProductsShop } from "./productAction"
+import { createProduct,getAllProductsShop,deleteProduct } from "./productAction"
 // 슬라이스 생성
 const productSlice = createSlice({
   name: "product",
@@ -18,6 +18,7 @@ const productSlice = createSlice({
   reducers: {
     clearErrors: (state) => {
       state.error = null;
+      state.success = false;
     },
   },
   extraReducers: (builder) => {
@@ -50,7 +51,18 @@ const productSlice = createSlice({
       .addCase(getAllProductsShop.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.error.message;
-      });
+      })
+      .addCase(deleteProduct.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteProduct.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(deleteProduct.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
   },
 });
 

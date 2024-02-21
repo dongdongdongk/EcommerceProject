@@ -37,3 +37,20 @@ export const getAllProductsShop = createAsyncThunk(
     }
   }
 );
+
+
+
+export const deleteProduct = createAsyncThunk(
+  "product/deleteProduct", async (id) => {
+
+    try {
+      const { data } = await axios.delete (`http://localhost:5000/api/v2/product/delete-shop-product/${id}`,{withCredentials : true} )
+      return data.message;
+    } catch (error) {
+      throw error.response.data.message
+    }
+
+  }
+
+
+)

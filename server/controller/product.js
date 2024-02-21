@@ -17,7 +17,7 @@ router.post(
       const shopId = req.body.shopId;
       const shop = await Shop.findById(shopId);
       if (!shop) {
-        return next(new ErrorHandler("Shop Id is invalid!", 400));
+        return next(new ErrorHandler("상점이 존재하지 않습니다!", 400));
       } else {
         const files = req.files;
         const imageUrls = files.map((file) => `${file.filename}`);
@@ -80,12 +80,12 @@ router.delete(
       const product = await Product.findByIdAndDelete(productId);
 
       if (!product) {
-        return next(new ErrorHandler("Product not found with this id!", 500));
+        return next(new ErrorHandler("일치하는 상품과 id 를 찾지 못했습니다!", 500));
       }
 
       res.status(201).json({
         success: true,
-        message: "Product Deleted successfully!",
+        message: "상품 삭제 성공!",
       });
     } catch (error) {
       return next(new ErrorHandler(error, 400));
