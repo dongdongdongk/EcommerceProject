@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { AiFillHeart, AiFillStar, AiOutlineEye, AiOutlineHeart, AiOutlineShoppingCart, AiOutlineStar } from "react-icons/ai";
+import {
+  AiFillHeart,
+  AiFillStar,
+  AiOutlineEye,
+  AiOutlineHeart,
+  AiOutlineShoppingCart,
+  AiOutlineStar,
+} from "react-icons/ai";
 import { Link } from "react-router-dom";
 import styles from "../../styles/styles";
 import ProductDetailsCard from "./ProductDetailCard";
@@ -63,7 +70,10 @@ const ProductCard = ({ data }) => {
             <div className="flex">
               <h5 className={`${styles.productDiscountPrice}`}>
                 {/* {data.price === 0 ? data.price : data.discount_price}$ */}
-                {data.originalPrice === 0 ? data.originalPrice : data.discountPrice}$
+                {data.originalPrice === 0
+                  ? data.originalPrice
+                  : data.discountPrice}
+                $
               </h5>
               <h4 className={`${styles.price}`}>
                 {/* {data.price ? data.price + " $" : null} */}
@@ -77,46 +87,41 @@ const ProductCard = ({ data }) => {
           </div>
         </Link>
 
-
-          {/* side options */}
-          <div>
-            {click ? (
-              <AiFillHeart
-                size={22}
-                className="cursor-pointer absolute right-2 top-5"
-                onClick={() => setClick(!click)}
-                color={click ? "red" : "#333"}
-                title="Remove from wishlist"
-              />
-            ) : (
-              <AiOutlineHeart
-                size={22}
-                className="cursor-pointer absolute right-2 top-5"
-                onClick={() => setClick(!click)}
-                color={click ? "red" : "#333"}
-                title="Add to wishlist"
-              />
-            )}
-            <AiOutlineEye
-                size={22}
-                className="cursor-pointer absolute right-2 top-14"
-                onClick={() => setOpen(!open)}
-                color="#333"
-                title="Quick view"
-              />
-              <AiOutlineShoppingCart
-               size={25}
-               className="cursor-pointer absolute right-2 top-24"
-               onClick={() => setOpen(!open)}
-               color="#444"
-               title="Add to cart"
-               />
-               {
-                open ? (
-                    <ProductDetailsCard setOpen={setOpen} data={data} />
-                ) : null
-               }
-          </div>
+        {/* side options */}
+        <div>
+          {click ? (
+            <AiFillHeart
+              size={22}
+              className="cursor-pointer absolute right-2 top-5"
+              onClick={() => setClick(!click)}
+              color={click ? "red" : "#333"}
+              title="Remove from wishlist"
+            />
+          ) : (
+            <AiOutlineHeart
+              size={22}
+              className="cursor-pointer absolute right-2 top-5"
+              onClick={() => setClick(!click)}
+              color={click ? "red" : "#333"}
+              title="Add to wishlist"
+            />
+          )}
+          <AiOutlineEye
+            size={22}
+            className="cursor-pointer absolute right-2 top-14"
+            onClick={() => setOpen(!open)}
+            color="#333"
+            title="Quick view"
+          />
+          <AiOutlineShoppingCart
+            size={25}
+            className="cursor-pointer absolute right-2 top-24"
+            onClick={() => setOpen(!open)}
+            color="#444"
+            title="Add to cart"
+          />
+          {open ? <ProductDetailsCard setOpen={setOpen} data={data} /> : null}
+        </div>
       </div>
     </>
   );
