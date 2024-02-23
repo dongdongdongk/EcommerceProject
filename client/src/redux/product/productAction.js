@@ -39,6 +39,19 @@ export const getAllProductsShop = createAsyncThunk(
 );
 
 
+export const getAllProducts = createAsyncThunk (
+  "product/getAllProducts",
+  async () => {
+    try {
+      const { data } = await axios.get(`http://localhost:5000/api/v2/product/get-all-products`)
+      return data.products
+    } catch (error) {
+      throw error.response.data.message      
+    }
+  }
+)
+
+
 
 export const deleteProduct = createAsyncThunk(
   "product/deleteProduct", async (id) => {

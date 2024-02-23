@@ -16,7 +16,7 @@ export const createEvent = createAsyncThunk(
 );
 
 
-// 모든 이벤트
+// 샵 모든 이벤트
 export const getAllEventsShop = createAsyncThunk(
     "event/getAllEventsShop",
     async (id) => {
@@ -28,6 +28,20 @@ export const getAllEventsShop = createAsyncThunk(
         }
     }
 );
+
+// 모든 이벤트 
+
+export const getAllEvents = createAsyncThunk(
+    "event/getAllEvents",
+    async() => {
+        try {
+            const { data } = await axios.get(`http://localhost:5000/api/v2/event/get-all-events`);
+            return data.events
+        } catch (error) {
+            throw error.response.data.message;
+        }
+    }
+)
 
 
 // 삭제 이벤트 

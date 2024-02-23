@@ -1,11 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createEvent, getAllEventsShop, deleteEvent  } from "./eventAction";
+import { createEvent, getAllEventsShop, deleteEvent, getAllEvents  } from "./eventAction";
 
 const eventSlice = createSlice({
     name : "event",
     initialState : {
         isLoading : true,
         success: false,
+        events : [],
+        allEvents : [],
+        event : null,
         error: null,
     },
     extraReducers : (builder) => {
@@ -24,7 +27,7 @@ const eventSlice = createSlice({
             state.error = action.error.message;
             state.success = false;
         })
-        // 모든 이벤트 조회
+        // 샵 모든 이벤트 조회
         .addCase(getAllEventsShop.pending, (state) => {
             state.isLoading = true;
         })
@@ -48,6 +51,19 @@ const eventSlice = createSlice({
         .addCase(deleteEvent.rejected, (state, action) => {
             state.isLoading = false;
             state.error = action.payload;
+        })
+        
+        // 모든 이벤트 조회
+        .addCase(getAllEvents.pending, (state, action) => {
+            state.isLoading = true;
+        })
+        .addCase(getAllEvents.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.allEvents = action.payload;
+        })
+        .addCase(getAllEvents.rejected, (state, action) => {
+            state.isLoading = false;
+            state.error = action.payload
         })
     }
 })

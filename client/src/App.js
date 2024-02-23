@@ -22,10 +22,9 @@ import ShopCreatePage from "./pages/Shop/ShopCreate";
 import { loadSeller } from "./redux/seller/sellerAction";
 import {
   getAllProductsShop,
-  createProduct,
-  deleteProduct,
+  getAllProducts
 } from "./redux/product/productAction";
-import { createEvent ,deleteEvent, getAllEventsShop } from "./redux/event/eventAction"
+import { getAllEvents } from "./redux/event/eventAction"
 import SellerActivationPage from "./pages/SellerActivationPage";
 import ShopLoginPage from "./pages/Shop/ShopLoginPage";
 import SellerProtectedRoute from "./Routes/SellerProtectedRoute";
@@ -41,12 +40,8 @@ const App = () => {
   useEffect(() => {
     Store.dispatch(loadUser());
     Store.dispatch(loadSeller());
-    Store.dispatch(getAllProductsShop());
-    Store.dispatch(createProduct());
-    Store.dispatch(deleteProduct());
-    Store.dispatch(createEvent());
-    Store.dispatch(deleteEvent());
-    Store.dispatch(getAllEventsShop());
+    Store.dispatch(getAllProducts());
+    Store.dispatch(getAllEvents());
   }, []);
 
   return (
