@@ -8,10 +8,14 @@ import {
   AiOutlineStar,
 } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import styles from "../../styles/styles";
 import ProductDetailsCard from "./ProductDetailCard";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 const ProductCard = ({ data }) => {
+
   const [click, setClick] = useState(false);
   const [open, setOpen] = useState(false);
 

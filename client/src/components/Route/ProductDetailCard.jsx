@@ -8,8 +8,13 @@ import {
 } from "react-icons/ai";
 import { RxCross1 } from "react-icons/rx";
 import styles from "../../styles/styles";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../../redux/cart/cartAction";
+import { toast } from "react-toastify";
 
 const ProductDetailsCard = ({ setOpen, data }) => {
+  const {cart} = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
   const [count, setCount] = useState(1);
   const [click, setClick] = useState(false);
 //   const [select, setSelect] = useState(false);
@@ -24,6 +29,22 @@ const ProductDetailsCard = ({ setOpen, data }) => {
 
   const incrementCount = () => {
     setCount(count + 1);
+  };
+
+  const addToCartHandler = (id) => {
+    console.log(cart)
+    const isItemExists = cart && cart.find((i) => i._id === id);
+    if (isItemExists) {
+      toast.error("상품이 카트에 이미 있습니다!");
+    } else {
+      if (data.stock < count) {
+        toast.error("상품 재고가 부족합니다!");
+      } else {
+        const cartData = { ...data, qty: count };
+        dispatch(addToCart(cartData));
+        toast.success("상품이 카트에 추가되었습니다!");
+      }
+    }
   };
 
   return (
@@ -127,6 +148,7 @@ const ProductDetailsCard = ({ setOpen, data }) => {
                 </div>
                 <div
                   className={`${styles.button} mt-6 rounded-[4px] h-11 flex items-center`}
+                  onClick={() => addToCartHandler(data._id)}
                 >
                   <span className="text-[#fff] flex items-center">
                     Add to cart <AiOutlineShoppingCart className="ml-1" />
