@@ -9,13 +9,13 @@ import SuggestedProduct from '../components/Products/SuggestedProduct';
 
 const ProductDetailsPage = () => {
     const {allProducts} = useSelector((state) => state.product);
-    const {name} = useParams();
+    const {id} = useParams();
     const [data,setData] = useState(null);
-    const productName = name.replace(/-/g," ");
+    const productName = id.replace(/-/g," ");
 
     useEffect(() => {
         // const data = productData.find((i) => i.name === productName);
-        const data = allProducts && allProducts.find((i) => i.name === productName);
+        const data = allProducts && allProducts.find((i) => i._id === productName);
         setData(data);
     }, [])
 

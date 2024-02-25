@@ -7,26 +7,71 @@ import {
   AiOutlineShoppingCart,
   AiOutlineStar,
 } from "react-icons/ai";
+import {
+  addToWishList,
+  removeFromWishList,
+} from "../../redux/wishList/wishListAction";
+import { addToCart } from "../../redux/cart/cartAction";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "../../styles/styles";
 import ProductDetailsCard from "./ProductDetailCard";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
+import Ratings from "../Products/Ratings";
 
-const ProductCard = ({ data }) => {
-
+const ProductCard = ({ data,isEvent }) => {
+  const { wishList } = useSelector((state) => state.wishList);
+  const { cart } = useSelector((state) => state.cart);
   const [click, setClick] = useState(false);
   const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
 
-  const d = data.name;
-  const product_name = d.replace(/\s+/g, "-");
+  useEffect(() => {
+    if (wishList && wishList.find((i) => i._id === data._id)) {
+      setClick(true);
+    } else {
+      setClick(false);
+    }
+  }, [wishList]);
+
+  const removeFromWishListHandler = (data) => {
+    setClick(!click);
+    dispatch(removeFromWishList(data));
+  };
+
+  const addToWishListHandler = (data) => {
+    setClick(!click);
+    dispatch(addToWishList(data));
+  };
+
+  const addToCartHandler = (id) => {
+    const isItemExists = cart && cart.find((i) => i._id === id);
+    if (isItemExists) {
+      toast.error("상품이 이미 카트에 있습니다!");
+    } else {
+      if (data.stock < 1) {
+        toast.error("상품의 재고를 초과했습니다!");
+      } else {
+        const cartData = { ...data, qty: 1 };
+        dispatch(addToCart(cartData));
+        toast.success("장바구니에 상품을 추가했습니다!");
+      }
+    }
+  };
 
   return (
     <>
       <div className="w-full h-[370px] bg-white rounded-lg shadow-sm p-3 relative cursor-pointer">
         <div className="flex justify-end"></div>
-        <Link to={`/product/${product_name}`}>
+        <Link to={`/product/${data._id}`}>
+        {/* <Link
+          // to={`${
+          //   isEvent === true
+          //     ? `/product/${data._id}?isEvent=true`
+          //     : `/product/${data._id}`
+          // }`}
+        > */}
           <img
             // src={data.image_Url[0].url}
             src={`http://localhost:5000/${data.images && data.images[0]}`}
@@ -34,40 +79,24 @@ const ProductCard = ({ data }) => {
             className="w-full h-[170px] object-contain"
           />
         </Link>
-        <Link to="/">
+        {/* <Link to="/"> */}
+        <Link to={`/shop/preview/${data?.shop._id}`}>
           <h5 className={`${styles.shop_name}`}>{data.shop.name}</h5>
         </Link>
-        <Link to={`/product/${product_name}`}>
+        <Link to={`/product/${data._id}`}>
+        {/* <Link
+          // to={`${
+          //   isEvent === true
+          //     ? `/product/${data._id}?isEvent=true`
+          //     : `/product/${data._id}`
+          // }`}
+        > */}
           <h4 className="pb-3 font-[500]">
             {data.name.length > 40 ? data.name.slice(0, 40) + "..." : data.name}
           </h4>
 
           <div className="flex">
-            <AiFillStar
-              className="mr-2 cursor-pointer"
-              size={20}
-              color="#F6BA00"
-            />
-            <AiFillStar
-              className="mr-2 cursor-pointer"
-              size={20}
-              color="#F6BA00"
-            />
-            <AiFillStar
-              className="mr-2 cursor-pointer"
-              size={20}
-              color="#F6BA00"
-            />
-            <AiFillStar
-              className="mr-2 cursor-pointer"
-              color="#F6BA00"
-              size={20}
-            />
-            <AiOutlineStar
-              size={20}
-              className="mr-2 cursor-pointer"
-              color="#F6BA00"
-            />
+            <Ratings rating={data?.ratings} />
           </div>
 
           <div className="py-2 flex items-center justify-between">
@@ -77,11 +106,11 @@ const ProductCard = ({ data }) => {
                 {data.originalPrice === 0
                   ? data.originalPrice
                   : data.discountPrice}
-                $
+                {" "}원
               </h5>
               <h4 className={`${styles.price}`}>
                 {/* {data.price ? data.price + " $" : null} */}
-                {data.originalPrice ? data.originalPrice + " $" : null}
+                {data.originalPrice ? data.originalPrice + " 원" : null}
               </h4>
             </div>
             <span className="font-[400] text-[17px] text-[#68d284]">
@@ -97,7 +126,7 @@ const ProductCard = ({ data }) => {
             <AiFillHeart
               size={22}
               className="cursor-pointer absolute right-2 top-5"
-              onClick={() => setClick(!click)}
+              onClick={() => removeFromWishListHandler(data)}
               color={click ? "red" : "#333"}
               title="Remove from wishlist"
             />
@@ -105,7 +134,7 @@ const ProductCard = ({ data }) => {
             <AiOutlineHeart
               size={22}
               className="cursor-pointer absolute right-2 top-5"
-              onClick={() => setClick(!click)}
+              onClick={() => addToWishListHandler(data)}
               color={click ? "red" : "#333"}
               title="Add to wishlist"
             />
@@ -120,7 +149,7 @@ const ProductCard = ({ data }) => {
           <AiOutlineShoppingCart
             size={25}
             className="cursor-pointer absolute right-2 top-24"
-            onClick={() => setOpen(!open)}
+            onClick={() => addToCartHandler(data._id)}
             color="#444"
             title="Add to cart"
           />

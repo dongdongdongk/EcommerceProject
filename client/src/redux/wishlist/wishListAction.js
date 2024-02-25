@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 // 위시 리스트 추가
-export const addWishList = createAsyncThunk(
+export const addToWishList = createAsyncThunk(
   "whishList/addWishList",
   async (newForm, { getState }) => {
     try {
@@ -23,7 +23,7 @@ export const addWishList = createAsyncThunk(
       } else {
         const updatedWishList = [...existingWishList, item];
 
-        localStorage.setItem("wishList", JSON.stringify(updatedWishList));
+        localStorage.setItem("wishListItem", JSON.stringify(updatedWishList));
 
         return {
           wishList: updatedWishList,
@@ -34,3 +34,25 @@ export const addWishList = createAsyncThunk(
     }
   }
 );
+
+
+// 위시 리스트 삭제 
+export const removeFromWishList = createAsyncThunk(
+    "wishList/removeFromWishList",
+    async ( data, { getState }) => {
+        try {
+            const filteredWishList = getState().wishList.wishList.filter(
+                (item) => item._id !== data._id
+            );
+
+            localStorage.setItem("wishListItem", JSON.stringify(filteredWishList));
+
+            return {
+                wishList : filteredWishList,
+            }
+
+        } catch (error) {
+            throw error;
+        }
+    }
+)
