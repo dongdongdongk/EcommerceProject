@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 const Payment2 = (effect, deps) => {
   const [orderData, setOrderData] = useState([]);
   const [open, setOpen] = useState(false);
-  const [shippingAddress, setShippingAddress] = useState("");
+  const [shippingAddress, setShippingAddress] = useState([]);
   
   const { user } = useSelector((state) => state.user);
   const navigate = useNavigate();
@@ -27,7 +28,8 @@ const Payment2 = (effect, deps) => {
   useEffect(() => {
     const orderData = JSON.parse(localStorage.getItem("latestOrder"));
     setOrderData(orderData);
-    setShippingAddress(shippingAddress)
+    setShippingAddress(orderData.shippingAddress)
+
   }, []);
 
   const onClickPayment = () => {
@@ -49,21 +51,50 @@ const Payment2 = (effect, deps) => {
     IMP.request_pay(data, callback);
   };
 
-  const callback = (response) => {
-    const {
-      success,
-      error_msg,
-      imp_uid,
-      merchant_uid,
-      pay_method,
-      paid_amount,
-      status,
-    } = response;
-    if (success) {
-      toast.success("상품결제를 성공하였습니다!")
-      navigate("/");
-    } else {
-      alert(`결제 실패 : ${error_msg}`);
+  const callback = async (response) => {
+    try {
+      const {
+        success,
+        error_msg,
+        imp_uid,
+        merchant_uid,
+        pay_method,
+        paid_amount,
+        status,
+      } = response;
+  
+      if (success) {
+        toast.success("상품결제를 성공하였습니다!");
+  
+        // 주문 정보를 서버에 저장하는 부분
+        const config = {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        };
+  
+        const orderDataToSend = {
+          cart: orderData.cart,
+          shippingAddress: shippingAddress,
+          user: user,
+          totalPrice: orderData.subTotalPrice,
+          paymentInfo: {
+            id: imp_uid,
+            status: status,
+            type: pay_method,
+          },
+        };
+  
+        await axios.post(`http://localhost:5000/api/v2/order/create-order`, orderDataToSend, config);
+  
+        // 기존 코드는 유지
+        navigate("/");
+      } else {
+        alert(`결제 실패 : ${error_msg}`);
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("주문 정보 저장 중 오류가 발생했습니다.");
     }
   };
 
