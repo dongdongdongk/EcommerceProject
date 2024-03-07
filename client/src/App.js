@@ -22,9 +22,9 @@ import ShopCreatePage from "./pages/Shop/ShopCreate";
 import { loadSeller } from "./redux/seller/sellerAction";
 import {
   getAllProductsShop,
-  getAllProducts
+  getAllProducts,
 } from "./redux/product/productAction";
-import { getAllEvents } from "./redux/event/eventAction"
+import { getAllEvents } from "./redux/event/eventAction";
 import SellerActivationPage from "./pages/SellerActivationPage";
 import ShopLoginPage from "./pages/Shop/ShopLoginPage";
 import SellerProtectedRoute from "./Routes/SellerProtectedRoute";
@@ -36,6 +36,9 @@ import ShopCreateEvents from "./pages/Shop/ShopCreateEvents";
 import ShopAllEvents from "./pages/Shop/ShopAllEvents";
 import ShopAllCoupons from "./pages/Shop/ShopAllCoupons";
 import PaymentPage from "./pages/PaymentPage";
+import OrderSuccessPage from "./pages/OrderSuccessPage";
+import ShopAllOrders from "./pages/Shop/ShopAllOrders";
+import ShopOrderDetails from "./pages/Shop/ShopOrderDetails";
 
 const App = () => {
   useEffect(() => {
@@ -110,6 +113,23 @@ const App = () => {
               </SellerProtectedRoute>
             }
           />
+          <Route
+            path="/dashboard-orders"
+            element={
+              <SellerProtectedRoute>
+                <ShopAllOrders />
+              </SellerProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/order/:id"
+            element={
+              <SellerProtectedRoute>
+                <ShopOrderDetails />
+              </SellerProtectedRoute>
+            }
+          />
 
           <Route
             path="/dashboard-products"
@@ -120,30 +140,31 @@ const App = () => {
             }
           />
           <Route
-          path="/dashboard-create-event"
-          element={
-            <SellerProtectedRoute>
-              <ShopCreateEvents />
-            </SellerProtectedRoute>
-          }
-        />
-        <Route
-          path="/dashboard-events"
-          element={
-            <SellerProtectedRoute>
-              <ShopAllEvents />
-            </SellerProtectedRoute>
-          }
-        />
-        <Route
-          path="/dashboard-coupons"
-          element={
-            <SellerProtectedRoute>
-              <ShopAllCoupons />
-            </SellerProtectedRoute>
-          }
-        />
-        <Route path="/payment" element={<PaymentPage />} />
+            path="/dashboard-create-event"
+            element={
+              <SellerProtectedRoute>
+                <ShopCreateEvents />
+              </SellerProtectedRoute>
+            }
+          />
+          <Route
+            path="/dashboard-events"
+            element={
+              <SellerProtectedRoute>
+                <ShopAllEvents />
+              </SellerProtectedRoute>
+            }
+          />
+          <Route
+            path="/dashboard-coupons"
+            element={
+              <SellerProtectedRoute>
+                <ShopAllCoupons />
+              </SellerProtectedRoute>
+            }
+          />
+          <Route path="/payment" element={<PaymentPage />} />
+          <Route path="/order/success" element={<OrderSuccessPage />} />
         </Routes>
 
         <ToastContainer

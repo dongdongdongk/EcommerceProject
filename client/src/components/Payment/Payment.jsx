@@ -15,7 +15,7 @@ const Payment = () => {
   useEffect(() => {
     const orderData = JSON.parse(localStorage.getItem("latestOrder"));
     setOrderData(orderData);
-    setShippingAddress(shippingAddress)
+    setShippingAddress(shippingAddress);
   }, []);
 
   return (
@@ -43,7 +43,7 @@ const PaymentInfo = () => {
 
   return (
     <div className="w-full 800px:w-[95%] bg-[#fff] rounded-md p-5 pb-8">
-      {/* select buttons */}
+      {/* 선택 버튼 */}
       <div>
         <div className="flex w-full pb-5 border-b mb-2">
           <div
@@ -55,32 +55,32 @@ const PaymentInfo = () => {
             ) : null}
           </div>
           <h4 className="text-[18px] pl-2 font-[600] text-[#000000b1]">
-            Pay with Debit/credit card
+            신용/체크카드로 결제
           </h4>
         </div>
 
-        {/* pay with card */}
+        {/* 카드 결제 */}
         {select === 1 ? (
           <div className="w-full flex border-b">
             <form className="w-full" onSubmit={paymentHandler}>
               <div className="w-full flex pb-3">
                 <div className="w-[50%]">
-                  <label className="block pb-2">Card Number</label>
+                  <label className="block pb-2">카드 번호</label>
                   <input required className={`${styles.input} !w-[95%]`} />
                 </div>
                 <div className="w-[50%]">
-                  <label className="block pb-2">Exp Date</label>
+                  <label className="block pb-2">유효기간</label>
                   <input type="number" required className={`${styles.input}`} />
                 </div>
               </div>
 
               <div className="w-full flex pb-3">
                 <div className="w-[50%]">
-                  <label className="block pb-2">Name On Card</label>
+                  <label className="block pb-2">카드 소지자 이름</label>
                   <input required className={`${styles.input} !w-[95%]`} />
                 </div>
                 <div className="w-[50%]">
-                  <label className="block pb-2">Billing Address</label>
+                  <label className="block pb-2">청구지 주소</label>
                   <input type="text" required className={`${styles.input}`} />
                 </div>
               </div>
@@ -95,7 +95,7 @@ const PaymentInfo = () => {
       </div>
 
       <br />
-      {/* paypal payment */}
+      {/* 페이팔 결제 */}
       <div>
         <div className="flex w-full pb-5 border-b mb-2">
           <div
@@ -107,17 +107,17 @@ const PaymentInfo = () => {
             ) : null}
           </div>
           <h4 className="text-[18px] pl-2 font-[600] text-[#000000b1]">
-            Pay with Paypal
+            페이팔로 결제
           </h4>
         </div>
 
-        {/* pay with card */}
+        {/* 카드 결제 */}
         {select === 2 ? (
           <div className="w-full flex border-b">
             <form className="w-full" onSubmit={paymentHandler}>
               <div className="w-full flex pb-3">
                 <div className="w-full">
-                  <label className="block pb-2">Paypal Email</label>
+                  <label className="block pb-2">페이팔 이메일</label>
                   <input required className={`${styles.input}`} />
                 </div>
               </div>
@@ -132,7 +132,7 @@ const PaymentInfo = () => {
       </div>
 
       <br />
-      {/* cash on delivery */}
+      {/* 착불 결제 */}
       <div>
         <div className="flex w-full pb-5 border-b mb-2">
           <div
@@ -144,11 +144,11 @@ const PaymentInfo = () => {
             ) : null}
           </div>
           <h4 className="text-[18px] pl-2 font-[600] text-[#000000b1]">
-            Cash on Delivery
+            착불 결제
           </h4>
         </div>
 
-        {/* pay with card */}
+        {/* 카드 결제 */}
         {select === 3 ? (
           <div className="w-full flex">
             <form className="w-full" onSubmit={paymentHandler}>
@@ -164,43 +164,31 @@ const PaymentInfo = () => {
     </div>
   );
 };
-const CartData = ({orderData}) => {
-    const shipping = orderData?.shipping?.toFixed(2);
-    console.log(shipping)
+const CartData = ({ orderData }) => {
+  const shipping = orderData?.shipping?.toFixed(2);
+  console.log(shipping);
   return (
     <div className="w-full bg-[#fff] rounded-md p-5 pb-8">
       <div className="flex justify-between">
-        <h3 className="text-[16px] font-[400] text-[#000000a4]">subtotal:</h3>
+        <h3 className="text-[16px] font-[400] text-[#000000a4]">소계:</h3>
         <h5 className="text-[18px] font-[600]">${orderData?.subTotalPrice}</h5>
       </div>
       <br />
       <div className="flex justify-between">
-        <h3 className="text-[16px] font-[400] text-[#000000a4]">shipping:</h3>
+        <h3 className="text-[16px] font-[400] text-[#000000a4]">배송비:</h3>
         <h5 className="text-[18px] font-[600]">${shipping}</h5>
       </div>
       <br />
       <div className="flex justify-between border-b pb-3">
-        <h3 className="text-[16px] font-[400] text-[#000000a4]">Discount:</h3>
-        <h5 className="text-[18px] font-[600]">{orderData?.discountPrice? "$" + orderData.discountPrice : "-"}</h5>
+        <h3 className="text-[16px] font-[400] text-[#000000a4]">할인:</h3>
+        <h5 className="text-[18px] font-[600]">
+          {orderData?.discountPrice ? "원" + orderData.discountPrice : "-"}
+        </h5>
       </div>
       <h5 className="text-[18px] font-[600] text-end pt-3">
         ${orderData?.totalPrice}
       </h5>
       <br />
-      <form>
-        <input
-          type="text"
-          className={`${styles.input} h-[40px] pl-2`}
-          placeholder="Coupoun code"
-          required
-        />
-        <input
-          className={`w-full h-[40px] border border-[#f63b60] text-center text-[#f63b60] rounded-[3px] mt-8 cursor-pointer`}
-          required
-          value="Apply code"
-          type="submit"
-        />
-      </form>
       <Payment2 />
     </div>
   );

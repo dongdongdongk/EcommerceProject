@@ -88,7 +88,7 @@ const Payment2 = (effect, deps) => {
         await axios.post(`http://localhost:5000/api/v2/order/create-order`, orderDataToSend, config);
   
         // 기존 코드는 유지
-        navigate("/");
+        navigate("/order/success");
       } else {
         alert(`결제 실패 : ${error_msg}`);
       }

@@ -78,11 +78,11 @@ const ProductDetails = ({ data }) => {
                 <div className="flex pt-3">
                   <h4 className={`${styles.productDiscountPrice}`}>
                     {/* {data.discount_price}$ */}
-                    {data.discountPrice}$
+                    {data.discountPrice}원
                   </h4>
                   <h3 className={`${styles.price}`}>
                     {/* {data.price ? data.price + "$" : null} */}
-                    {data.originalPrice ? data.originalPrice + "$" : null}
+                    {data.originalPrice ? data.originalPrice + "원" : null}
                   </h3>
                 </div>
 
@@ -111,7 +111,7 @@ const ProductDetails = ({ data }) => {
                         className="cursor-pointer"
                         onClick={() => setClick(!click)}
                         color={click ? "red" : "#333"}
-                        title="Remove from wishlist"
+                        title="Wishlist에서 제거"
                       />
                     ) : (
                       <AiOutlineHeart
@@ -119,7 +119,7 @@ const ProductDetails = ({ data }) => {
                         className="cursor-pointer"
                         onClick={() => setClick(!click)}
                         color={click ? "red" : "#333"}
-                        title="Add to wishlist"
+                        title="Wishlist에 추가"
                       />
                     )}
                   </div>
@@ -128,7 +128,7 @@ const ProductDetails = ({ data }) => {
                   className={`${styles.button} !mt-6 !rounded !h-11 flex items-center`}
                 >
                   <span className="text-white flex items-center">
-                    Add to cart <AiOutlineShoppingCart className="ml-1" />
+                    장바구니 <AiOutlineShoppingCart className="ml-1" />
                   </span>
                 </div>
                 <div className="flex items-center pt-8">
@@ -144,7 +144,7 @@ const ProductDetails = ({ data }) => {
                     </h3>
                     <h5 className="pb-3 text-[15px]">
                       {/* ({data.shop.ratings}) Ratings */}
-                      (4/5) Ratings
+                      (4/5) 평점
                     </h5>
                   </div>
                   <div
@@ -152,7 +152,7 @@ const ProductDetails = ({ data }) => {
                     onClick={handleMessageSubmit}
                   >
                     <span className="text-white flex items-center">
-                      Send Message <AiOutlineMessage className="ml-1" />
+                      메시지 보내기 <AiOutlineMessage className="ml-1" />
                     </span>
                   </div>
                 </div>
@@ -182,7 +182,7 @@ const ProductDetailsInfo = ({ data, products }) => {
             }
             onClick={() => setActive(1)}
           >
-            Product Details
+            제품 상세 정보
           </h5>
           {active === 1 ? (
             <div className={`${styles.active_indicator}`} />
@@ -195,7 +195,7 @@ const ProductDetailsInfo = ({ data, products }) => {
             }
             onClick={() => setActive(2)}
           >
-            Product Reviews
+            제품 리뷰
           </h5>
           {active === 2 ? (
             <div className={`${styles.active_indicator}`} />
@@ -208,7 +208,7 @@ const ProductDetailsInfo = ({ data, products }) => {
             }
             onClick={() => setActive(3)}
           >
-            Seller Information
+            판매자 정보
           </h5>
           {active === 3 ? (
             <div className={`${styles.active_indicator}`} />
@@ -225,7 +225,7 @@ const ProductDetailsInfo = ({ data, products }) => {
 
       {active === 2 ? (
         <div className="w-full justify-center min-h-[40vh] flex items-center">
-          <p>No Reviews yet!</p>
+          <p>아직 리뷰가 없습니다!</p>
         </div>
       ) : null}
 
@@ -245,7 +245,7 @@ const ProductDetailsInfo = ({ data, products }) => {
                   <h3 className={`${styles.shop_name}`}>{data.shop.name}</h3>
                   <h5 className="pb-2 text-[15px]">
                     {/* ({data.shop.ratings}) Ratings */}
-                    (4/5) Ratings
+                    (4/5) 평점
                   </h5>
                 </div>
               </div>
@@ -255,25 +255,25 @@ const ProductDetailsInfo = ({ data, products }) => {
           <div className="w-full 800px:w-[50%] mt-5 800px:mt-0 800px:flex flex-col items-end">
             <div className="text-left">
               <h5 className="font-[600]">
-                Joined on:{" "}
+                가입일:{" "}
                 <span className="font-[500]">
                   {data.shop?.createdAt?.slice(0, 10)}
                 </span>
               </h5>
               <h5 className="font-[600] pt-3">
-                Total Products:{" "}
+                총 제품 수:{" "}
                 <span className="font-[500]">
                   {products && products.length}
                 </span>
               </h5>
               <h5 className="font-[600] pt-3">
-                Total Reviews: <span className="font-[500]">324</span>
+                총 리뷰 수: <span className="font-[500]">324</span>
               </h5>
               <Link to="/">
                 <div
                   className={`${styles.button} !rounded-[4px] !h-[39.5px] mt-3`}
                 >
-                  <h4 className="text-white">Visit Shop</h4>
+                  <h4 className="text-white">상점 방문</h4>
                 </div>
               </Link>
             </div>

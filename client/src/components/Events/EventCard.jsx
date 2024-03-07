@@ -1,8 +1,29 @@
 import React from "react";
 import styles from "../../styles/styles";
 import CountDown from "./CountDown";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../../redux/cart/cartAction";
+import { toast } from "react-toastify";
 
 const EventCard = ({ active, data }) => {
+  const { cart } = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+
+  const addToCartHandler = (data) => {
+    const isItemExists = cart && cart.find((i) => i._id === data._id);
+    if (isItemExists) {
+      toast.error("상품이 이미 장바구니에 존재합니다!");
+    } else {
+      if (data.stock < 1) {
+        toast.error("제품 재고를 초과하였습니다!");
+      } else {
+        const cartData = { ...data, qty: 1 };
+        dispatch(addToCart(cartData));
+        toast.success("상품을 장바구니에 추가하였습니다!");
+      }
+    }
+  };
   return (
     <div
       className={`w-full block bg-white rounded-lg ${
@@ -27,11 +48,22 @@ const EventCard = ({ active, data }) => {
             </h5>
           </div>
           <span className="pr-3 font-[400] text-[17px] text-[#44a55e]">
-            120 sold
+          120 판매됨
           </span>
         </div>
         <CountDown data={data} />
         <br />
+        <div className="flex items-center">
+          <Link to={`/product/${data._id}?isEvent=true`}>
+            <div className={`${styles.button} text-[#fff]`}>상세 보기</div>
+          </Link>
+          <div
+            className={`${styles.button} text-[#fff] ml-5`}
+            onClick={() => addToCartHandler(data)}
+          >
+            장바구니에 추가
+          </div>
+        </div>
       </div>
     </div>
   );
