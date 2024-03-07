@@ -25,8 +25,32 @@ const Checkout = () => {
   }, []);
 
   const paymentSubmit = () => {
-    navigate("/payment");
-  };
+    if(address1 === "" || address2 === "" || zipCode === null || country === "" || city === ""){
+       toast.error("배송지 주소를 선택해주세요!")
+    } else{
+     const shippingAddress = {
+       address1,
+       address2,
+       zipCode,
+       country,
+       city,
+     };
+ 
+     const orderData = {
+       cart,
+       totalPrice,
+       subTotalPrice,
+       shipping,
+       discountPrice,
+       shippingAddress,
+       user,
+     }
+ 
+     // update local storage with the updated orders array
+     localStorage.setItem("latestOrder", JSON.stringify(orderData, shippingAddress));
+     navigate("/payment");
+    }
+   };
 
   const subTotalPrice = cart.reduce(
     (acc, item) => acc + item.qty * item.discountPrice,
