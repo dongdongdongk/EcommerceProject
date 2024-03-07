@@ -39,6 +39,7 @@ import PaymentPage from "./pages/PaymentPage";
 import OrderSuccessPage from "./pages/OrderSuccessPage";
 import ShopAllOrders from "./pages/Shop/ShopAllOrders";
 import ShopOrderDetails from "./pages/Shop/ShopOrderDetails";
+import OrderDetailsPage from "./pages/OrderDetailsPage";
 
 const App = () => {
   useEffect(() => {
@@ -130,6 +131,14 @@ const App = () => {
               </SellerProtectedRoute>
             }
           />
+          <Route
+          path="/user/order/:id"
+          element={
+            <ProtectedRoute>
+              <OrderDetailsPage />
+            </ProtectedRoute>
+          }
+        />
 
           <Route
             path="/dashboard-products"

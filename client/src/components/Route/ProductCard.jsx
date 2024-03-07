@@ -62,35 +62,19 @@ const ProductCard = ({ data,isEvent }) => {
 
   return (
     <>
-      <div className="w-full h-[370px] bg-white rounded-lg shadow-sm p-3 relative cursor-pointer">
+      <div className="w-full h-[370px] bg-white rounded-lg shadow-sm p-3 relative cursor-pointer overflow-hidden">
         <div className="flex justify-end"></div>
         <Link to={`/product/${data._id}`}>
-        {/* <Link
-          // to={`${
-          //   isEvent === true
-          //     ? `/product/${data._id}?isEvent=true`
-          //     : `/product/${data._id}`
-          // }`}
-        > */}
           <img
-            // src={data.image_Url[0].url}
             src={`http://localhost:5000/${data.images && data.images[0]}`}
             alt=""
             className="w-full h-[170px] object-contain"
           />
         </Link>
-        {/* <Link to="/"> */}
         <Link to={`/shop/preview/${data?.shop._id}`}>
           <h5 className={`${styles.shop_name}`}>{data.shop.name}</h5>
         </Link>
         <Link to={`/product/${data._id}`}>
-        {/* <Link
-          // to={`${
-          //   isEvent === true
-          //     ? `/product/${data._id}?isEvent=true`
-          //     : `/product/${data._id}`
-          // }`}
-        > */}
           <h4 className="pb-3 font-[500]">
             {data.name.length > 40 ? data.name.slice(0, 40) + "..." : data.name}
           </h4>
@@ -102,25 +86,21 @@ const ProductCard = ({ data,isEvent }) => {
           <div className="py-2 flex items-center justify-between">
             <div className="flex">
               <h5 className={`${styles.productDiscountPrice}`}>
-                {/* {data.price === 0 ? data.price : data.discount_price}$ */}
                 {data.originalPrice === 0
                   ? data.originalPrice
                   : data.discountPrice}
                 {" "}원
               </h5>
               <h4 className={`${styles.price}`}>
-                {/* {data.price ? data.price + " $" : null} */}
                 {data.originalPrice ? data.originalPrice + " 원" : null}
               </h4>
             </div>
             <span className="font-[400] text-[17px] text-[#68d284]">
-              {/* {data.total_sell} sold */}
               50 sold
             </span>
           </div>
         </Link>
 
-        {/* side options */}
         <div>
           {click ? (
             <AiFillHeart

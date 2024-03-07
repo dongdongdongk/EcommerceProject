@@ -293,7 +293,7 @@ const AllRefundOrders = () => {
         },
       ],
       totalPrice: 120,
-      orderStatus: "Processing",
+      orderStatus: "처리 중",
     },
   ];
 
@@ -306,7 +306,7 @@ const AllRefundOrders = () => {
       minWidth: 130,
       flex: 0.7,
       cellClassName: (params) => {
-        return params.getValue(params.id, "status") === "Delivered"
+        return params.getValue(params.id, "status") === "배송 완료"
           ? "greenColor"
           : "redColor";
       },
@@ -383,7 +383,7 @@ const TrackOrder = () => {
         },
       ],
       totalPrice: 120,
-      orderStatus: "Processing",
+      orderStatus: "처리 중",
     },
   ];
 
@@ -395,7 +395,7 @@ const TrackOrder = () => {
       minWidth: 130,
       flex: 0.7,
       cellClassName: (params) => {
-        return params.getValue(params.id, "status") === "Delivered"
+        return params.getValue(params.id, "status") === "배송 완료"
           ? "greenColor"
           : "redColor";
       },

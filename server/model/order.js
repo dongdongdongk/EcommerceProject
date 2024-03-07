@@ -19,7 +19,7 @@ const orderSchema = new mongoose.Schema({
     },
     status:{
         type: String,
-        default: "Processing",
+        default: "처리 중",
     },
     paymentInfo:{
         id:{

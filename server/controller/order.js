@@ -99,7 +99,7 @@ router.put(
       if (!order) {
         return next(new ErrorHandler("Order not found with this id", 400));
       }
-      if (req.body.status === "Transferred to delivery partner") {
+      if (req.body.status === "배송 파트너로 이관됨") {
         order.cart.forEach(async (o) => {
           await updateOrder(o._id, o.qty);
         });
@@ -107,9 +107,9 @@ router.put(
 
       order.status = req.body.status;
 
-      if (req.body.status === "Delivered") {
+      if (req.body.status === "배송 완료") {
         order.deliveredAt = Date.now();
-        order.paymentInfo.status = "Succeeded";
+        order.paymentInfo.status = "배송 완료";
       }
 
       await order.save({ validateBeforeSave: false });
@@ -180,7 +180,7 @@ router.put(
         message: "Order Refund successfull!",
       });
 
-      if (req.body.status === "Refund Success") {
+      if (req.body.status === "환불 완료") {
         order.cart.forEach(async (o) => {
           await updateOrder(o._id, o.qty);
         });

@@ -52,34 +52,34 @@ const ShopInfo = ({ isOwner }) => {
         </p>
       </div>
       <div className="p-3">
-        <h5 className="font-[600]">Address</h5>
+        <h5 className="font-[600]">주소</h5>
         <h4 className="text-[#000000a6]">{data.address}</h4>
       </div>
       <div className="p-3">
-        <h5 className="font-[600]">Phone Number</h5>
+        <h5 className="font-[600]">전화번호</h5>
         <h4 className="text-[#000000a6]">{data.phoneNumber}</h4>
       </div>
       <div className="p-3">
-        <h5 className="font-[600]">Total Products</h5>
+        <h5 className="font-[600]">전체 상품 수</h5>
         <h4 className="text-[#000000a6]">10</h4>
       </div>
       <div className="p-3">
-        <h5 className="font-[600]">Shop Ratings</h5>
+        <h5 className="font-[600]">상점 평점</h5>
         <h4 className="text-[#000000b0]">4/5</h4>
       </div>
       <div className="p-3">
-        <h5 className="font-[600]">Joined On</h5>
+        <h5 className="font-[600]">가입일</h5>
         <h4 className="text-[#000000b0]">{data?.createdAt?.slice(0, 10)}</h4>
       </div>
       {isOwner && (
         <div className="py-3 px-4">
           <div className={`${styles.button} !w-full !h-[42px] !rounded-[5px]`}>
-            <span className="text-white">Edit Shop</span>
+            <span className="text-white">상점 수정</span>
           </div>
           <div className={`${styles.button} !w-full !h-[42px] !rounded-[5px]`}
           onClick={logoutHandler}
           >
-            <span className="text-white">Log Out</span>
+            <span className="text-white">로그아웃</span>
           </div>
         </div>
       )}
