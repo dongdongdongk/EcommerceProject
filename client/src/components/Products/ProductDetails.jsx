@@ -33,7 +33,7 @@ const ProductDetails = ({ data }) => {
   };
 
   const handleMessageSubmit = () => {
-    navigate("/inbox?conversation=507ebjver884ehfdjeriv84");
+    
   };
 
   return (

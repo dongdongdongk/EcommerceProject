@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "../../styles/styles";
 import { categoriesData, productData } from "../../static/data";
 import {
@@ -29,6 +29,7 @@ const Header = ({ activeHeading }) => {
   const [openCart, setOpenCart] = useState(false);
   const [openWishlist, setOpenWishlist] = useState(false);
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleSearchChange = (e) => {
     const term = e.target.value;
@@ -67,7 +68,7 @@ const Header = ({ activeHeading }) => {
           <div className="w-[50%] relative">
             <input
               type="text"
-              placeholder="Search Product..."
+              placeholder="상품 검색..."
               value={searchTerm}
               onChange={handleSearchChange}
               className="h-[40px] w-full px-2 border-[#e3bb8b] border-[2px] rounded-md"
@@ -80,21 +81,20 @@ const Header = ({ activeHeading }) => {
               <div className="absolute min-h-[30vh] bg-slate-50 shadow-sm-2 z-[9] p-4">
                 {searchData &&
                   searchData.map((i, index) => {
-                    const d = i.name;
+                    let d = i._id;
 
-                    const Product_name = d.replace(/\s+/g, "-");
                     return (
-                      <Link to={`/product/${Product_name}`}>
-                        <div className="w-full flex items-start-py-3">
-                          <img
-                            // src={i.image_Url[0].url}
-                            src={`http://localhost:5000/${i.images[0]}`}
-                            alt=""
-                            className="w-[40px] h-[40px] mr-[10px]"
-                          />
-                          <h1>{i.name}</h1>
-                        </div>
-                      </Link>
+                      <div
+                        className="w-full flex items-start-py-3 cursor-pointer"
+                        onClick={() => navigate(`/product/${d}`)}
+                      >
+                        <img
+                          src={`http://localhost:5000/${i.images[0]}`}
+                          alt=""
+                          className="w-[40px] h-[40px] mr-[10px]"
+                        />
+                        <h1>{i.name}</h1>
+                      </div>
                     );
                   })}
               </div>
@@ -153,7 +153,7 @@ const Header = ({ activeHeading }) => {
               >
                 <AiOutlineHeart size={30} color="rgb(255 255 255 / 83%)" />
                 <span className="absolute right-0 top-0 rounded-full bg-[#3bc177] w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px] leading-tight text-center">
-                {wishList && wishList.length}
+                  {wishList && wishList.length}
                 </span>
               </div>
             </div>

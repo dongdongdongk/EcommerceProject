@@ -12,7 +12,6 @@ const ProductDetailsPage = () => {
   const { allEvents } = useSelector((state) => state.event);
   const { id } = useParams();
   const [data, setData] = useState(null);
-  const productName = id.replace(/-/g, " ");
   const [searchParams] = useSearchParams();
   const eventData = searchParams.get("isEvent");
 
