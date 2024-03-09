@@ -52,7 +52,7 @@ const Cart = ({ setOpenCart }) => {
               <div className={`${styles.noramlFlex} p-4`}>
                 <IoBagHandleOutline size={25} />
                 <h5 className="pl-2 text-[20px] font-[500]">
-                  {cart && cart.length} items
+                  상품 {cart && cart.length} 개
                 </h5>
               </div>
 
@@ -78,7 +78,7 @@ const Cart = ({ setOpenCart }) => {
                   className={`h-[45px] flex items-center justify-center w-[100%] bg-[#e44343] rounded-[5px]`}
                 >
                   <h1 className="text-[#fff] text-[18px] font-[600]">
-                    Checkout Now ({totalPrice}원)
+                    결제하기 ({totalPrice}원)
                   </h1>
                 </div>
               </Link>

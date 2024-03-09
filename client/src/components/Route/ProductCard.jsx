@@ -20,7 +20,7 @@ import { useEffect } from "react";
 import { toast } from "react-toastify";
 import Ratings from "../Products/Ratings";
 
-const ProductCard = ({ data,isEvent }) => {
+const ProductCard = ({ data, isEvent }) => {
   const { wishList } = useSelector((state) => state.wishList);
   const { cart } = useSelector((state) => state.cart);
   const [click, setClick] = useState(false);
@@ -88,15 +88,15 @@ const ProductCard = ({ data,isEvent }) => {
               <h5 className={`${styles.productDiscountPrice}`}>
                 {data.originalPrice === 0
                   ? data.originalPrice
-                  : data.discountPrice}
-                {" "}원
+                  : data.discountPrice}{" "}
+                원
               </h5>
               <h4 className={`${styles.price}`}>
                 {data.originalPrice ? data.originalPrice + " 원" : null}
               </h4>
             </div>
             <span className="font-[400] text-[17px] text-[#68d284]">
-              50 sold
+              {data?.sold_out} 판매
             </span>
           </div>
         </Link>

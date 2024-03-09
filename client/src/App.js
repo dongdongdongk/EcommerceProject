@@ -40,6 +40,10 @@ import OrderSuccessPage from "./pages/OrderSuccessPage";
 import ShopAllOrders from "./pages/Shop/ShopAllOrders";
 import ShopOrderDetails from "./pages/Shop/ShopOrderDetails";
 import OrderDetailsPage from "./pages/OrderDetailsPage";
+import TrackOrderPage from "./pages/TrackOrderPage";
+import ShopAllRefunds from "./pages/Shop/ShopAllRefunds";
+import ShopSettingsPage from "./pages/Shop/ShopSettingsPage";
+import ShopWithDrawMoneyPage from "./pages/Shop/ShopWithdrawMoney";
 
 const App = () => {
   useEffect(() => {
@@ -122,6 +126,14 @@ const App = () => {
               </SellerProtectedRoute>
             }
           />
+          <Route
+            path="/dashboard-withdraw-money"
+            element={
+              <SellerProtectedRoute>
+                <ShopWithDrawMoneyPage />
+              </SellerProtectedRoute>
+            }
+          />
 
           <Route
             path="/order/:id"
@@ -131,14 +143,24 @@ const App = () => {
               </SellerProtectedRoute>
             }
           />
+
           <Route
-          path="/user/order/:id"
-          element={
-            <ProtectedRoute>
-              <OrderDetailsPage />
-            </ProtectedRoute>
-          }
-        />
+            path="/user/track/order/:id"
+            element={
+              <ProtectedRoute>
+                <TrackOrderPage />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/user/order/:id"
+            element={
+              <ProtectedRoute>
+                <OrderDetailsPage />
+              </ProtectedRoute>
+            }
+          />
 
           <Route
             path="/dashboard-products"
@@ -169,6 +191,22 @@ const App = () => {
             element={
               <SellerProtectedRoute>
                 <ShopAllCoupons />
+              </SellerProtectedRoute>
+            }
+          />
+          <Route
+            path="/dashboard-refunds"
+            element={
+              <SellerProtectedRoute>
+                <ShopAllRefunds />
+              </SellerProtectedRoute>
+            }
+          />
+          <Route
+            path="/settings"
+            element={
+              <SellerProtectedRoute>
+                <ShopSettingsPage />
               </SellerProtectedRoute>
             }
           />

@@ -43,8 +43,11 @@ export const updateUserInformation = createAsyncThunk(
         {
           withCredentials: true,
         }
-      );
-      return data.user;
+      )
+      return {
+        user : data.user,
+        successMessage : "사용자 정보를 업데이트 했습니다!"
+      }
     } catch (error) {
       throw error.response.data.message;
     }

@@ -32,6 +32,15 @@ const productSchema = new mongoose.Schema({
             type: String,
         },
     ],
+    reviews : [
+        {
+            type : Object,
+        }
+    ],
+    ratings : {
+        type : Number,
+    },
+
     shopId:{
         type: String,
         required: true,
@@ -48,6 +57,7 @@ const productSchema = new mongoose.Schema({
         type: Date,
         default: Date.now(),
     }
+    
 });
 
 module.exports = mongoose.model("Product", productSchema);

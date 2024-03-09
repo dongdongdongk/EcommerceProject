@@ -6,14 +6,14 @@ const { isAuthenticated, isSeller } = require("../middleware/auth");
 const Order = require("../model/order");
 const Product = require("../model/product");
 
-// create new order
+// 새 주문 생성
 router.post(
   "/create-order",
   catchAsyncErrors(async (req, res, next) => {
     try {
       const { cart, shippingAddress, user, totalPrice, paymentInfo } = req.body;
 
-      //   group cart items by shopId
+      //   shopId로 카트 아이템 그룹화
       const shopItemsMap = new Map();
 
       for (const item of cart) {
@@ -24,7 +24,7 @@ router.post(
         shopItemsMap.get(shopId).push(item);
       }
 
-      // create an order for each shop
+      // 각 상점에 대한 주문 생성
       const orders = [];
 
       for (const [shopId, items] of shopItemsMap) {
@@ -48,7 +48,7 @@ router.post(
   })
 );
 
-// get all orders of user
+// 사용자의 모든 주문 가져오기
 router.get(
   "/get-all-orders/:userId",
   catchAsyncErrors(async (req, res, next) => {
@@ -67,7 +67,7 @@ router.get(
   })
 );
 
-// get all orders of seller
+// 판매자의 모든 주문 가져오기
 router.get(
   "/get-seller-all-orders/:shopId",
   catchAsyncErrors(async (req, res, next) => {
@@ -88,7 +88,7 @@ router.get(
   })
 );
 
-// update order status for seller
+// 판매자를 위한 주문 상태 업데이트
 router.put(
   "/update-order-status/:id",
   isSeller,
@@ -97,7 +97,7 @@ router.put(
       const order = await Order.findById(req.params.id);
 
       if (!order) {
-        return next(new ErrorHandler("Order not found with this id", 400));
+        return next(new ErrorHandler("주문을 찾을 수 없습니다", 400));
       }
       if (req.body.status === "배송 파트너로 이관됨") {
         order.cart.forEach(async (o) => {
@@ -133,7 +133,7 @@ router.put(
   })
 );
 
-// give a refund ----- user
+// 환불 요청 ---- 사용자
 router.put(
   "/order-refund/:id",
   catchAsyncErrors(async (req, res, next) => {
@@ -141,7 +141,7 @@ router.put(
       const order = await Order.findById(req.params.id);
 
       if (!order) {
-        return next(new ErrorHandler("Order not found with this id", 400));
+        return next(new ErrorHandler("주문을 찾을 수 없습니다.", 400));
       }
 
       order.status = req.body.status;
@@ -151,7 +151,7 @@ router.put(
       res.status(200).json({
         success: true,
         order,
-        message: "Order Refund Request successfully!",
+        message: "주문 환불 요청이 성공적으로 완료되었습니다!",
       });
     } catch (error) {
       return next(new ErrorHandler(error.message, 500));
@@ -159,7 +159,7 @@ router.put(
   })
 );
 
-// accept the refund ---- seller
+// 환불 승인 ---- 판매자
 router.put(
   "/order-refund-success/:id",
   isSeller,
@@ -168,7 +168,7 @@ router.put(
       const order = await Order.findById(req.params.id);
 
       if (!order) {
-        return next(new ErrorHandler("Order not found with this id", 400));
+        return next(new ErrorHandler("주문을 찾을 수 없습니다.", 400));
       }
 
       order.status = req.body.status;
@@ -177,7 +177,7 @@ router.put(
 
       res.status(200).json({
         success: true,
-        message: "Order Refund successfull!",
+        message: "주문 환불이 성공적으로 완료되었습니다!",
       });
 
       if (req.body.status === "환불 완료") {

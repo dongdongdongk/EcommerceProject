@@ -41,13 +41,26 @@ const ProfileContent = ({ active }) => {
     if (successMessage) {
       toast.success(successMessage);
       dispatch({ type: "clearMessages" });
-    }
+    };
   }, [error, successMessage]);
+  
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(name, email, phoneNumber, password);
-    dispatch(updateUserInformation({ name, email, phoneNumber, password }));
+    try {
+      // 사용자 정보 업데이트
+      await dispatch(updateUserInformation({ name, email, phoneNumber, password }));
+      
+      // 사용자 정보 다시 가져오기
+      await dispatch(loadUser());
+      
+      // 화면 다시 렌더링을 위한 동작 수행
+      // 예: 상태 업데이트, 필요한 동작 수행 등
+      
+      toast.success("사용자 정보 업데이트 성공!");
+    } catch (error) {
+      toast.error("사용자 정보 업데이트 실패!");
+    }
   };
 
   const handleImage = async (e) => {
@@ -67,7 +80,7 @@ const ProfileContent = ({ active }) => {
       })
       .then((response) => {
         dispatch(loadUser());
-        toast.success("avatar updated successfully!");
+        toast.success("아바타 변경 성공!");
       })
       .catch((error) => {
         toast.error(error);
@@ -265,7 +278,7 @@ const AllOrders = () => {
       row.push({
         id: item._id,
         itemsQty: item.cart.length,
-        total:  item.totalPrice + "원 ",
+        total: item.totalPrice + "원 ",
         status: item.status,
       });
     });
@@ -284,18 +297,16 @@ const AllOrders = () => {
 };
 
 const AllRefundOrders = () => {
-  const orders = [
-    {
-      _id: "7463hvbfbhfbrtr28820221",
-      orderItems: [
-        {
-          name: "Iphone 14 pro max",
-        },
-      ],
-      totalPrice: 120,
-      orderStatus: "처리 중",
-    },
-  ];
+  const { user } = useSelector((state) => state.user);
+  const { orders } = useSelector((state) => state.orders);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllOrdersOfUser(user._id));
+  }, []);
+
+  const eligibleOrders =
+    orders && orders.filter((item) => item.status === "환불 처리 중");
 
   const columns = [
     { field: "id", headerName: "Order ID", minWidth: 150, flex: 0.7 },
@@ -337,7 +348,7 @@ const AllRefundOrders = () => {
       renderCell: (params) => {
         return (
           <>
-            <Link to={`/order/${params.id}`}>
+            <Link to={`/user/order/${params.id}`}>
               <Button>
                 <AiOutlineArrowRight size={20} />
               </Button>
@@ -350,13 +361,13 @@ const AllRefundOrders = () => {
 
   const row = [];
 
-  orders &&
-    orders.forEach((item) => {
+  eligibleOrders &&
+    eligibleOrders.forEach((item) => {
       row.push({
         id: item._id,
-        itemsQty: item.orderItems.length,
-        total: "US$ " + item.totalPrice,
-        status: item.orderStatus,
+        itemsQty: item.cart.length,
+        total: item.totalPrice + " 원",
+        status: item.status,
       });
     });
 
@@ -374,18 +385,13 @@ const AllRefundOrders = () => {
 };
 
 const TrackOrder = () => {
-  const orders = [
-    {
-      _id: "7463hvbfbhfbrtr28820221",
-      orderItems: [
-        {
-          name: "Iphone 14 pro max",
-        },
-      ],
-      totalPrice: 120,
-      orderStatus: "처리 중",
-    },
-  ];
+  const { user } = useSelector((state) => state.user);
+  const { orders } = useSelector((state) => state.orders);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllOrdersOfUser(user._id));
+  }, []);
 
   const columns = [
     { field: "id", headerName: "Order ID", minWidth: 150, flex: 0.7 },
@@ -418,16 +424,16 @@ const TrackOrder = () => {
     {
       field: " ",
       flex: 1,
-      minWidth: 130,
+      minWidth: 150,
       headerName: "",
       type: "number",
       sortable: false,
       renderCell: (params) => {
         return (
           <>
-            <Link to={`/order/${params.id}`}>
+            <Link to={`/user/track/order/${params.id}`}>
               <Button>
-                <MdOutlineTrackChanges size={20} />
+                <MdTrackChanges size={20} />
               </Button>
             </Link>
           </>
@@ -442,9 +448,9 @@ const TrackOrder = () => {
     orders.forEach((item) => {
       row.push({
         id: item._id,
-        itemsQty: item.orderItems.length,
-        total: "US$ " + item.totalPrice,
-        status: item.orderStatus,
+        itemsQty: item.cart.length,
+        total: item.totalPrice + " 원",
+        status: item.status,
       });
     });
 
