@@ -160,7 +160,7 @@ router.put(
 
       res.status(200).json({
         success: true,
-        message: "Reviwed succesfully!",
+        message: "리뷰를 작성하였습니다!",
       });
     } catch (error) {
       return next(new ErrorHandler(error, 400));

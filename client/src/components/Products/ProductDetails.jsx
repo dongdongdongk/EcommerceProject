@@ -16,7 +16,6 @@ import { addToCart } from "../../redux/cart/cartAction";
 import { toast } from "react-toastify";
 import styles from "../../styles/styles";
 import Ratings from "./Ratings";
-import axios from "axios";
 
 const ProductDetails = ({ data }) => {
   const [count, setCount] = useState(1);
@@ -325,15 +324,15 @@ const ProductDetailsInfo = ({
                 <img
                   // src={data.shop.shop_avatar.url}
                   // className="w-[50px] h-[50px] rounded-full"
-                  src={`http://localhost:5000/${data?.shop?.avatar}`}
+                  src={`http://localhost:5000/${data?.shop.avatar}`}
                   className="w-[50px] h-[50px] rounded-full"
                   alt=""
                 />
                 <div className="pl-3">
                   <h3 className={`${styles.shop_name}`}>{data.shop.name}</h3>
                   <h5 className="pb-2 text-[15px]">
-                    {/* ({data.shop.ratings}) Ratings */}
-                    (4/5) 평점
+                    ({data.shop.ratings}) Ratings
+                    {/* (4/5) 평점 */}
                   </h5>
                 </div>
               </div>

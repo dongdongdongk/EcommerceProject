@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import axios from "axios";
 
-const Payment2 = (effect, deps) => {
+const KakaoPayment = (effect, deps) => {
   const [orderData, setOrderData] = useState([]);
   const [open, setOpen] = useState(false);
   const [shippingAddress, setShippingAddress] = useState([]);
@@ -43,7 +43,7 @@ const Payment2 = (effect, deps) => {
       amount: orderData?.subTotalPrice, // 금액 (필수항목)
       custom_data: { name: "부가정보", desc: "세부 부가정보" },
       buyer_name: user.name, // 구매자 이름
-      buyer_tel: "01080055113", // 구매자 전화번호 (필수항목)
+      buyer_tel: user.phoneNumber, // 구매자 전화번호 (필수항목)
       buyer_email: user.email, // 구매자 이메일
       buyer_addr: shippingAddress?.address1,
       buyer_postalcode: shippingAddress?.zipCode,
@@ -105,4 +105,4 @@ const Payment2 = (effect, deps) => {
   );
 };
 
-export default Payment2;
+export default KakaoPayment;

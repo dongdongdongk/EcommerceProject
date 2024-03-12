@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import styles from "../../styles/styles";
-import Payment2 from "./Payment2";
+import KakaoPayment from "./KakaoPayment";
 
 const Payment = () => {
   const [orderData, setOrderData] = useState([]);
@@ -189,7 +189,7 @@ const CartData = ({ orderData }) => {
         ${orderData?.totalPrice}
       </h5>
       <br />
-      <Payment2 />
+      <KakaoPayment />
     </div>
   );
 };

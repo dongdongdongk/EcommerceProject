@@ -133,52 +133,54 @@ const OrderDetails = () => {
       <br />
       <br />
       <h4 className="pt-3 text-[20px] font-[600]">주문 상태:</h4>
-      {data?.status !== "환불 처리 중" &&
-        data?.status !== "환불 완료" && (
-          <select
-            value={status}
-            onChange={(e) => setStatus(e.target.value)}
-            className="w-[200px] mt-2 border h-[35px] rounded-[5px]"
-          >
-            {[
-              "처리 중",
-              "배송 파트너로 이관됨",
-              "발송 중",
-              "수령함",
-              "배송 중",
-              "배송 완료",
-            ]
-              .slice(
-                [
-                  "처리 중",
-                  "배송 파트너로 이관됨",
-                  "발송 중",
-                  "수령함",
-                  "배송 중",
-                  "배송 완료",
-                ].indexOf(data?.status)
-              )
-              .map((option, index) => (
-                <option value={option} key={index}>
-                  {option}
-                </option>
-              ))}
-          </select>
-        )}
+      {data?.status !== "환불 처리 중" && data?.status !== "환불 완료" && (
+        <select
+          value={status}
+          onChange={(e) => setStatus(e.target.value)}
+          className="w-[200px] mt-2 border h-[35px] rounded-[5px]"
+        >
+          {[
+            "처리 중",
+            "배송 파트너로 이관됨",
+            "발송 중",
+            "수령함",
+            "배송 중",
+            "배송 완료",
+          ]
+            .slice(
+              [
+                "처리 중",
+                "배송 파트너로 이관됨",
+                "발송 중",
+                "수령함",
+                "배송 중",
+                "배송 완료",
+              ].indexOf(data?.status)
+            )
+            .map((option, index) => (
+              <option value={option} key={index}>
+                {option}
+              </option>
+            ))}
+        </select>
+      )}
 
-      <select
-        value={status}
-        onChange={(e) => setStatus(e.target.value)}
-        className="w-[200px] mt-2 border h-[35px] rounded-[5px]"
-      >
-        {["환불 처리 중", "환불 완료"]
-          .slice(["환불 처리 중", "환불 완료"].indexOf(data?.status))
-          .map((option, index) => (
-            <option value={option} key={index}>
-              {option}
-            </option>
-          ))}
-      </select>
+      {data?.status === "환불 처리 중" ||
+      data?.status === "환불 완료" ? (
+        <select
+          value={status}
+          onChange={(e) => setStatus(e.target.value)}
+          className="w-[200px] mt-2 border h-[35px] rounded-[5px]"
+        >
+          {["환불 처리 중", "환불 완료"]
+            .slice(["환불 처리 중", "환불 완료"].indexOf(data?.status))
+            .map((option, index) => (
+              <option value={option} key={index}>
+                {option}
+              </option>
+            ))}
+        </select>
+      ) : null}
 
       <div
         className={`${styles.button} mt-5 !bg-[#FCE1E6] !rounded-[4px] text-[#E94560] font-[600] !h-[45px] text-[18px]`}
