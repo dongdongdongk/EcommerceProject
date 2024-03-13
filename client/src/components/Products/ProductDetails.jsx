@@ -16,6 +16,7 @@ import { addToCart } from "../../redux/cart/cartAction";
 import { toast } from "react-toastify";
 import styles from "../../styles/styles";
 import Ratings from "./Ratings";
+import axios from "axios";
 
 const ProductDetails = ({ data }) => {
   const [count, setCount] = useState(1);
@@ -59,14 +60,14 @@ const ProductDetails = ({ data }) => {
   const addToCartHandler = (id) => {
     const isItemExists = cart && cart.find((i) => i._id === id);
     if (isItemExists) {
-      toast.error("Item already in cart!");
+      toast.error("상품이 장바구니에 존재합니다!");
     } else {
       if (data.stock < 1) {
-        toast.error("Product stock limited!");
+        toast.error("상품의 재고를 초과했습니다!");
       } else {
         const cartData = { ...data, qty: count };
         dispatch(addToCart(cartData));
-        toast.success("Item added to cart successfully!");
+        toast.success("장바구니에 상품을 추가하였습니다!");
       }
     }
   };
@@ -85,7 +86,27 @@ const ProductDetails = ({ data }) => {
 
   const averageRating = totalRatings / totalReviewsLength || 0;
 
-  const handleMessageSubmit = () => {};
+  const handleMessageSubmit = async () => {
+    if (isAuthenticated) {
+      const groupTitle = data._id + user._id;
+      const userId = user._id;
+      const sellerId = data.shop._id;
+      await axios
+        .post(`http://localhost:5000/api/v2/conversation/create-new-conversation`, {
+          groupTitle,
+          userId,
+          sellerId,
+        })
+        .then((res) => {
+          navigate(`/inbox?${res.data.conversation._id}`);
+        })
+        .catch((error) => {
+          toast.error(error.response.data.message);
+        });
+    } else {
+      toast.error("메세지를 보내시려면 로그인하세요.");
+    }
+  }
 
   return (
     <div className="bg-white">

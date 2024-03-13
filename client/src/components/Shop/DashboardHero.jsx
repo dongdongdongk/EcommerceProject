@@ -20,7 +20,7 @@ const DashboardHero = () => {
      dispatch(getAllOrdersOfShop(seller._id));
      dispatch(getAllProductsShop(seller._id));
 
-     const orderData = orders && orders.filter((item) => item.status === "Delivered");
+     const orderData = orders && orders.filter((item) => item.status === "배송 완료");
      setDeliveredOrder(orderData);
   }, [dispatch]);
 

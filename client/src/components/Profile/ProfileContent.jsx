@@ -33,35 +33,36 @@ const ProfileContent = ({ active }) => {
   const [avatar, setAvatar] = useState(null);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (error) {
-      toast.error(error);
-      dispatch({ type: "clearErrors" });
-    }
-    if (successMessage) {
-      toast.success(successMessage);
-      dispatch({ type: "clearMessages" });
-    };
-  }, [error, successMessage]);
+  // useEffect(() => {
+  //   if (error) { // error가 문자열인 경우에만 토스트 메시지 출력
+  //     toast.error(error);
+  //     dispatch({ type: "clearErrors" });
+  //   }
+  //   if (successMessage) {
+  //     toast.success(successMessage);
+  //     dispatch({ type: "clearMessages" });
+  //   }
+  // }, [error, successMessage]);
   
 
-  const handleSubmit = async (e) => {
+const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // 사용자 정보 업데이트
-      await dispatch(updateUserInformation({ name, email, phoneNumber, password }));
-      
-      // 사용자 정보 다시 가져오기
-      await dispatch(loadUser());
-      
-      // 화면 다시 렌더링을 위한 동작 수행
-      // 예: 상태 업데이트, 필요한 동작 수행 등
-      
-      toast.success("사용자 정보 업데이트 성공!");
+        const updatedUser = await dispatch(updateUserInformation({ name, email, phoneNumber, password }));
+        console.log(updatedUser)
+
+        await dispatch(loadUser());
+
+        if (updatedUser && updatedUser.payload.successMessage) {
+            toast.success("유저 정보를 변경했습니다!");
+        } else {
+            throw new Error("올바른 정보를 입력해 주세요!");
+        }
     } catch (error) {
-      toast.error("사용자 정보 업데이트 실패!");
+        // 에러 발생 시 처리
+        toast.error(error.message);
     }
-  };
+};
 
   const handleImage = async (e) => {
     const file = e.target.files[0];

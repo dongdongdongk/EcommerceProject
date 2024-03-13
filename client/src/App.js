@@ -44,6 +44,8 @@ import TrackOrderPage from "./pages/TrackOrderPage";
 import ShopAllRefunds from "./pages/Shop/ShopAllRefunds";
 import ShopSettingsPage from "./pages/Shop/ShopSettingsPage";
 import ShopWithDrawMoneyPage from "./pages/Shop/ShopWithdrawMoney";
+import ShopInboxPage from "./pages/Shop/ShopInboxPage";
+import UserInbox from "./components/UserInbox";
 
 const App = () => {
   useEffect(() => {
@@ -154,6 +156,15 @@ const App = () => {
           />
 
           <Route
+            path="/inbox"
+            element={
+              <ProtectedRoute>
+                <UserInbox />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
             path="/user/order/:id"
             element={
               <ProtectedRoute>
@@ -207,6 +218,14 @@ const App = () => {
             element={
               <SellerProtectedRoute>
                 <ShopSettingsPage />
+              </SellerProtectedRoute>
+            }
+          />
+          <Route
+            path="/dashboard-messages"
+            element={
+              <SellerProtectedRoute>
+                <ShopInboxPage />
               </SellerProtectedRoute>
             }
           />
