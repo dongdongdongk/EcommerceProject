@@ -22,6 +22,7 @@ const Header = ({ activeHeading }) => {
   const { allProducts } = useSelector((state) => state.product);
   const { cart } = useSelector((state) => state.cart);
   const { wishList } = useSelector((state) => state.wishList);
+  const { seller } = useSelector((state) => state.seller);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchData, setSearchData] = useState(null);
   const [active, setActive] = useState(false);
@@ -59,9 +60,9 @@ const Header = ({ activeHeading }) => {
           <div>
             <Link to="/">
               <img
-                src={`http://localhost:5000/images/QuickDealMarketFix.jpg`}
+                src={`http://localhost:5000/images/QuickDealMarket.png`}
                 alt=""
-              />
+                />
             </Link>
           </div>
           {/* 검색창 */}
@@ -102,11 +103,19 @@ const Header = ({ activeHeading }) => {
           </div>
 
           <div className={`${styles.button}`}>
-            <Link to="/shop-create">
-              <h1 className="text-[#fff] flex items-center">
-                판매자 등록 <IoIosArrowForward className="ml-1" />
-              </h1>
-            </Link>
+            {seller ? (
+              <Link to={`/shop/${seller._id}`}>
+                <h1 className="text-[#fff] flex items-center">
+                  대시보드로 이동 <IoIosArrowForward className="ml-1" />
+                </h1>
+              </Link>
+            ) : (
+              <Link to="/shop-create">
+                <h1 className="text-[#fff] flex items-center">
+                  판매자 등록 <IoIosArrowForward className="ml-1" />
+                </h1>
+              </Link>
+            )}
           </div>
         </div>
       </div>

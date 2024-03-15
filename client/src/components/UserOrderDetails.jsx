@@ -242,9 +242,9 @@ const UserOrderDetails = () => {
         </div>
       </div>
       <br />
-      <Link to="/">
+      {/* <Link to="/">
         <div className={`${styles.button} text-white`}>메시지 보내기</div>
-      </Link>
+      </Link> */}
       <br />
       <br />
     </div>
