@@ -164,7 +164,7 @@ const handleSubmit = async (e) => {
                 </div>
               </div>
               <input
-                className={`w-[250px] h-[40px] border border-[#3a24db] text-center text-[#3a24db] rounded-[3px] mt-8 cursor-pointer`}
+                className={`${styles.button} w-[150px] h-[25px] rounded-[3px] mt-8 cursor-pointer`}
                 required
                 value="업데이트"
                 type="submit"
@@ -533,7 +533,7 @@ const ChangePassword = () => {
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
             <input
-              className={`w-[95%] h-[40px] border border-[#3a24db] text-center text-[#3a24db] rounded-[3px] mt-8 cursor-pointer`}
+              className={`${styles.button} w-[150px] h-[25px] rounded-[3px] mt-8 cursor-pointer`}
               required
               value="수정"
               type="submit"

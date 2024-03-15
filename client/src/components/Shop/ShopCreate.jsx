@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState,useEffect, useRef } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import styles from "../../styles/styles";
 import { Link, useNavigate } from "react-router-dom";
@@ -16,6 +16,12 @@ const ShopCreate = () => {
   const [avatar, setAvatar] = useState();
   const [password, setPassword] = useState("");
   const [visible, setVisible] = useState(false);
+  const signUpRef = useRef(null);
+
+  useEffect(() => {
+    // 페이지에 들어왔을 때 로그인 컴포넌트로 스크롤 이동
+    signUpRef.current.scrollIntoView({ behavior: "smooth" }); // ref로 해당 컴포넌트로 스크롤 이동
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -53,8 +59,8 @@ const ShopCreate = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-      <div className="sm:mx-auto sm:w-full sm:max-w-md">
+    <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8" ref={signUpRef} >
+      <div className="sm:mx-auto sm:w-full sm:max-w-md"  >
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
           판매자 등록
         </h2>
@@ -230,7 +236,7 @@ const ShopCreate = () => {
                 type="submit"
                 className="group relative w-full h-[40px] flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-500 hover:bg-yellow-600"
               >
-                Submit
+                등록
               </button>
             </div>
             <div className={`${styles.noramlFlex} w-full`}>

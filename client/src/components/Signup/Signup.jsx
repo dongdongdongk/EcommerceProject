@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect, useRef } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { FiFilePlus } from "react-icons/fi";
 import styles from "../../styles/styles.js";
@@ -12,6 +12,12 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [visible, setVisible] = useState(false);
   const [avatar, setAvatar] = useState(null);
+  const signUpRef = useRef(null); // useRef로 ref 생성
+
+  useEffect(() => {
+    // 페이지에 들어왔을 때 로그인 컴포넌트로 스크롤 이동
+    signUpRef.current.scrollIntoView({ behavior: "smooth" }); // ref로 해당 컴포넌트로 스크롤 이동
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,7 +47,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8" ref={signUpRef}>
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
           회원가입
@@ -137,7 +143,7 @@ const Signup = () => {
                     htmlFor="file-input"
                     className="ml-5 flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
                   >
-                    <span>Upload a file</span>
+                    <span>프로필 이미지</span>
                     <input
                       type="file"
                       name="avatar"
@@ -154,7 +160,7 @@ const Signup = () => {
                   type="submit"
                   className="group relative w-full h-[40px] flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-500 hover:bg-yellow-600"
                 >
-                  Submit
+                  등록
                 </button>
               </div>
               <div className={`${styles.noramlFlex} w-full`}>

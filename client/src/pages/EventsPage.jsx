@@ -17,7 +17,11 @@ const EventsPage = () => {
         <div>
           <Header activeHeading={4} />
           {allEvents && allEvents.length > 0 ? (
-            <EventCard active={true} data={allEvents[0]} />
+            <div className="w-full grid grid-col-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-col-12">
+              {allEvents.map((event, index) => (
+                <EventCard key={index} data={event} />
+              ))}
+            </div>
           ) : (
             <h1 className="text-center w-full pb-[100px] pt-[40px] text-[20px] flex flex-col items-center justify-center">
               <Lottie

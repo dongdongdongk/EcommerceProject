@@ -14,8 +14,9 @@ const DashboardHeader = () => {
       <div>
         <Link to="/">
           <img
-            src={`http://localhost:5000/images/QuickDealMarketFix.jpg`}
+            src={`http://localhost:5000/images/MainFix.png`}
             alt=""
+            className="w-[225px] h-[70px]"
           />
         </Link>
       </div>

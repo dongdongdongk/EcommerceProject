@@ -6,6 +6,7 @@ module.exports = {
     fontFamily: {
       Roboto: ["Roboto", "sans-serif"],
       Poppins: ['Poppins', "sans-serif"],
+      'NotoSansKR': ['Noto Sans KR', 'sans-serif'], // Noto Sans KR 폰트를 추가합니다.
     },
     extend: {
       screens: {

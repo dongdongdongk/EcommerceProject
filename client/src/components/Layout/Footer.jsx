@@ -11,6 +11,7 @@ import {
   footerProductLinks,
   footerSupportLinks,
 } from "../../static/data";
+import styles from "../../styles/styles";
 
 const Footer = () => {
   return (
@@ -25,21 +26,21 @@ const Footer = () => {
           <input
             type="text"
             required
-            placeholder="Enter your email..."
+            placeholder="이메일을 입력하세요..."
             className="text-gray-800
                 sm:w-72 w-full sm:mr-5 mr-1 lg:mb-0 mb-4 py-2.5 rounded px-2 focus:outline-none"
           />
-          <button className="bg-[#000000] hover:bg-zinc-600 duration-300 px-5 py-2.5 rounded-md text-white md:w-auto w-full">
-            Submit
+          <button className={`${styles.button}bg-[#000000] hover:bg-zinc-600 duration-300 px-5 py-2.5 rounded-md text-white md:w-auto w-full`}>
+            구독
           </button>
         </div>
       </div>
       <div className="grid grid-cols-1 sm:gird-cols-3 lg:grid-cols-4 gap-6 sm:px-8 px-5 py-16 sm:text-center">
         <ul className="px-5 text-center sm:text-start flex sm:block flex-col items-center text-gray-500">
           <img
-            src={`http://localhost:5000/images/QuickDealMarketFix.jpg`}
+            src={`http://localhost:5000/images/MainFix.png`}
             alt=""
-        
+            className="w-[225px] h-[80px]"
           />
           <br />
           <p>최신 트렌드와 다양한 상품으로 여러분을 기다립니다.</p>

@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import Signup from "../components/Signup/Signup";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import Header from "../components/Layout/Header";
+import Footer from "../components/Layout/Footer";
 
 const SignupPage = () => {
 
@@ -16,7 +18,9 @@ const SignupPage = () => {
 
   return (
     <div>
+      <Header />
       <Signup />
+      <Footer />
     </div>
   );
 };

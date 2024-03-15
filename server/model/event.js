@@ -44,6 +44,11 @@ const eventSchema = new mongoose.Schema({
             type: String,
         },
     ],
+    reviews : [
+        {
+            type : Object,
+        }
+    ],
     shopId:{
         type: String,
         required: true,

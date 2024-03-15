@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import Login from '../components/Login/Login'
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Header from "../components/Layout/Header";
+import Footer from "../components/Layout/Footer";
 
 const LoginPage = () => {
 
@@ -16,7 +18,9 @@ const LoginPage = () => {
 
     return (
         <div>
+            <Header/>
             <Login/>
+            <Footer/>
         </div>
 
     )

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef  } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -9,6 +9,13 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [visible, setVisible] = useState(false);
   const navigate = useNavigate();
+  const loginRef = useRef(null); // useRef로 ref 생성
+
+
+  useEffect(() => {
+    // 페이지에 들어왔을 때 로그인 컴포넌트로 스크롤 이동
+    loginRef.current.scrollIntoView({ behavior: "smooth" }); // ref로 해당 컴포넌트로 스크롤 이동
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,7 +40,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div ref={loginRef} className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
           로그인
@@ -90,7 +97,7 @@ const Login = () => {
                   )}
                 </div>
               </div>
-              <div className={`${styles.noramlFlex} justify-between`}>
+              {/* <div className={`${styles.noramlFlex} justify-between`}>
                 <div className={`${styles.noramlFlex}`}>
                   <input
                     type="checkbox"
@@ -113,13 +120,13 @@ const Login = () => {
                     Forgot your password?
                   </a>
                 </div>
-              </div>
+              </div> */}
               <div>
                 <button
                   type="submit"
-                  className="group relative w-full h-[40px] flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-500 hover:bg-yellow-600"
+                  className="group relative w-full h-[40px] flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-500 hover:bg-yellow-600 mt-12"
                 >
-                  Submit
+                  로그인
                 </button>
               </div>
               <div className={`${styles.noramlFlex} w-full`}>
@@ -128,6 +135,12 @@ const Login = () => {
                         회원가입
                     </Link>
               </div>
+              {/* <div className={`${styles.noramlFlex} w-full`}>
+                    <h4>홈으로 돌아가기</h4>
+                    <Link to="/" className="text-yellow-600 pl-2">
+                    홈으로
+                    </Link>
+              </div> */}
             </form>
           </div>
         </div>

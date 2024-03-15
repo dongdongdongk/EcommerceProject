@@ -108,7 +108,7 @@ const DashboardHero = () => {
               <span className="text-[16px]">(10% 서비스 수수료 포함)</span>
             </h3>
           </div>
-          <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">${availableBalance}</h5>
+          <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">{availableBalance} 원</h5>
           <Link to="/dashboard-withdraw-money">
             <h5 className="pt-4 pl-[2] text-[#077f9c]">출금</h5>
           </Link>

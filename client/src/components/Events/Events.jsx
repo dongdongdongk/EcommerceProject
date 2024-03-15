@@ -14,7 +14,10 @@ const Events = () => {
           </div>
 
           <div className="w-full grid">
-            <EventCard data={allEvents && allEvents[0]} />
+            {allEvents &&
+              allEvents.map((event, index) => (
+                <EventCard key={index} data={event} />
+              ))}
           </div>
         </div>
       )}

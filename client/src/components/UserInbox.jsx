@@ -112,7 +112,10 @@ const UserInbox = () => {
     try {
       if (newMessage !== "") {
         await axios
-          .post(`http://localhost:5000/api/v2/message/create-new-message`, message)
+          .post(
+            `http://localhost:5000/api/v2/message/create-new-message`,
+            message
+          )
           .then((res) => {
             setMessages([...messages, res.data.message]);
             updateLastMessage();
@@ -133,10 +136,13 @@ const UserInbox = () => {
     });
 
     await axios
-      .put(`http://localhost:5000/api/v2/conversation/update-last-message/${currentChat._id}`, {
-        lastMessage: newMessage,
-        lastMessageId: user._id,
-      })
+      .put(
+        `http://localhost:5000/api/v2/conversation/update-last-message/${currentChat._id}`,
+        {
+          lastMessage: newMessage,
+          lastMessageId: user._id,
+        }
+      )
       .then((res) => {
         setNewMessage("");
       })
@@ -157,6 +163,7 @@ const UserInbox = () => {
           <h1 className="text-center text-[30px] py-3 font-Poppins">
             모든 메세지
           </h1>
+          <div className="p-12">
           {/* All messages list */}
           {conversations &&
             conversations.map((item, index) => (
@@ -173,6 +180,7 @@ const UserInbox = () => {
                 setActiveStatus={setActiveStatus}
               />
             ))}
+            </div>
         </>
       )}
 
@@ -217,7 +225,9 @@ const MessageList = ({
     const userId = data.members.find((user) => user !== me);
     const getUser = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/v2/shop/get-shop-info/${userId}`);
+        const res = await axios.get(
+          `http://localhost:5000/api/v2/shop/get-shop-info/${userId}`
+        );
 
         setUser(res.data.shop);
       } catch (error) {
@@ -226,6 +236,7 @@ const MessageList = ({
     };
     getUser();
   }, [me, data]);
+  console.log(data)
 
   return (
     <div
@@ -254,12 +265,16 @@ const MessageList = ({
       </div>
       <div className="pl-3">
         <h1 className="text-[18px]">{userData?.name}</h1>
-        <p className="text-[16px] text-[#000c]">
-          {data?.lastMessageId !== userData?._id
-            ? "You:"
-            : userData?.name.split(" ")[0] + ": "}{" "}
-          {data?.lastMessage}
-        </p>
+        {data?.lastMessage ? (
+          <p className="text-[16px] text-[#000c]">
+            {data?.lastMessageId !== userData?._id
+              ? "You:"
+              : userData?.name.split(" ")[0] + ": "}{" "}
+            {data?.lastMessage}
+          </p>
+        ) : (
+          <p className="text-[16px] text-[#000c]">대화내용 없음</p>
+        )}
       </div>
     </div>
   );
@@ -345,7 +360,7 @@ const SellerInbox = ({
           <input
             type="text"
             required
-            placeholder="Enter your message..."
+            placeholder="메세지를 입력하세요"
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
             className={`${styles.input}`}

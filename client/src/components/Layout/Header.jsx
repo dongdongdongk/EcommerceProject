@@ -60,8 +60,9 @@ const Header = ({ activeHeading }) => {
           <div>
             <Link to="/">
               <img
-                src={`http://localhost:5000/images/QuickDealMarket.png`}
+                src={`http://localhost:5000/images/MainFixBg.png`}
                 alt=""
+                className="w-[225px] h-[80px]"
                 />
             </Link>
           </div>
@@ -226,7 +227,7 @@ const Header = ({ activeHeading }) => {
           <div>
             <Link to="/">
               <img
-                src={`http://localhost:5000/images/QuickDealMarketFix.jpg`}
+                src={`className="w-[225px] h-[80px]"`}
                 alt=""
                 className="mt-3 cursor-pointer"
               />

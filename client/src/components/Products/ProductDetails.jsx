@@ -92,11 +92,14 @@ const ProductDetails = ({ data }) => {
       const userId = user._id;
       const sellerId = data.shop._id;
       await axios
-        .post(`http://localhost:5000/api/v2/conversation/create-new-conversation`, {
-          groupTitle,
-          userId,
-          sellerId,
-        })
+        .post(
+          `http://localhost:5000/api/v2/conversation/create-new-conversation`,
+          {
+            groupTitle,
+            userId,
+            sellerId,
+          }
+        )
         .then((res) => {
           navigate(`/inbox?${res.data.conversation._id}`);
         })
@@ -106,7 +109,7 @@ const ProductDetails = ({ data }) => {
     } else {
       toast.error("메세지를 보내시려면 로그인하세요.");
     }
-  }
+  };
 
   return (
     <div className="bg-white">
@@ -197,10 +200,10 @@ const ProductDetails = ({ data }) => {
                   </div>
                 </div>
                 <div
-                  className={`${styles.button} !mt-6 !rounded !h-11 flex items-center`}
+                  className={`${styles.button} bg-[#efbb82] !mt-6 !rounded !h-11 flex items-center`}
                   onClick={() => addToCartHandler(data._id)}
                 >
-                  <span className="text-white flex items-center">
+                  <span className="text-white flex items-center ">
                     장바구니 <AiOutlineShoppingCart className="ml-1" />
                   </span>
                 </div>
@@ -224,7 +227,7 @@ const ProductDetails = ({ data }) => {
                     </h5>
                   </div>
                   <div
-                    className={`${styles.button} bg-[#6443d1] mt-4 !rounded !h-11`}
+                    className={`${styles.button} bg-[#efbb82] mt-4 !rounded !h-11`}
                     onClick={handleMessageSubmit}
                   >
                     <span className="text-white flex items-center">
@@ -257,9 +260,9 @@ const ProductDetailsInfo = ({
   averageRating,
 }) => {
   const [active, setActive] = useState(1);
-
+console.log(data)
   return (
-    <div className="bg-[#f5f6fb] px-3 800px:px-10 py-2 rounded">
+    <div className="bg-[#f7ebe1] px-3 800px:px-10 py-2 rounded">
       <div className="w-full flex justify-between border-b pt-10 pb-2">
         <div className="relative">
           <h5
@@ -312,7 +315,7 @@ const ProductDetailsInfo = ({
       {active === 2 ? (
         <div className="w-full min-h-[40vh] flex flex-col items-center py-3 overflow-y-scroll">
           {data &&
-            data?.reviews.map((item, index) => (
+            data?.reviews?.map((item, index) => (
               <div className="w-full flex my-2">
                 <img
                   src={`http://localhost:5000/${item.user.avatar}`}
@@ -330,8 +333,8 @@ const ProductDetailsInfo = ({
             ))}
 
           <div className="w-full flex justify-center">
-            {data && data.reviews.length === 0 && (
-              <h5>No Reviews have for this product!</h5>
+            {(!data || data.reviews?.length === 0) && (
+              <h5>이 상품은 리뷰가 없습니다!</h5>
             )}
           </div>
         </div>
@@ -375,15 +378,16 @@ const ProductDetailsInfo = ({
                 </span>
               </h5>
               <h5 className="font-[600] pt-3">
-                총 리뷰 수: <span className="font-[500]">{totalReviewsLength}</span>
+                총 리뷰 수:{" "}
+                <span className="font-[500]">{totalReviewsLength}</span>
               </h5>
-              <Link to="/">
+              {/* <Link to="/">
                 <div
                   className={`${styles.button} !rounded-[4px] !h-[39.5px] mt-3`}
                 >
                   <h4 className="text-white">상점 방문</h4>
                 </div>
-              </Link>
+              </Link> */}
             </div>
           </div>
         </div>

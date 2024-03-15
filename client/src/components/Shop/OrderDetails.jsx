@@ -67,7 +67,7 @@ const OrderDetails = () => {
         </div>
         <Link to="/dashboard-orders">
           <div
-            className={`${styles.button} !bg-[#fce1e6] !rounded-[4px] text-[#e94560] font-[600] !h-[45px] text-[18px]`}
+            className={`${styles.button} font-[600] !h-[45px] text-[18px]`}
           >
             주문 목록
           </div>
@@ -125,7 +125,7 @@ const OrderDetails = () => {
         <div className="w-full 800px:w-[40%]">
           <h4 className="pt-3 text-[20px]">결제 정보:</h4>
           <h4>
-            Status:{" "}
+            상태:{" "}
             {data?.paymentInfo?.status ? data?.paymentInfo?.status : "미결제"}
           </h4>
         </div>
@@ -183,7 +183,7 @@ const OrderDetails = () => {
       ) : null}
 
       <div
-        className={`${styles.button} mt-5 !bg-[#FCE1E6] !rounded-[4px] text-[#E94560] font-[600] !h-[45px] text-[18px]`}
+        className={`${styles.button} mt-5 !rounded-[4px] text-[#E94560] font-[600] !h-[45px] text-[18px]`}
         onClick={
           data?.status !== "환불 처리 중"
             ? orderUpdateHandler

@@ -2,6 +2,8 @@ import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import ShopCreate from '../../components/Shop/ShopCreate'
+import Header from '../../components/Layout/Header';
+import Footer from '../../components/Layout/Footer';
 
 const ShopCreatePage = () => {
   const navigate = useNavigate();
@@ -14,7 +16,9 @@ const ShopCreatePage = () => {
   }, [])
   return (
     <div>
+        <Header />
         <ShopCreate />
+        <Footer />
     </div>
   )
 }
