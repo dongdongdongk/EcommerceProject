@@ -6,7 +6,7 @@ export const getAllOrdersOfUser = createAsyncThunk(
   "order/getAllOrdersOfUser",
   async (userId) => {
     try {
-      const { data } = await axios.get(`http://localhost:5000/api/v2/order/get-all-orders/${userId}`);
+      const { data } = await axios.get(process.env.REACT_APP_BACKEND_URL +`/order/get-all-orders/${userId}`);
       return data.orders;
     } catch (error) {
       return error.response.data.message;
@@ -19,7 +19,7 @@ export const getAllOrdersOfShop = createAsyncThunk(
   "order/getAllOrdersOfShop",
   async (shopId) => {
     try {
-      const { data } = await axios.get(`http://localhost:5000/api/v2/order/get-seller-all-orders/${shopId}`);
+      const { data } = await axios.get(process.env.REACT_APP_BACKEND_URL +`/order/get-seller-all-orders/${shopId}`);
       return data.orders;
     } catch (error) {
       return error.response.data.message;
@@ -32,7 +32,7 @@ export const getAllOrdersOfAdmin = createAsyncThunk(
   "order/getAllOrdersOfAdmin",
   async () => {
     try {
-      const { data } = await axios.get(`http://localhost:5000/api/v2/order/admin-all-orders`, {
+      const { data } = await axios.get(process.env.REACT_APP_BACKEND_URL +`/order/admin-all-orders`, {
         withCredentials: true,
       });
       return data.orders;

@@ -44,7 +44,7 @@ const DashboardMessages = () => {
     const getConversation = async () => {
       try {
         const resonse = await axios.get(
-          `http://localhost:5000/api/v2/conversation/get-all-conversation-seller/${seller?._id}`,
+          process.env.REACT_APP_BACKEND_URL +`/conversation/get-all-conversation-seller/${seller?._id}`,
           {
             withCredentials: true,
           }
@@ -80,7 +80,7 @@ const DashboardMessages = () => {
     const getMessage = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/v2/message/get-all-messages/${currentChat?._id}`
+          process.env.REACT_APP_BACKEND_URL +`/message/get-all-messages/${currentChat?._id}`
         );
         setMessages(response.data.messages);
       } catch (error) {
@@ -112,7 +112,7 @@ const DashboardMessages = () => {
     try {
       if (newMessage !== "") {
         await axios
-          .post(`http://localhost:5000/api/v2/message/create-new-message`, message)
+          .post(process.env.REACT_APP_BACKEND_URL +`/message/create-new-message`, message)
           .then((res) => {
             setMessages([...messages, res.data.message]);
             updateLastMessage();
@@ -133,7 +133,7 @@ const DashboardMessages = () => {
     });
 
     await axios
-      .put(`http://localhost:5000/api/v2/conversation/update-last-message/${currentChat._id}`, {
+      .put(process.env.REACT_APP_BACKEND_URL +`/conversation/update-last-message/${currentChat._id}`, {
         lastMessage: newMessage,
         lastMessageId: seller._id,
       })
@@ -218,7 +218,7 @@ const MessageList = ({
 
     const getUser = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/v2/user/user-info/${userId}`);
+        const res = await axios.get(process.env.REACT_APP_BACKEND_URL +`/user/user-info/${userId}`);
         setUser(res.data.user);
         console.log("res 는 " ,res)
       } catch (error) {

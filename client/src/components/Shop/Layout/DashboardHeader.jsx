@@ -16,7 +16,7 @@ const DashboardHeader = () => {
           <img
             src={`http://localhost:5000/images/MainFix.png`}
             alt=""
-            className="w-[225px] h-[70px]"
+            style={{width:"170px", objectFit:"contain"}}
           />
         </Link>
       </div>

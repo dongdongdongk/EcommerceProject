@@ -17,7 +17,7 @@ const ShopInfo = ({ isOwner }) => {
     dispatch(getAllProductsShop(id));
     setIsLoading(true);
     axios
-      .get(`http://localhost:5000/api/v2/shop/get-shop-info/${id}`)
+      .get(process.env.REACT_APP_BACKEND_URL +`/shop/get-shop-info/${id}`)
       .then((res) => {
         setData(res.data.shop);
         setIsLoading(false);
@@ -29,7 +29,7 @@ const ShopInfo = ({ isOwner }) => {
   }, []);
 
   const logoutHandler = async () => {
-    axios.get(`http://localhost:5000/api/v2/shop/logout`, {
+    axios.get(process.env.REACT_APP_BACKEND_URL +`/shop/logout`, {
       withCredentials: true,
     });
     window.location.reload();

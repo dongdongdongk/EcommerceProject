@@ -44,7 +44,7 @@ const UserInbox = () => {
     const getConversation = async () => {
       try {
         const resonse = await axios.get(
-          `http://localhost:5000/api/v2/conversation/get-all-conversation-user/${user?._id}`,
+          process.env.REACT_APP_BACKEND_URL +`/conversation/get-all-conversation-user/${user?._id}`,
           {
             withCredentials: true,
           }
@@ -80,7 +80,7 @@ const UserInbox = () => {
     const getMessage = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/v2/message/get-all-messages/${currentChat?._id}`
+          process.env.REACT_APP_BACKEND_URL +`/message/get-all-messages/${currentChat?._id}`
         );
         setMessages(response.data.messages);
       } catch (error) {
@@ -113,7 +113,7 @@ const UserInbox = () => {
       if (newMessage !== "") {
         await axios
           .post(
-            `http://localhost:5000/api/v2/message/create-new-message`,
+            process.env.REACT_APP_BACKEND_URL +`/message/create-new-message`,
             message
           )
           .then((res) => {
@@ -137,7 +137,7 @@ const UserInbox = () => {
 
     await axios
       .put(
-        `http://localhost:5000/api/v2/conversation/update-last-message/${currentChat._id}`,
+        process.env.REACT_APP_BACKEND_URL +`/conversation/update-last-message/${currentChat._id}`,
         {
           lastMessage: newMessage,
           lastMessageId: user._id,
@@ -226,7 +226,7 @@ const MessageList = ({
     const getUser = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/v2/shop/get-shop-info/${userId}`
+          process.env.REACT_APP_BACKEND_URL +`/shop/get-shop-info/${userId}`
         );
 
         setUser(res.data.shop);
@@ -253,7 +253,7 @@ const MessageList = ({
     >
       <div className="relative">
         <img
-          src={`http://localhost:5000/${userData?.avatar}`}
+          src={process.env.REACT_APP_BACKEND + `/${userData?.avatar}`}
           alt=""
           className="w-[50px] h-[50px] rounded-full"
         />
@@ -297,7 +297,7 @@ const SellerInbox = ({
       <div className="w-full flex p-3 items-center justify-between bg-slate-200">
         <div className="flex">
           <img
-            src={`http://localhost:5000/${userData?.avatar}`}
+            src={process.env.REACT_APP_BACKEND +`/${userData?.avatar}`}
             alt=""
             className="w-[60px] h-[60px] rounded-full"
           />

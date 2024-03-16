@@ -78,6 +78,14 @@ const App = () => {
 
           {/* 샵 라우터 */}
           <Route path="/shop-create" element={<ShopCreatePage />} />
+          <Route
+            path="/shop/:id"
+            element={
+              <SellerProtectedRoute>
+                <ShopHomePage />
+              </SellerProtectedRoute>
+            }
+          />
           <Route path="/shop-login" element={<ShopLoginPage />} />
 
           <Route
@@ -94,14 +102,6 @@ const App = () => {
               <ProtectedRoute>
                 <CheckoutPage />
               </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/shop/:id"
-            element={
-              <SellerProtectedRoute>
-                <ShopHomePage />
-              </SellerProtectedRoute>
             }
           />
           <Route

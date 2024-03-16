@@ -22,7 +22,7 @@ const ShopLogin = () => {
 
     await axios
       .post(
-        `http://localhost:5000/api/v2/shop/login-shop`,
+        process.env.REACT_APP_BACKEND_URL +`/shop/login-shop`,
         {
           email,
           password,

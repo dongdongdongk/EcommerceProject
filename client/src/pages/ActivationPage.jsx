@@ -11,7 +11,7 @@ const ActivationPage = () => {
   useEffect(() => {
     const sendRequest = async () => {
       try {
-        const response = await axios.post(`http://localhost:5000/api/v2/user/activation`, {
+        const response = await axios.post(process.env.REACT_APP_BACKEND_URL +`/user/activation`, {
           activation_token,
         });
         console.log("이거 맞나??", response);

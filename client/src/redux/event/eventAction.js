@@ -7,7 +7,7 @@ export const createEvent = createAsyncThunk(
   async (newForm) => {
     try {
       const config = { headers: { "Content-Type": "multipart/form-data" } };
-      const { data } = await axios.post(`http://localhost:5000/api/v2/event/create-event`,newForm, config);
+      const { data } = await axios.post(process.env.REACT_APP_BACKEND_URL +`/event/create-event`,newForm, config);
       return data.event;
     } catch (error) {
         throw error.response.data.message;
@@ -21,7 +21,7 @@ export const getAllEventsShop = createAsyncThunk(
     "event/getAllEventsShop",
     async (id) => {
         try {
-            const { data } = await axios.get(`http://localhost:5000/api/v2/event/get-all-events/${id}`);
+            const { data } = await axios.get(process.env.REACT_APP_BACKEND_URL +`/event/get-all-events/${id}`);
             return data.events
         } catch (error) {
             throw error.response.data.message;
@@ -35,7 +35,7 @@ export const getAllEvents = createAsyncThunk(
     "event/getAllEvents",
     async() => {
         try {
-            const { data } = await axios.get(`http://localhost:5000/api/v2/event/get-all-events`);
+            const { data } = await axios.get(process.env.REACT_APP_BACKEND_URL +`/event/get-all-events`);
             return data.events
         } catch (error) {
             throw error.response.data.message;
@@ -49,7 +49,7 @@ export const deleteEvent = createAsyncThunk(
     "event/deleteEvent",
     async (id) => {
         try {
-            const { data } = await axios.delete(`http://localhost:5000/api/v2/event/delete-shop-event/${id}`, { withCredentials: true, })
+            const { data } = await axios.delete(process.env.REACT_APP_BACKEND_URL +`/event/delete-shop-event/${id}`, { withCredentials: true, })
             return data.message
         } catch (error) {
             throw error.response.data.message;

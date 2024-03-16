@@ -18,7 +18,7 @@ const ProfileSidebar = ({ setActive, active }) => {
 
   const logoutHandler = () => {
     axios
-      .get(`http://localhost:5000/api/v2/user/logout`, {
+      .get(process.env.REACT_APP_BACKEND_URL +`/user/logout`, {
         withCredentials: true,
       })
       .then((res) => {

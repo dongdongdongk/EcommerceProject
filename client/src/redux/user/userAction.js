@@ -8,7 +8,7 @@ export const clearErrors = createAsyncThunk("user/clearErrors", async () => {
 export const loadUser = createAsyncThunk("user/loadUser", async () => {
   try {
     const { data } = await axios.get(
-      `http://localhost:5000/api/v2/user/getuser`,
+      process.env.REACT_APP_BACKEND_URL +`/user/getuser`,
       {
         withCredentials: true,
       }
@@ -22,7 +22,7 @@ export const loadUser = createAsyncThunk("user/loadUser", async () => {
 export const loadSeller = createAsyncThunk("user/loadSeller", async () => {
   try {
     const { data } = await axios.get(
-      `http://localhost:5000/api/v2/shop/getSeller`,
+      process.env.REACT_APP_BACKEND_URL +`/shop/getSeller`,
       {
         withCredentials: true,
       }
@@ -38,7 +38,7 @@ export const updateUserInformation = createAsyncThunk(
   async ({ name, email, phoneNumber, password }) => {
     try {
       const { data } = await axios.put(
-        `http://localhost:5000/api/v2/user/update-user-info`,
+        process.env.REACT_APP_BACKEND_URL +`/user/update-user-info`,
         { name, email, phoneNumber, password },
         {
           withCredentials: true,
@@ -59,7 +59,7 @@ export const updateUserAddress = createAsyncThunk(
   async ({ country, city, address1, address2, zipCode, addressType }) => {
     try {
       const { data } = await axios.put(
-        `http://localhost:5000/api/v2/user/update-user-addresses`,
+        process.env.REACT_APP_BACKEND_URL +`/user/update-user-addresses`,
         { country, city, address1, address2, zipCode, addressType },
         {
           withCredentials: true,
@@ -80,7 +80,7 @@ export const deleteUserAddress = createAsyncThunk(
   async (id) => {
     try {
       const { data } = await axios.delete(
-        `http://localhost:5000/api/v2/user/delete-user-address/${id}`,
+        process.env.REACT_APP_BACKEND_URL +`/user/delete-user-address/${id}`,
         {
           withCredentials: true,
         }

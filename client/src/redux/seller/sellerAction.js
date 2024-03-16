@@ -7,7 +7,7 @@ export const clearErrors = createAsyncThunk('seller/clearErrors', async () => {
 
 export const loadSeller = createAsyncThunk('seller/loadSeller', async () => {
   try {
-    const { data } = await axios.get(`http://localhost:5000/api/v2/shop/getSeller`, {
+    const { data } = await axios.get(process.env.REACT_APP_BACKEND_URL +`/shop/getSeller`, {
       withCredentials: true,
     });
     return data.seller;

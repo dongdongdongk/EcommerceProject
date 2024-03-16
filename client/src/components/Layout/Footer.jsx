@@ -40,7 +40,7 @@ const Footer = () => {
           <img
             src={`http://localhost:5000/images/MainFix.png`}
             alt=""
-            className="w-[225px] h-[80px]"
+            style={{width:"180px", objectFit:"contain"}}
           />
           <br />
           <p>최신 트렌드와 다양한 상품으로 여러분을 기다립니다.</p>

@@ -30,7 +30,7 @@ const Signup = () => {
     newForm.append("email", email);
     newForm.append("password", password);
     
-    axios.post('http://localhost:5000/api/v2/user/create-user', newForm, config).then((res) => {
+    axios.post(process.env.REACT_APP_BACKEND_URL +'/user/create-user', newForm, config).then((res) => {
       toast.success(res.data.message)
       setName("");
       setEmail("");

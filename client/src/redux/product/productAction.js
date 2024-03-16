@@ -12,7 +12,7 @@ export const createProduct = createAsyncThunk(
     try {
       const config = { headers: { "Content-Type": "multipart/form-data" } };
       const { data } = await axios.post(
-        `http://localhost:5000/api/v2/product/create-product`,
+        process.env.REACT_APP_BACKEND_URL +`/product/create-product`,
         newForm,
         config
       );
@@ -29,7 +29,7 @@ export const getAllProductsShop = createAsyncThunk(
   async (id) => {
     try {
       const { data } = await axios.get(
-        `http://localhost:5000/api/v2/product/get-all-products-shop/${id}`
+        process.env.REACT_APP_BACKEND_URL +`/product/get-all-products-shop/${id}`
       );
       return data.products;
     } catch (error) {
@@ -43,7 +43,7 @@ export const getAllProducts = createAsyncThunk (
   "product/getAllProducts",
   async () => {
     try {
-      const { data } = await axios.get(`http://localhost:5000/api/v2/product/get-all-products`)
+      const { data } = await axios.get(process.env.REACT_APP_BACKEND_URL +`/product/get-all-products`)
       return data.products
     } catch (error) {
       throw error.response.data.message      
@@ -57,7 +57,7 @@ export const deleteProduct = createAsyncThunk(
   "product/deleteProduct", async (id) => {
 
     try {
-      const { data } = await axios.delete (`http://localhost:5000/api/v2/product/delete-shop-product/${id}`,{withCredentials : true} )
+      const { data } = await axios.delete (process.env.REACT_APP_BACKEND_URL +`/product/delete-shop-product/${id}`,{withCredentials : true} )
       return data.message;
     } catch (error) {
       throw error.response.data.message

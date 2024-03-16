@@ -60,9 +60,9 @@ const Header = ({ activeHeading }) => {
           <div>
             <Link to="/">
               <img
-                src={`http://localhost:5000/images/MainFixBg.png`}
+                src={process.env.REACT_APP_BACKEND + `/images/MainFixBg.png`}
                 alt=""
-                className="w-[225px] h-[80px]"
+                style={{width:"180px", objectFit:"contain"}}
                 />
             </Link>
           </div>

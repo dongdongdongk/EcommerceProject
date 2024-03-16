@@ -29,7 +29,7 @@ const UserOrderDetails = () => {
   const reviewHandler = async (e) => {
     await axios
       .put(
-        `http://localhost:5000/api/v2/product/create-new-review`,
+        process.env.REACT_APP_BACKEND_URL +`/product/create-new-review`,
         {
           user,
           rating,
@@ -53,7 +53,7 @@ const UserOrderDetails = () => {
 
   const refundHandler = async () => {
     await axios
-      .put(`http://localhost:5000/api/v2/order/order-refund/${id}`, {
+      .put(process.env.REACT_APP_BACKEND_URL +`/order/order-refund/${id}`, {
         status: "환불 처리 중",
       })
       .then((res) => {

@@ -25,7 +25,7 @@ const OrderDetails = () => {
   const orderUpdateHandler = async (e) => {
     await axios
       .put(
-        `http://localhost:5000/api/v2/order/update-order-status/${id}`,
+        process.env.REACT_APP_BACKEND_URL +`/order/update-order-status/${id}`,
         {
           status,
         },
@@ -43,7 +43,7 @@ const OrderDetails = () => {
   const refundOrderUpdateHandler = async (e) => {
     await axios
       .put(
-        `http://localhost:5000/api/v2/order/order-refund-success/${id}`,
+        process.env.REACT_APP_BACKEND_URL +`/order/order-refund-success/${id}`,
         {
           status,
         },

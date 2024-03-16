@@ -37,7 +37,7 @@ const ShopCreate = () => {
     newForm.append("address", address);
     newForm.append("phoneNumber", phoneNumber);
     axios
-      .post(`http://localhost:5000/api/v2/shop/create-shop`, newForm, config)
+      .post(process.env.REACT_APP_BACKEND_URL +`/shop/create-shop`, newForm, config)
       .then((res) => {
         toast.success(res.data.message);
         setName("");

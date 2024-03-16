@@ -85,7 +85,7 @@ const KakaoPayment = (effect, deps) => {
           },
         };
   
-        await axios.post(`http://localhost:5000/api/v2/order/create-order`, orderDataToSend, config);
+        await axios.post(process.env.REACT_APP_BACKEND_URL +`/order/create-order`, orderDataToSend, config);
   
         // 기존 코드는 유지
         navigate("/order/success");

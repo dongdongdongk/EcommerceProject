@@ -93,7 +93,7 @@ const ProductDetails = ({ data }) => {
       const sellerId = data.shop._id;
       await axios
         .post(
-          `http://localhost:5000/api/v2/conversation/create-new-conversation`,
+          process.env.REACT_APP_BACKEND_URL +`/conversation/create-new-conversation`,
           {
             groupTitle,
             userId,
@@ -164,16 +164,16 @@ const ProductDetails = ({ data }) => {
                 <div className="flex items-center mt-12 justify-between pr-3">
                   <div>
                     <button
-                      className="bg-gradient-to-r from-teal-400 to-teal-500 text-white font-bold rounded-l px-4 py-2 shadow-lg hover:opacity-75 transition duration-300 ease-in-out"
+                      className="bg-[#efbb82] -to-r from-teal-400 to-teal-500 text-white font-bold rounded-l px-4 py-2 shadow-lg hover:opacity-75 transition duration-300 ease-in-out"
                       onClick={decrementCount}
                     >
                       -
                     </button>
-                    <span className="bg-gray-200 text-gray-800 font-medium px-4 py-[11px]">
+                    <span className="bg-gray-200 text-gray-800 font-medium px-4 py-[10px]">
                       {count}
                     </span>
                     <button
-                      className="bg-gradient-to-r from-teal-400 to-teal-500 text-white font-bold rounded-l px-4 py-2 shadow-lg hover:opacity-75 transition duration-300 ease-in-out"
+                      className="bg-[#efbb82] -to-r from-teal-400 to-teal-500 text-white font-bold rounded-l px-4 py-2 shadow-lg hover:opacity-75 transition duration-300 ease-in-out"
                       onClick={incrementCount}
                     >
                       +

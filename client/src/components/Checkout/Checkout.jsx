@@ -70,7 +70,7 @@ const Checkout = () => {
     const name = couponCode;
 
     await axios
-      .get(`http://localhost:5000/api/v2/coupon/get-coupon-value/${name}`)
+      .get(process.env.REACT_APP_BACKEND_URL +`/coupon/get-coupon-value/${name}`)
       .then((res) => {
         const shopId = res.data.couponCode?.shopId;
         const couponCodeValue = res.data.couponCode?.value;

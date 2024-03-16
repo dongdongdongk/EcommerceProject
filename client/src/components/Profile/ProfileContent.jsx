@@ -73,7 +73,7 @@ const handleSubmit = async (e) => {
     formData.append("image", e.target.files[0]);
 
     await axios
-      .put(`http://localhost:5000/api/v2/user/update-avatar`, formData, {
+      .put(process.env.REACT_APP_BACKEND_URL +`/user/update-avatar`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -478,7 +478,7 @@ const ChangePassword = () => {
 
     await axios
       .put(
-        `http://localhost:5000/api/v2/user/update-user-password`,
+        process.env.REACT_APP_BACKEND_URL +`/user/update-user-password`,
         { oldPassword, newPassword, confirmPassword },
         { withCredentials: true }
       )
