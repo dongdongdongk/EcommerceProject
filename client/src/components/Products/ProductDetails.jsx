@@ -199,41 +199,48 @@ const ProductDetails = ({ data }) => {
                     )}
                   </div>
                 </div>
-                <div
-                  className={`${styles.button} bg-[#efbb82] !mt-6 !rounded !h-11 flex items-center`}
-                  onClick={() => addToCartHandler(data._id)}
-                >
-                  <span className="text-white flex items-center ">
-                    장바구니 <AiOutlineShoppingCart className="ml-1" />
-                  </span>
+                <div className="grid grid-cols-6 gap-2 mt-5">
+                  <div>
+                    <div
+                      className={`${styles.button} mt-6 rounded-[4px] h-11`}
+                      onClick={() => addToCartHandler(data._id)}
+                    >
+                      <span className="text-[#fff] flex items-center">
+                        장바구니 추가 <AiOutlineShoppingCart className="ml-1" />
+                      </span>
+                    </div>
+                  </div>
+                  <div>
+                    <div
+                      className={`${styles.button} mt-6 rounded-[4px] h-11`}
+                      onClick={handleMessageSubmit}
+                    >
+                      <span className="text-[#fff] flex items-center">
+                        메세지 보내기 <AiOutlineMessage className="ml-1" />
+                      </span>
+                    </div>
+                  </div>
                 </div>
-                <div className="flex items-center pt-8">
-                  <Link to={`/shop/preview/${data?.shop._id}`}>
+                <div className="flex mt-3">
+                  <Link to={`/shop/preview/${data.shop._id}`} className="flex">
                     <img
-                      src={process.env.REACT_APP_BACKEND +`/${data?.shop?.avatar}`}
+                      src={
+                        process.env.REACT_APP_BACKEND + `/${data?.shop?.avatar}`
+                      }
                       alt=""
                       className="w-[50px] h-[50px] rounded-full mr-2"
                     />
-                  </Link>
-                  <div className="pr-8">
-                    <Link to={`/shop/preview/${data?.shop._id}`}>
-                      <h3 className={`${styles.shop_name} pb-1 pt-1`}>
+                    <div>
+                      <h3 className={`${styles.shop_name}`}>
                         {data.shop.name}
                       </h3>
-                    </Link>
-                    <h5 className="pb-3 text-[15px]">
-                      {/* ({data.shop.ratings}) Ratings */}({averageRating}/5)
-                      Ratings
-                    </h5>
-                  </div>
-                  <div
-                    className={`${styles.button} bg-[#efbb82] mt-4 !rounded !h-11`}
-                    onClick={handleMessageSubmit}
-                  >
-                    <span className="text-white flex items-center">
-                      메시지 보내기 <AiOutlineMessage className="ml-1" />
-                    </span>
-                  </div>
+                      <h5 className="pb-3 text-[15px]">
+                        ({averageRating}/5) 점
+                      </h5>
+                      <Ratings rating={data?.ratings} />
+                    </div>
+                  </Link>
+                  <h5 className="text-[16px] text-[#3eac4d] mt-5">{data?.sold_out} 판매</h5>
                 </div>
               </div>
             </div>

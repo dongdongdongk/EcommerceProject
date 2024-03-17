@@ -107,6 +107,8 @@ const Checkout = () => {
     ? (subTotalPrice + shipping - discountPercentenge).toFixed(2)
     : (subTotalPrice + shipping).toFixed(2);
 
+
+
   return (
     <div className="w-full flex flex-col items-center py-8">
       <div className="w-[90%] 1000px:w-[70%] block 800px:flex">
@@ -164,6 +166,14 @@ const ShippingInfo = ({
   zipCode,
   setZipCode,
 }) => {
+
+  const handleAddressButtonClick = () => {
+    if (user.addresses.length === 0) {
+      toast.error("저장된 주소가 없습니다.");
+    } else {
+      setUserInfo(!userInfo);
+    }
+  };
   return (
     <div className="w-full 800px:w-[95%] bg-white rounded-md p-5 pb-8">
       <h5 className="text-[18px] font-[500]">배송지</h5>
@@ -278,7 +288,10 @@ const ShippingInfo = ({
       </form>
       <button
         className={`w-[150px] bg-[#e1b989] h-[50px] my-3 flex items-center justify-center rounded-xl cursor-pointer    text-neutral-50 shadow-[0_4px_9px_-4px_rgba(51,45,45,0.7)] hover:bg-yellow-600 hover:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] text-[15px] px-4 py-1 `}
-        onClick={() => setUserInfo(!userInfo)}
+        onClick={() => {
+          setUserInfo(!userInfo);
+          handleAddressButtonClick();
+        }}
       >
         저장된 주소에서 선택하기
       </button>
