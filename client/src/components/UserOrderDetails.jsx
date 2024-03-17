@@ -90,7 +90,7 @@ const UserOrderDetails = () => {
         data?.cart.map((item, index) => (
           <div className="w-full flex items-start mb-5">
             <img
-              src={`http://localhost:5000/${item.images[0]}`}
+              src={process.env.REACT_APP_BACKEND +`/${item.images[0]}`}
               alt=""
               className="w-[80x] h-[80px]"
             />
@@ -136,7 +136,7 @@ const UserOrderDetails = () => {
             <br />
             <div className="w-full flex">
               <img
-                src={`http://localhost:5000/${selectedItem?.images[0]}`}
+                src={process.env.REACT_APP_BACKEND +`/${selectedItem?.images[0]}`}
                 alt=""
                 className="w-[80px] h-[80px]"
               />

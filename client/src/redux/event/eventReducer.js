@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createEvent, getAllEventsShop, deleteEvent, getAllEvents  } from "./eventAction";
+import { createEvent, getAllEventsShop, deleteEvent, getAllEvents, endEvent  } from "./eventAction";
 
 const eventSlice = createSlice({
     name : "event",
@@ -64,6 +64,19 @@ const eventSlice = createSlice({
         .addCase(getAllEvents.rejected, (state, action) => {
             state.isLoading = false;
             state.error = action.payload
+        })
+
+        // 이벤트 종료 상태변경
+        .addCase(endEvent.pending, (state, action) => {
+            state.isLoading = true;
+        })
+        .addCase(endEvent.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.message = action.payload
+        })
+        .addCase(endEvent.rejected, (state, action) => {
+            state.isLoading = false;
+            state.error = action.payload;
         })
     }
 })

@@ -325,7 +325,7 @@ const SellerInbox = ({
             >
               {item.sender !== sellerId && (
                 <img
-                  src={`http://localhost:5000/${userData?.avatar}`}
+                  src={process.env.REACT_APP_BACKEND +`/${userData?.avatar}`}
                   className="w-[40px] h-[40px] rounded-full mr-3"
                   alt=""
                 />

@@ -91,7 +91,7 @@ const Header = ({ activeHeading }) => {
                         onClick={() => navigate(`/product/${d}`)}
                       >
                         <img
-                          src={`http://localhost:5000/${i.images[0]}`}
+                          src={process.env.REACT_APP_BACKEND +`/${i.images[0]}`}
                           alt=""
                           className="w-[40px] h-[40px] mr-[10px]"
                         />
@@ -133,9 +133,9 @@ const Header = ({ activeHeading }) => {
             <div className="relative h-[60px] mt-[10px] w-[270px] hidden 1000px:block">
               <BiMenuAltLeft size={30} className="absolute top-3 left-2" />
               <button
-                className={`h-[100%] w-full flex justify-between items-center pl-10 bg-white font-sans text-lg font-[500] select-none rounded-t-md`}
+                className={`h-[100%] w-full flex justify-between items-center pl-10 bg-white font-bold text-lg  select-none rounded-t-md`}
               >
-                All Categories
+                카테고리
               </button>
               <IoIosArrowDown
                 size={20}
@@ -187,7 +187,7 @@ const Header = ({ activeHeading }) => {
                 {isAuthenticated ? (
                   <Link to="/profile">
                     <img
-                      src={`http://localhost:5000/${user?.avatar}`}
+                      src={process.env.REACT_APP_BACKEND +`/${user?.avatar}`}
                       className="w-[35px] h-[35px] rounded-full"
                       alt=""
                     />
@@ -313,7 +313,7 @@ const Header = ({ activeHeading }) => {
                   <div>
                     <Link to="/profile">
                       <img
-                        src={`http://localhost:5000/${user.avatar}`}
+                        src={process.env.REACT_APP_BACKEND +`/${user.avatar}`}
                         alt=""
                         className="w-[60px] h-[60px] rounded-full border-[3px] border-[#0eae88]"
                       />

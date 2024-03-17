@@ -106,7 +106,7 @@ const ShopProfileData = ({ isOwner }) => {
             allReviews.map((item, index) => (
               <div className="w-full flex my-4">
                 <img
-                  src={`http://localhost:5000/${item.user.avatar}`}
+                  src={process.env.REACT_APP_BACKEND +`/${item.user.avatar}`}
                   className="w-[50px] h-[50px] rounded-full"
                   alt=""
                 />

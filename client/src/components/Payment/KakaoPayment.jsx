@@ -8,7 +8,7 @@ const KakaoPayment = (effect, deps) => {
   const [orderData, setOrderData] = useState([]);
   const [open, setOpen] = useState(false);
   const [shippingAddress, setShippingAddress] = useState([]);
-  
+
   const { user } = useSelector((state) => state.user);
   const navigate = useNavigate();
 
@@ -28,8 +28,7 @@ const KakaoPayment = (effect, deps) => {
   useEffect(() => {
     const orderData = JSON.parse(localStorage.getItem("latestOrder"));
     setOrderData(orderData);
-    setShippingAddress(orderData.shippingAddress)
-
+    setShippingAddress(orderData.shippingAddress);
   }, []);
 
   const onClickPayment = () => {
@@ -62,17 +61,17 @@ const KakaoPayment = (effect, deps) => {
         paid_amount,
         status,
       } = response;
-  
+
       if (success) {
         toast.success("상품결제를 성공하였습니다!");
-  
+
         // 주문 정보를 서버에 저장하는 부분
         const config = {
           headers: {
             "Content-Type": "application/json",
           },
         };
-  
+
         const orderDataToSend = {
           cart: orderData.cart,
           shippingAddress: shippingAddress,
@@ -84,13 +83,18 @@ const KakaoPayment = (effect, deps) => {
             type: pay_method,
           },
         };
-  
-        await axios.post(process.env.REACT_APP_BACKEND_URL +`/order/create-order`, orderDataToSend, config);
-  
+
+        await axios.post(
+          process.env.REACT_APP_BACKEND_URL + `/order/create-order`,
+          orderDataToSend,
+          config
+        );
+
         // 기존 코드는 유지
         navigate("/order/success");
       } else {
-        alert(`결제 실패 : ${error_msg}`);
+        // alert(`결제 실패 : ${error_msg}`);
+        toast.error(`${error_msg}`)
       }
     } catch (error) {
       console.error(error);
@@ -100,7 +104,12 @@ const KakaoPayment = (effect, deps) => {
 
   return (
     <>
-      <button onClick={onClickPayment}>결제하기</button>
+      <img
+        src={process.env.REACT_APP_BACKEND + `/images/kakao.png`}
+        alt="결제하기"
+        onClick={onClickPayment}
+        style={{ cursor: "pointer" }}
+      />
     </>
   );
 };

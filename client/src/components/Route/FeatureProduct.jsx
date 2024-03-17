@@ -15,7 +15,7 @@ const FeaturedProduct = () => {
           {/* {productData &&
             productData.map((i, index) => <ProductCard data={i} key={index} />)} */}
           {allProducts &&
-            allProducts.map((i, index) => <ProductCard data={i} key={index} />)}
+            allProducts.slice(0, 15).map((i, index) => <ProductCard data={i} key={index} />)}
         </div>
       </div>
     </div>

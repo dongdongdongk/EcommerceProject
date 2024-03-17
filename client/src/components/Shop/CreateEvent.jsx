@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef  } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -23,8 +23,8 @@ const CreateEvent = () => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
 
-   // useRef를 사용하여 "end-date" 요소에 접근
-   const endDateRef = useRef(null);
+  // useRef를 사용하여 "end-date" 요소에 접근
+  const endDateRef = useRef(null);
 
   const handleStartDateChange = (e) => {
     const startDate = new Date(e.target.value);
@@ -70,6 +70,26 @@ const CreateEvent = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // 필수 필드가 누락되었을 경우 각 필드마다 오류 메시지를 설정합니다.
+    if (
+      !name ||
+      !description ||
+      !category ||
+      !discountPrice ||
+      !stock ||
+      !startDate ||
+      !endDate ||
+      !images.length
+    ) {
+      toast.error("이벤트 등록에 필요한 정보를 모두 입력해주세요.");
+      return;
+    }
+
+    // 형식 변환 오류를 방지하기 위해 입력된 가격과 재고를 Number로 변환합니다.
+    const parsedOriginalPrice = originalPrice ? parseFloat(originalPrice) : 0;
+    const parsedDiscountPrice = parseFloat(discountPrice);
+    const parsedStock = parseInt(stock);
+
     const newForm = new FormData();
 
     images.forEach((image) => {
@@ -83,8 +103,12 @@ const CreateEvent = () => {
     newForm.append("discountPrice", discountPrice);
     newForm.append("stock", stock);
     newForm.append("shopId", seller._id);
-    newForm.append("start_Date", startDate.toISOString());
-    newForm.append("Finish_Date", endDate.toISOString());
+    if (startDate) {
+      newForm.append("start_Date", startDate.toISOString());
+    }
+    if (endDate) {
+      newForm.append("Finish_Date", endDate.toISOString());
+    }
     dispatch(createEvent(newForm));
   };
 
@@ -220,7 +244,7 @@ const CreateEvent = () => {
             type="date"
             name="price"
             id="end-date"
-            ref={endDateRef}  // useRef로 "end-date" 요소에 ref 설정
+            ref={endDateRef} // useRef로 "end-date" 요소에 ref 설정
             value={endDate ? endDate.toISOString().slice(0, 10) : ""}
             className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
             onChange={handleEndDateChange}

@@ -128,7 +128,7 @@ const ShopLogin = () => {
                 type="submit"
                 className="group relative w-full h-[40px] flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-500 hover:bg-yellow-600 mt-12"
               >
-                Submit
+                로그인
               </button>
             </div>
             <div className={`${styles.noramlFlex} w-full`}>

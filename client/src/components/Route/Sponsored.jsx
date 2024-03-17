@@ -23,7 +23,7 @@ const Sponsored = () => {
         </div>
         <div className="flex items-start">
           <img
-            src="http://localhost:5000/images/MainFix.png"
+            src={process.env.REACT_APP_BACKEND +`/images/MainFix.png`}
             style={{width:"200px", objectFit:"contain"}}
             alt=""
           />

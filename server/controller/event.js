@@ -93,7 +93,9 @@ router.delete(
       const event = await Event.findByIdAndDelete(productId);
 
       if (!event) {
-        return next(new ErrorHandler("이 id 에서 이벤트를 찾지 못하였습니다.", 500));
+        return next(
+          new ErrorHandler("이 id 에서 이벤트를 찾지 못하였습니다.", 500)
+        );
       }
 
       res.status(201).json({
@@ -105,5 +107,28 @@ router.delete(
     }
   })
 );
+
+// 이벤트 종료 상태변경 엔드포인트
+router.patch("/end-event/:id", async (req, res) => {
+  try {
+    const event = await Event.findById(req.params.id);
+    if (!event) {
+      return next(
+        new ErrorHandler("이 id 에서 이벤트를 찾지 못하였습니다.", 500)
+      );
+    }
+
+    // 이벤트 상태를 종료로 변경
+    event.status = "end";
+    await event.save();
+
+    res.status(200).json({ 
+      success : true,
+      message: "이벤트가 종료되었습니다." 
+    });
+  } catch (error) {
+    return next(new ErrorHandler(error, 400));
+  }
+});
 
 module.exports = router;

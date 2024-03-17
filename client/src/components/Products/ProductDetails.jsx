@@ -120,7 +120,7 @@ const ProductDetails = ({ data }) => {
               <div className="w-full 800px:w-[50%]">
                 <img
                   // src={data.image_Url[select].url}
-                  src={`http://localhost:5000/${data && data.images[select]}`}
+                  src={process.env.REACT_APP_BACKEND +`/${data && data.images[select]}`}
                   alt=""
                   className="w-[80%]"
                 />
@@ -133,7 +133,7 @@ const ProductDetails = ({ data }) => {
                         } cursor-pointer`}
                       >
                         <img
-                          src={`http://localhost:5000/${i}`}
+                          src={process.env.REACT_APP_BACKEND +`/${i}`}
                           alt=""
                           className="h-[200px] overflow-hidden mr-3 mt-3"
                           onClick={() => setSelect(index)}
@@ -169,7 +169,7 @@ const ProductDetails = ({ data }) => {
                     >
                       -
                     </button>
-                    <span className="bg-gray-200 text-gray-800 font-medium px-4 py-[10px]">
+                    <span className="bg-gray-200 text-gray-800 font-medium px-4 py-[10px] shadow-lg">
                       {count}
                     </span>
                     <button
@@ -210,7 +210,7 @@ const ProductDetails = ({ data }) => {
                 <div className="flex items-center pt-8">
                   <Link to={`/shop/preview/${data?.shop._id}`}>
                     <img
-                      src={`http://localhost:5000/${data?.shop?.avatar}`}
+                      src={process.env.REACT_APP_BACKEND +`/${data?.shop?.avatar}`}
                       alt=""
                       className="w-[50px] h-[50px] rounded-full mr-2"
                     />
@@ -318,7 +318,7 @@ console.log(data)
             data?.reviews?.map((item, index) => (
               <div className="w-full flex my-2">
                 <img
-                  src={`http://localhost:5000/${item.user.avatar}`}
+                  src={process.env.REACT_APP_BACKEND +`/${item.user.avatar}`}
                   alt=""
                   className="w-[50px] h-[50px] rounded-full"
                 />
@@ -348,7 +348,7 @@ console.log(data)
                 <img
                   // src={data.shop.shop_avatar.url}
                   // className="w-[50px] h-[50px] rounded-full"
-                  src={`http://localhost:5000/${data?.shop.avatar}`}
+                  src={process.env.REACT_APP_BACKEND +`/${data?.shop.avatar}`}
                   className="w-[50px] h-[50px] rounded-full"
                   alt=""
                 />

@@ -7,7 +7,7 @@ const Hero = () => {
     <div
       className={`relative min-h-[70vh] 800px:min-h-[80vh] w-full bg-no-repeat bg-cover ${styles.noramlFlex}`}
       style={{
-        backgroundImage: `url(http://localhost:5000/images/HeroImage.jpg)`, // 이미지 URL을 바로 넣어줍니다.
+        backgroundImage: `url(${process.env.REACT_APP_BACKEND}/images/HeroImage.jpg)`, // process.env.REACT_APP_BACKEND 변수를 사용합니다.
       }}
     >
       <div className={`${styles.section} w-[90%] 800px:w-[60%]`}>

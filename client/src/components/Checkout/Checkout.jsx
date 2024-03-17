@@ -70,7 +70,9 @@ const Checkout = () => {
     const name = couponCode;
 
     await axios
-      .get(process.env.REACT_APP_BACKEND_URL +`/coupon/get-coupon-value/${name}`)
+      .get(
+        process.env.REACT_APP_BACKEND_URL + `/coupon/get-coupon-value/${name}`
+      )
       .then((res) => {
         const shopId = res.data.couponCode?.shopId;
         const couponCodeValue = res.data.couponCode?.value;
@@ -274,12 +276,12 @@ const ShippingInfo = ({
 
         <div></div>
       </form>
-      <h5
-        className="text-[18px] cursor-pointer inline-block"
+      <button
+        className={`w-[150px] bg-[#e1b989] h-[50px] my-3 flex items-center justify-center rounded-xl cursor-pointer    text-neutral-50 shadow-[0_4px_9px_-4px_rgba(51,45,45,0.7)] hover:bg-yellow-600 hover:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] text-[15px] px-4 py-1 `}
         onClick={() => setUserInfo(!userInfo)}
       >
         저장된 주소에서 선택하기
-      </h5>
+      </button>
       {userInfo && (
         <div>
           {user &&
@@ -319,12 +321,12 @@ const CartData = ({
     <div className="w-full bg-[#fff] rounded-md p-5 pb-8">
       <div className="flex justify-between">
         <h3 className="text-[16px] font-[400] text-[#000000a4]">소계:</h3>
-        <h5 className="text-[18px] font-[600]">${subTotalPrice}</h5>
+        <h5 className="text-[18px] font-[600]">{subTotalPrice} 원</h5>
       </div>
       <br />
       <div className="flex justify-between">
         <h3 className="text-[16px] font-[400] text-[#000000a4]">배송비:</h3>
-        <h5 className="text-[18px] font-[600]">${shipping}</h5>
+        <h5 className="text-[18px] font-[600]">{shipping} 원</h5>
       </div>
       <br />
       <div className="flex justify-between border-b pb-3">
@@ -333,7 +335,9 @@ const CartData = ({
           - {discountPercentenge ? "원" + discountPercentenge.toString() : null}
         </h5>
       </div>
-      <h5 className="text-[18px] font-[600] text-end pt-3">${totalPrice}</h5>
+      <h5 className="text-[18px] font-[600] text-end pt-3">
+        {Math.floor(totalPrice)} 원
+      </h5>
       <br />
       <form onSubmit={handleSubmit}>
         <input
@@ -345,7 +349,7 @@ const CartData = ({
           required
         />
         <input
-          className={`w-full h-[40px] border border-[#f63b60] text-center text-[#f63b60] rounded-[3px] mt-8 cursor-pointer`}
+          className={`${styles.button} w-full h-[40px] text-center rounded-[3px] mt-8 cursor-pointer`}
           required
           value="쿠폰 적용"
           type="submit"

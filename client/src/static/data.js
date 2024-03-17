@@ -194,69 +194,69 @@ export const navItems = [
       title: "컴퓨터 및 노트북",
       subTitle: "",
       image_Url:
-        "http://localhost:5000/images/TV.jpg",
+      process.env.REACT_APP_BACKEND +`/images/TV.jpg`,
     },
     {
       id: 2,
       title: "화장품 및 영양제",
       subTitle: "",
       image_Url:
-        "http://localhost:5000/images/HG.jpg",
+      process.env.REACT_APP_BACKEND +`/images/HG.jpg`,
     },
     {
       id: 3,
       title: "액세서리",
       subTitle: "",
       image_Url:
-        "http://localhost:5000/images/accessory.jpg",
+      process.env.REACT_APP_BACKEND +`/images/accessory.jpg`,
     },
     {
       id: 4,
       title: "의류",
       subTitle: "",
       image_Url:
-        "http://localhost:5000/images/cloth.jpg",
+      process.env.REACT_APP_BACKEND +`/images/cloth.jpg`,
     },
     {
       id: 5,
       title: "신발",
       subTitle: "",
       image_Url:
-        "http://localhost:5000/images/shoose.jpg",
+      process.env.REACT_APP_BACKEND +`/images/shoose.jpg`,
     },
     {
       id: 6,
       title: "선물",
       subTitle: "",
       image_Url:
-       "http://localhost:5000/images/gift.jpg",
+      process.env.REACT_APP_BACKEND +`/images/gift.jpg`,
     },
     {
       id: 7,
       title: "애완 용품",
       subTitle: "",
-      image_Url: "http://localhost:5000/images/cat.jpg",
+      image_Url: process.env.REACT_APP_BACKEND +`/images/cat.jpg`,
     },
     {
       id: 8,
       title: "모바일 및 태블릿",
       subTitle: "",
       image_Url:
-      "http://localhost:5000/images/phone.jpg",
+      process.env.REACT_APP_BACKEND +`/images/phone.jpg`,
     },
     {
       id: 9,
       title: "음악 및 게임 용품",
       subTitle: "",
       image_Url:
-      "http://localhost:5000/images/mouse.jpg",
+      process.env.REACT_APP_BACKEND +`/images/mouse.jpg`,
     },
     {
       id: 10,
       title: "기타 상품",
       subTitle: "",
       image_Url:
-      "http://localhost:5000/images/JD.jpg",
+      process.env.REACT_APP_BACKEND +`/images/JD.jpg`,
     },
   ];
   

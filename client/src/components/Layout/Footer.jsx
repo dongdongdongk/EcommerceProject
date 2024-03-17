@@ -38,7 +38,7 @@ const Footer = () => {
       <div className="grid grid-cols-1 sm:gird-cols-3 lg:grid-cols-4 gap-6 sm:px-8 px-5 py-16 sm:text-center">
         <ul className="px-5 text-center sm:text-start flex sm:block flex-col items-center text-gray-500">
           <img
-            src={`http://localhost:5000/images/MainFix.png`}
+            src={process.env.REACT_APP_BACKEND +`/images/MainFix.png`}
             alt=""
             style={{width:"180px", objectFit:"contain"}}
           />

@@ -45,7 +45,7 @@ const ProductsPage = () => {
                 data.map((i, index) => <ProductCard data={i} key={index} />)}
             </div>
             {data && data.length === 0 ? (
-              <h1 className="text-center w-full pb-[100px] pt-[40px] text-[20px] flex flex-col items-center justify-center ">
+              <h1 className="text-center w-full pb-[100px] pt-[40px] text-[20px] flex flex-col items-center justify-center font-bold">
                 <Lottie
                   animationData={NoData}
                   style={{ width: "600px", height: "600px" }}

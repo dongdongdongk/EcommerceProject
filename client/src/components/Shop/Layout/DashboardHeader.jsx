@@ -14,7 +14,7 @@ const DashboardHeader = () => {
       <div>
         <Link to="/">
           <img
-            src={`http://localhost:5000/images/MainFix.png`}
+            src={process.env.REACT_APP_BACKEND +`/images/MainFix.png`}
             alt=""
             style={{width:"170px", objectFit:"contain"}}
           />
@@ -55,7 +55,7 @@ const DashboardHeader = () => {
           </Link>
           <Link to={`/shop/${seller._id}`}>
             <img
-              src={`http://localhost:5000/${seller.avatar}`}
+              src={process.env.REACT_APP_BACKEND +`/${seller.avatar}`}
               alt=""
               className="w-[50px] h-[50px] rounded-full object-cover"
             />

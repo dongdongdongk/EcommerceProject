@@ -57,3 +57,16 @@ export const deleteEvent = createAsyncThunk(
     }
 )
 
+
+// 이벤트 종료 상태변경
+export const endEvent = createAsyncThunk(
+    "event/endEvent",
+    async (id) => {
+      try {
+        const { data } = await axios.patch(`${process.env.REACT_APP_BACKEND_URL}/event/end-event/${id}`);
+        return data.message;
+      } catch (error) {
+        throw error.response.data.message;
+      }
+    }
+  );

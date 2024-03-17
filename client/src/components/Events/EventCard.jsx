@@ -31,8 +31,11 @@ const EventCard = ({ active, data }) => {
       } lg:flex p-2`}
     >
       <div className="w-full lg:-w[50%] m-auto">
-        {/* <img src="https://m.media-amazon.com/images/I/31Vle5fVdaL.jpg" alt="" /> */}
-        <img src={`http://localhost:5000/${data?.images[0]}`} alt="" />
+        <img
+          src={process.env.REACT_APP_BACKEND + `/${data?.images[0]}`}
+          alt=""
+          className={data?.status === "end" ? "grayscale filter blur-sm" : ""}
+        />
       </div>
       <div className="w-full lg:[w-50%] flex flex-col justify-center">
         {/* <h2 className={`${styles.productTitle}`}>Iphone 14pro max 8/256gb</h2> */}
@@ -54,12 +57,24 @@ const EventCard = ({ active, data }) => {
         <CountDown data={data} />
         <br />
         <div className="flex items-center">
-          <Link to={`/product/${data?._id}?isEvent=true`}>
-            <div className={`${styles.button} text-[#fff]`}>상세 보기</div>
-          </Link>
+          {data?.status !== "end" ? (
+            <Link to={`/product/${data?._id}?isEvent=true`}>
+              <div className={`${styles.button} text-[#fff]`}>상세 보기</div>
+            </Link>
+          ) : (
+            <div
+              className={`${styles.button} text-[#fff] opacity-50 cursor-not-allowed`}
+            >
+              상세 보기
+            </div>
+          )}
           <div
-            className={`${styles.button} text-[#fff] ml-5`}
-            onClick={() => addToCartHandler(data)}
+            className={`${styles.button} text-[#fff] ml-5 ${
+              data?.status === "end" ? "opacity-50 cursor-not-allowed" : ""
+            }`}
+            onClick={() =>
+              data?.status !== "end" ? addToCartHandler(data) : null
+            }
           >
             장바구니에 추가
           </div>

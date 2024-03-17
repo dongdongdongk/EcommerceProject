@@ -1,14 +1,33 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { endEvent, getAllEvents } from "../../redux/event/eventAction";
 
-const CountDown = ({data}) => {
+const CountDown = ({ data }) => {
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+  const { allEvents, isLoading } = useSelector((state) => state.event);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setTimeLeft(calculateTimeLeft());
-    }, 1000);
-    return () => clearTimeout(timer);
-  });
+    console.log(data);
+
+    // 이벤트 상태가 "end"가 아닌 경우에만 타이머 실행
+    if (data.status !== "end") {
+      const timer = setTimeout(() => {
+        const updatedTimeLeft = calculateTimeLeft();
+        setTimeLeft(updatedTimeLeft);
+
+        // 이벤트 종료 시간이 지났다면 상태를 "end"로 변경
+        if (Object.keys(updatedTimeLeft).length === 0) {
+          dispatch(endEvent(data._id));
+          dispatch(getAllEvents())
+        }
+      }, 1000);
+
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
+  console.log("모든 이벤트", data);
 
   function calculateTimeLeft() {
     // const difference = +new Date("2024-05-10") - +new Date();
@@ -44,7 +63,7 @@ const CountDown = ({data}) => {
       {timerComponents.length ? (
         timerComponents
       ) : (
-        <span className="text-[red] text-[25px]">Time's Up</span>
+        <span className="text-[red] text-[25px]">이벤트 종료</span>
       )}
     </div>
   );

@@ -96,7 +96,7 @@ const handleSubmit = async (e) => {
           <div className="flex justify-center w-full">
             <div className="relative">
               <img
-                src={`http://localhost:5000/${user?.avatar}`}
+                src={process.env.REACT_APP_BACKEND +`/${user?.avatar}`}
                 className="w-[150px] h-[150px] rounded-full object-cover border-[3px] border-[#3ad132]"
                 alt=""
               />

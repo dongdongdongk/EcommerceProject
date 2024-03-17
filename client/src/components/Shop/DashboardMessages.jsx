@@ -245,7 +245,7 @@ const MessageList = ({
     >
       <div className="relative">
         <img
-          src={`http://localhost:5000/${user?.avatar}`}
+          src={process.env.REACT_APP_BACKEND +`/${user?.avatar}`}
           alt=""
           className="w-[50px] h-[50px] rounded-full"
         />
@@ -286,7 +286,7 @@ const SellerInbox = ({
       <div className="w-full flex p-3 items-center justify-between bg-slate-200">
         <div className="flex">
           <img
-            src={`http://localhost:5000/${userData?.avatar}`}
+            src={process.env.REACT_APP_BACKEND +`/${userData?.avatar}`}
             alt=""
             className="w-[60px] h-[60px] rounded-full"
           />
@@ -314,7 +314,7 @@ const SellerInbox = ({
             >
               {item.sender !== sellerId && (
                 <img
-                  src={`http://localhost:5000/${userData?.avatar}`}
+                  src={process.env.REACT_APP_BACKEND +`/${userData?.avatar}`}
                   className="w-[40px] h-[40px] rounded-full mr-3"
                   alt=""
                 />

@@ -86,7 +86,7 @@ const CartSingle = ({ data, removeFromWishListHandler, addToCartHandler }) => {
           onClick={() => removeFromWishListHandler(data)}
         />
         <img
-          src={`http://localhost:5000/${data?.images[0]}`}
+          src={process.env.REACT_APP_BACKEND +`/${data?.images[0]}`}
           alt=""
           className="w-[130px] h-min ml-2 mr-2 rounded-[5px]"
         />

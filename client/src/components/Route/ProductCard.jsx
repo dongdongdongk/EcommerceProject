@@ -66,7 +66,7 @@ const ProductCard = ({ data, isEvent }) => {
         <div className="flex justify-end"></div>
         <Link to={`/product/${data._id}`}>
           <img
-            src={`http://localhost:5000/${data.images && data.images[0]}`}
+            src={process.env.REACT_APP_BACKEND +`/${data.images && data.images[0]}`}
             alt=""
             className="w-full h-[170px] object-contain"
           />

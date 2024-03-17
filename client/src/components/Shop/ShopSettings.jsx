@@ -67,7 +67,7 @@ const ShopSettings = () => {
           <div className="relative">
             <img
               src={
-                avatar ? URL.createObjectURL(avatar) : `http://localhost:5000/${seller.avatar}`
+                avatar ? URL.createObjectURL(avatar) : process.env.REACT_APP_BACKEND +`/${seller.avatar}`
               }
               alt=""
               className="w-[200px] h-[200px] rounded-full cursor-pointer"
