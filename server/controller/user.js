@@ -40,7 +40,7 @@ router.post("/create-user", upload.single("file"), async (req, res, next) => {
 
     const activationToken = createActivationToken(user);
 
-    const activationUrl = `http://localhost:3000/activation/${activationToken}`;
+    const activationUrl = process.env.REACT_APP_BACKEND +`/activation/${activationToken}`;
 
     try {
       await sendMail({
@@ -123,9 +123,7 @@ router.post(
       const isPasswordValid = await user.comparePassword(password);
 
       if (!isPasswordValid) {
-        return next(
-          new ErrorHandler("올바른 정보를 입력해 주세요.", 400)
-        );
+        return next(new ErrorHandler("올바른 정보를 입력해 주세요.", 400));
       }
 
       sendToken(user, 201, res);
@@ -143,6 +141,8 @@ router.get(
       res.cookie("token", null, {
         expires: new Date(Date.now()),
         httpOnly: true,
+        sameSite: "none",
+        secure: true,
       });
       res.status(201).json({
         success: true,
@@ -154,30 +154,29 @@ router.get(
   })
 );
 
-
-// 유저 불러오기 
+// 유저 불러오기
 router.get(
-    "/getuser",
-    isAuthenticated,
-    catchAsyncErrors(async (req, res, next) => {
-      try {
-        const user = await User.findById(req.user.id);
-  
-        if (!user) {
-          return next(new ErrorHandler("유저가 존재하지 않습니다!", 400));
-        }
-  
-        res.status(200).json({
-          success: true,
-          user,
-        });
-      } catch (error) {
-        return next(new ErrorHandler(error.message, 500));
-      }
-    })
-  );
+  "/getuser",
+  isAuthenticated,
+  catchAsyncErrors(async (req, res, next) => {
+    try {
+      const user = await User.findById(req.user.id);
 
-  // update user info
+      if (!user) {
+        return next(new ErrorHandler("유저가 존재하지 않습니다!", 400));
+      }
+
+      res.status(200).json({
+        success: true,
+        user,
+      });
+    } catch (error) {
+      return next(new ErrorHandler(error.message, 500));
+    }
+  })
+);
+
+// update user info
 router.put(
   "/update-user-info",
   isAuthenticated,
@@ -193,9 +192,7 @@ router.put(
       const isPasswordValid = await user.comparePassword(password);
 
       if (!isPasswordValid) {
-        return next(
-          new ErrorHandler("올바른 정보를 입력해주세요!", 400)
-        );
+        return next(new ErrorHandler("올바른 정보를 입력해주세요!", 400));
       }
 
       user.name = name;
@@ -250,7 +247,7 @@ router.put(
   catchAsyncErrors(async (req, res, next) => {
     try {
       const user = await User.findById(req.user.id);
-      console.log(user)
+      console.log(user);
       const sameTypeAddress = user.addresses.find(
         (address) => address.addressType === req.body.addressType
       );
@@ -323,7 +320,9 @@ router.put(
       );
 
       if (!isPasswordMatched) {
-        return next(new ErrorHandler("기존 비밀번호가 정확하지 않습니다!", 400));
+        return next(
+          new ErrorHandler("기존 비밀번호가 정확하지 않습니다!", 400)
+        );
       }
 
       if (req.body.newPassword !== req.body.confirmPassword) {
@@ -361,6 +360,5 @@ router.get(
     }
   })
 );
-  
 
 module.exports = router;
