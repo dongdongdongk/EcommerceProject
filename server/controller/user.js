@@ -176,24 +176,55 @@ router.get(
   })
 );
 
-// update user info
+// // update user info
+// router.put(
+//   "/update-user-info",
+//   isAuthenticated,
+//   catchAsyncErrors(async (req, res, next) => {
+//     try {
+//       const { email, password, phoneNumber, name } = req.body;
+//       const user = await User.findOne({ email }).select("+password");
+
+//       if (!user) {
+//         return next(new ErrorHandler("유저가 존재하지 않습니다!", 400));
+//       }
+
+//       const isPasswordValid = await user.comparePassword(password);
+
+//       if (!isPasswordValid) {
+//         return next(new ErrorHandler("올바른 정보를 입력해주세요!", 400));
+//       }
+
+//       user.name = name;
+//       user.email = email;
+//       user.phoneNumber = phoneNumber;
+
+//       await user.save();
+
+//       res.status(201).json({
+//         success: true,
+//         user,
+//       });
+//     } catch (error) {
+//       return next(new ErrorHandler(error.message, 500));
+//     }
+//   })
+// );
+
+// 유저 업데이트 패스워드 제거 
 router.put(
   "/update-user-info",
   isAuthenticated,
   catchAsyncErrors(async (req, res, next) => {
     try {
-      const { email, password, phoneNumber, name } = req.body;
-      const user = await User.findOne({ email }).select("+password");
+      const { email, phoneNumber, name } = req.body;
+      const user = await User.findOne({ email });
 
       if (!user) {
         return next(new ErrorHandler("유저가 존재하지 않습니다!", 400));
       }
 
-      const isPasswordValid = await user.comparePassword(password);
-
-      if (!isPasswordValid) {
-        return next(new ErrorHandler("올바른 정보를 입력해주세요!", 400));
-      }
+      // 패스워드 체크 부분 제거
 
       user.name = name;
       user.email = email;

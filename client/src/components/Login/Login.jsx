@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import styles from "../../styles/styles.js";
 import axios from "axios";
 import KakaoLogin from "../Auth/KakaoLogin.jsx";
+import GoogleLoginButton from "../Auth/GoogleLoginButton.jsx";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -129,21 +130,22 @@ const Login = () => {
                 >
                   로그인
                 </button>
-                <KakaoLogin />
-              </div>
-              <div className={`${styles.noramlFlex} w-full`}>
-                    <h4>회원이 아니십니까?</h4>
-                    <Link to="/sign-up" className="text-yellow-600 pl-2">
-                        회원가입
-                    </Link>
               </div>
               {/* <div className={`${styles.noramlFlex} w-full`}>
                     <h4>홈으로 돌아가기</h4>
                     <Link to="/" className="text-yellow-600 pl-2">
                     홈으로
                     </Link>
-              </div> */}
+                  </div> */}
             </form>
+                  <KakaoLogin />
+                  <GoogleLoginButton  />
+                  <div className={`${styles.noramlFlex} w-full`}>
+                        <h4>회원이 아니십니까?</h4>
+                        <Link to="/sign-up" className="text-yellow-600 pl-2">
+                            회원가입
+                        </Link>
+                  </div>
           </div>
         </div>
       </div>

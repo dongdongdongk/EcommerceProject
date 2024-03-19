@@ -14,7 +14,7 @@ const KakaoLogin = () => {
           className="text-center"
           src={process.env.REACT_APP_BACKEND + `/images/kakao_login.png`}
           id="kakao-login-btn"
-          width="200px"
+          width="500px"
         />
       </button>
       </div>

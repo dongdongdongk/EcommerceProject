@@ -16,6 +16,7 @@ import SellerProtectedRoute from "./Routes/SellerProtectedRoute";
 import ProtectedRoute from "./Routes/ProtectedRoute";
 import Loader from "./components/Layout/Loader";
 import AuthCallback from "./components/Auth/AuthCallback";
+import AuthGoogleCallback from "./components/Auth/AuthGoogleCallback";
 // import LoginPage from "./pages/LoginPage";
 // import SignupPage from "./pages/SignupPage";
 // import ActivationPage from "./pages/ActivationPage";
@@ -268,6 +269,7 @@ const App = () => {
             }
           />
           <Route path="/auth" element={<AuthCallback />} />
+          <Route path='/authGoogle' element={<AuthGoogleCallback/>}/>
           <Route path="/payment" element={<PaymentPage />} />
           <Route path="/order/success" element={<OrderSuccessPage />} />
         </Routes>

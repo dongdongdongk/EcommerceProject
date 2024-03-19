@@ -134,6 +134,7 @@ const handleSubmit = async (e) => {
                     type="text"
                     className={`${styles.input} !w-[95%] mb-1 800px:mb-0`}
                     required
+                    readOnly
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
@@ -152,7 +153,7 @@ const handleSubmit = async (e) => {
                   />
                 </div>
 
-                <div className=" w-[100%] 800px:w-[50%]">
+                {/* <div className=" w-[100%] 800px:w-[50%]">
                   <label className="block pb-2">비밀번호</label>
                   <input
                     type="password"
@@ -161,7 +162,7 @@ const handleSubmit = async (e) => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
-                </div>
+                </div> */}
               </div>
               <input
                 className={`${styles.button} w-[150px] h-[25px] rounded-[3px] mt-8 cursor-pointer`}
