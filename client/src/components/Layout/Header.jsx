@@ -62,8 +62,8 @@ const Header = ({ activeHeading }) => {
               <img
                 src={process.env.REACT_APP_BACKEND + `/images/MainFixBg.png`}
                 alt=""
-                style={{width:"180px", objectFit:"contain"}}
-                />
+                style={{ width: "180px", objectFit: "contain" }}
+              />
             </Link>
           </div>
           {/* 검색창 */}
@@ -91,7 +91,9 @@ const Header = ({ activeHeading }) => {
                         onClick={() => navigate(`/product/${d}`)}
                       >
                         <img
-                          src={process.env.REACT_APP_BACKEND +`/${i.images[0]}`}
+                          src={
+                            process.env.REACT_APP_BACKEND + `/${i.images[0]}`
+                          }
                           alt=""
                           className="w-[40px] h-[40px] mr-[10px]"
                         />
@@ -187,7 +189,11 @@ const Header = ({ activeHeading }) => {
                 {isAuthenticated ? (
                   <Link to="/profile">
                     <img
-                      src={process.env.REACT_APP_BACKEND +`/${user?.avatar}`}
+                      src={
+                        user?.avatar
+                          ? process.env.REACT_APP_BACKEND + `/${user.avatar}`
+                          : process.env.REACT_APP_BACKEND + "/kakaoAvatar.jpg"
+                      }
                       className="w-[35px] h-[35px] rounded-full"
                       alt=""
                     />
@@ -313,7 +319,7 @@ const Header = ({ activeHeading }) => {
                   <div>
                     <Link to="/profile">
                       <img
-                        src={process.env.REACT_APP_BACKEND +`/${user.avatar}`}
+                        src={process.env.REACT_APP_BACKEND + `/${user.avatar}`}
                         alt=""
                         className="w-[60px] h-[60px] rounded-full border-[3px] border-[#0eae88]"
                       />

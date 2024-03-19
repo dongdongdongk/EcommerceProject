@@ -25,7 +25,7 @@ const OrderDetails = () => {
   const orderUpdateHandler = async (e) => {
     await axios
       .put(
-        process.env.REACT_APP_BACKEND_URL +`/order/update-order-status/${id}`,
+        process.env.REACT_APP_BACKEND_URL + `/order/update-order-status/${id}`,
         {
           status,
         },
@@ -43,7 +43,7 @@ const OrderDetails = () => {
   const refundOrderUpdateHandler = async (e) => {
     await axios
       .put(
-        process.env.REACT_APP_BACKEND_URL +`/order/order-refund-success/${id}`,
+        process.env.REACT_APP_BACKEND_URL + `/order/order-refund-success/${id}`,
         {
           status,
         },
@@ -66,9 +66,7 @@ const OrderDetails = () => {
           <h1 className="pl-2 text-[25px]">주문 상세 정보</h1>
         </div>
         <Link to="/dashboard-orders">
-          <div
-            className={`${styles.button} font-[600] !h-[45px] text-[18px]`}
-          >
+          <div className={`${styles.button} font-[600] !h-[45px] text-[18px]`}>
             주문 목록
           </div>
         </Link>
@@ -90,7 +88,7 @@ const OrderDetails = () => {
         data?.cart.map((item, index) => (
           <div className="w-full flex items-start mb-5">
             <img
-              src={process.env.REACT_APP_BACKEND +`/${item.images[0]}`}
+              src={process.env.REACT_APP_BACKEND + `/${item.images[0]}`}
               alt=""
               className="w-[80x] h-[80px]"
             />
@@ -165,8 +163,7 @@ const OrderDetails = () => {
         </select>
       )}
 
-      {data?.status === "환불 처리 중" ||
-      data?.status === "환불 완료" ? (
+      {data?.status === "환불 처리 중" || data?.status === "환불 완료" ? (
         <select
           value={status}
           onChange={(e) => setStatus(e.target.value)}
@@ -182,16 +179,18 @@ const OrderDetails = () => {
         </select>
       ) : null}
 
-      <div
-        className={`${styles.button} mt-5 !rounded-[4px] text-[#E94560] font-[600] !h-[45px] text-[18px]`}
-        onClick={
-          data?.status !== "환불 처리 중"
-            ? orderUpdateHandler
-            : refundOrderUpdateHandler
-        }
-      >
-        상태 업데이트
-      </div>
+      {data?.status !== "배송 완료" && data?.status !== "환불 완료" && (
+        <div
+          className={`${styles.button} mt-5 !rounded-[4px] text-[#E94560] font-[600] !h-[45px] text-[18px]`}
+          onClick={
+            data?.status !== "환불 처리 중"
+              ? orderUpdateHandler
+              : refundOrderUpdateHandler
+          }
+        >
+          상태 업데이트
+        </div>
+      )}
     </div>
   );
 };

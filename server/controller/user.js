@@ -40,7 +40,8 @@ router.post("/create-user", upload.single("file"), async (req, res, next) => {
 
     const activationToken = createActivationToken(user);
 
-    const activationUrl = process.env.BACKEND_URL +`/activation/${activationToken}`;
+    const activationUrl =
+      process.env.BACKEND_URL + `/activation/${activationToken}`;
 
     try {
       await sendMail({
@@ -211,7 +212,7 @@ router.get(
 //   })
 // );
 
-// 유저 업데이트 패스워드 제거 
+// 유저 업데이트 패스워드 제거
 router.put(
   "/update-user-info",
   isAuthenticated,
@@ -251,19 +252,27 @@ router.put(
     try {
       const existsUser = await User.findById(req.user.id);
 
-      const existAvatarPath = `uploads/${existsUser.avatar}`;
+      // 사용자가 아바타를 가지고 있는지 확인
+      if (existsUser.avatar) {
+        const existAvatarPath = `uploads/${existsUser.avatar}`;
 
-      fs.unlinkSync(existAvatarPath);
+        // 기존 아바타 파일 삭제
+        fs.unlinkSync(existAvatarPath);
+      }
 
-      const fileUrl = path.join(req.file.filename);
+      // 파일이 업로드 되었는지 확인
+      if (req.file) {
+        const fileUrl = path.join(req.file.filename);
 
-      const user = await User.findByIdAndUpdate(req.user.id, {
-        avatar: fileUrl,
-      });
+        // 아바타 업데이트
+        await User.findByIdAndUpdate(req.user.id, {
+          avatar: fileUrl,
+        });
+      }
 
       res.status(200).json({
         success: true,
-        user,
+        message: "아바타가 업데이트되었습니다.",
       });
     } catch (error) {
       return next(new ErrorHandler(error.message, 500));

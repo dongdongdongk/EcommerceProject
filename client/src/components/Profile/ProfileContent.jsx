@@ -43,26 +43,27 @@ const ProfileContent = ({ active }) => {
   //     dispatch({ type: "clearMessages" });
   //   }
   // }, [error, successMessage]);
-  
 
-const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        const updatedUser = await dispatch(updateUserInformation({ name, email, phoneNumber, password }));
-        console.log(updatedUser)
+      const updatedUser = await dispatch(
+        updateUserInformation({ name, email, phoneNumber, password })
+      );
+      console.log(updatedUser);
 
-        await dispatch(loadUser());
+      await dispatch(loadUser());
 
-        if (updatedUser && updatedUser.payload.successMessage) {
-            toast.success("유저 정보를 변경했습니다!");
-        } else {
-            throw new Error("올바른 정보를 입력해 주세요!");
-        }
+      if (updatedUser && updatedUser.payload.successMessage) {
+        toast.success("유저 정보를 변경했습니다!");
+      } else {
+        throw new Error("올바른 정보를 입력해 주세요!");
+      }
     } catch (error) {
-        // 에러 발생 시 처리
-        toast.error(error.message);
+      // 에러 발생 시 처리
+      toast.error(error.message);
     }
-};
+  };
 
   const handleImage = async (e) => {
     const file = e.target.files[0];
@@ -73,12 +74,16 @@ const handleSubmit = async (e) => {
     formData.append("image", e.target.files[0]);
 
     await axios
-      .put(process.env.REACT_APP_BACKEND_URL +`/user/update-avatar`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-        withCredentials: true,
-      })
+      .put(
+        process.env.REACT_APP_BACKEND_URL + `/user/update-avatar`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          withCredentials: true,
+        }
+      )
       .then((response) => {
         dispatch(loadUser());
         toast.success("아바타 변경 성공!");
@@ -96,7 +101,11 @@ const handleSubmit = async (e) => {
           <div className="flex justify-center w-full">
             <div className="relative">
               <img
-                src={process.env.REACT_APP_BACKEND +`/${user?.avatar}`}
+                src={
+                  user?.avatar
+                    ? process.env.REACT_APP_BACKEND + `/${user.avatar}`
+                    : process.env.REACT_APP_BACKEND + "/kakaoAvatar.jpg"
+                }
                 className="w-[150px] h-[150px] rounded-full object-cover border-[3px] border-[#3ad132]"
                 alt=""
               />
@@ -479,7 +488,7 @@ const ChangePassword = () => {
 
     await axios
       .put(
-        process.env.REACT_APP_BACKEND_URL +`/user/update-user-password`,
+        process.env.REACT_APP_BACKEND_URL + `/user/update-user-password`,
         { oldPassword, newPassword, confirmPassword },
         { withCredentials: true }
       )
