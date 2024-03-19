@@ -14,7 +14,6 @@ const ActivationPage = () => {
         const response = await axios.post(process.env.REACT_APP_BACKEND_URL +`/user/activation`, {
           activation_token,
         });
-        console.log("이거 맞나??", response);
       } catch (err) {
         setError(true);
       }

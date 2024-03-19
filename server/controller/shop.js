@@ -44,7 +44,7 @@ router.post("/create-shop", upload.single("file"), async (req, res, next) => {
 
     const activationToken = createActivationToken(seller);
 
-    const activationUrl = process.env.REACT_APP_BACKEND +`/seller/activation/${activationToken}`;
+    const activationUrl = process.env.BACKEND_URL +`/seller/activation/${activationToken}`;
 
     try {
       await sendMail({
@@ -174,7 +174,7 @@ router.get(
   catchAsyncErrors(async (req, res, next) => {
     try {
       res.cookie("seller_token", null, {
-        expires: new Date(Date.now()),
+        expires: new Date(0),
         httpOnly: true,
         sameSite: "none",
         secure: true,

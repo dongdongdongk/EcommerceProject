@@ -14,6 +14,8 @@ import Store from "./redux/store";
 import HomePage from "./pages/HomePage";
 import SellerProtectedRoute from "./Routes/SellerProtectedRoute";
 import ProtectedRoute from "./Routes/ProtectedRoute";
+import Loader from "./components/Layout/Loader";
+import AuthCallback from "./components/Auth/AuthCallback";
 // import LoginPage from "./pages/LoginPage";
 // import SignupPage from "./pages/SignupPage";
 // import ActivationPage from "./pages/ActivationPage";
@@ -93,7 +95,7 @@ const App = () => {
   return (
     <>
       <BrowserRouter>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<div><Loader /></div>}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
@@ -265,6 +267,7 @@ const App = () => {
               </SellerProtectedRoute>
             }
           />
+          <Route path="/auth" element={<AuthCallback />} />
           <Route path="/payment" element={<PaymentPage />} />
           <Route path="/order/success" element={<OrderSuccessPage />} />
         </Routes>

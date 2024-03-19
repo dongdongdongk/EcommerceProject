@@ -48,7 +48,7 @@ const userSchema = new mongoose.Schema({
   },
   avatar:{
       type: String,
-      required: true,
+      default: "kakaoAvatar.jpg",
  },
  createdAt:{
   type: Date,

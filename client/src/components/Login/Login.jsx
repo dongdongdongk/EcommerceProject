@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import styles from "../../styles/styles.js";
 import axios from "axios";
+import KakaoLogin from "../Auth/KakaoLogin.jsx";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -128,6 +129,7 @@ const Login = () => {
                 >
                   로그인
                 </button>
+                <KakaoLogin />
               </div>
               <div className={`${styles.noramlFlex} w-full`}>
                     <h4>회원이 아니십니까?</h4>

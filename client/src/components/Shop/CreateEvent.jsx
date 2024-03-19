@@ -17,11 +17,12 @@ const CreateEvent = () => {
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [tags, setTags] = useState("");
-  const [originalPrice, setOriginalPrice] = useState();
-  const [discountPrice, setDiscountPrice] = useState();
+  const [originalPrice, setOriginalPrice] = useState("");
+  const [discountPrice, setDiscountPrice] = useState("");
   const [stock, setStock] = useState();
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
+  
 
   // useRef를 사용하여 "end-date" 요소에 접근
   const endDateRef = useRef(null);
@@ -99,9 +100,9 @@ const CreateEvent = () => {
     newForm.append("description", description);
     newForm.append("category", category);
     newForm.append("tags", tags);
-    newForm.append("originalPrice", originalPrice);
-    newForm.append("discountPrice", discountPrice);
-    newForm.append("stock", stock);
+    newForm.append("originalPrice", parsedOriginalPrice);
+    newForm.append("discountPrice", parsedDiscountPrice);
+    newForm.append("stock", parsedStock);
     newForm.append("shopId", seller._id);
     if (startDate) {
       newForm.append("start_Date", startDate.toISOString());

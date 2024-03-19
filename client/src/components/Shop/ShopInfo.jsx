@@ -5,6 +5,7 @@ import { Link, useParams } from "react-router-dom";
 import { getAllProductsShop } from "../../redux/product/productAction";
 import styles from "../../styles/styles";
 import Loader from "../Layout/Loader";
+import { toast } from "react-toastify";
 
 const ShopInfo = ({ isOwner }) => {
   const [data, setData] = useState({});
@@ -31,8 +32,15 @@ const ShopInfo = ({ isOwner }) => {
   const logoutHandler = async () => {
     axios.get(process.env.REACT_APP_BACKEND_URL +`/shop/logout`, {
       withCredentials: true,
+    })
+    .then((res) => {
+      window.location.replace("/");
+      //   navigate("/login");
+      toast.success(res.data.message);
+    })
+    .catch((error) => {
+      console.log(error.response.data.message);
     });
-    window.location.reload();
   };
 
   const totalReviewsLength =

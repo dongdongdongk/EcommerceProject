@@ -14,8 +14,8 @@ app.use(cookieParser());
 app.use(morgan('dev'));
 app.use(
     cors({
-      origin: 'https://ecommerceproject-f1267.web.app' ,
-      // origin: 'http://localhost:3000' ,
+      // origin: 'https://ecommerceproject-f1267.web.app' ,
+      origin: 'http://localhost:3000' ,
       credentials: true,
     })
   );
@@ -44,6 +44,7 @@ const coupon = require("./controller/couponCode");
 const order = require("./controller/order");
 const conversation = require("./controller/conversation");
 const message = require("./controller/message");
+const auth = require("./controller/auth");
 
 app.use("/api/v2/user", user)
 app.use("/api/v2/shop", shop)
@@ -53,6 +54,7 @@ app.use("/api/v2/coupon", coupon)
 app.use("/api/v2/order", order);
 app.use("/api/v2/conversation", conversation)
 app.use("/api/v2/message", message)
+app.use("/api/v2/auth", auth)
 
 // 에러 핸들링 
 app.use(ErrorHandler);

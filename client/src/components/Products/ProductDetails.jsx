@@ -341,7 +341,7 @@ console.log(data)
 
           <div className="w-full flex justify-center">
             {(!data || data.reviews?.length === 0) && (
-              <h5>이 상품은 리뷰가 없습니다!</h5>
+              <h5 className="font-bold">이 상품은 리뷰가 없습니다!</h5>
             )}
           </div>
         </div>

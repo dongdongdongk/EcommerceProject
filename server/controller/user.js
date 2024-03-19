@@ -22,10 +22,10 @@ router.post("/create-user", upload.single("file"), async (req, res, next) => {
       fs.unlink(filePath, (err) => {
         if (err) {
           console.log(err);
-          res.status(500).json({ message: "Error deleting file" });
+          res.status(500).json({ message: "파일삭제 실패" });
         }
       });
-      return next(new ErrorHandler("User already exists", 400));
+      return next(new ErrorHandler("회원이 이미 존재합니다", 400));
     }
 
     const filename = req.file.filename;
@@ -40,7 +40,7 @@ router.post("/create-user", upload.single("file"), async (req, res, next) => {
 
     const activationToken = createActivationToken(user);
 
-    const activationUrl = process.env.REACT_APP_BACKEND +`/activation/${activationToken}`;
+    const activationUrl = process.env.BACKEND_URL +`/activation/${activationToken}`;
 
     try {
       await sendMail({
