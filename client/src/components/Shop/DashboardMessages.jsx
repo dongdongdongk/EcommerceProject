@@ -8,7 +8,7 @@ import styles from "../../styles/styles";
 import { TfiGallery } from "react-icons/tfi";
 import socketIO from "socket.io-client";
 import { format } from "timeago.js";
-const ENDPOINT = process.env.REACT_APP_SOCKET +"/";
+const ENDPOINT = process.env.REACT_APP_SOCKET + "/";
 const socketId = socketIO(ENDPOINT, { transports: ["websocket"] });
 
 const DashboardMessages = () => {
@@ -44,7 +44,8 @@ const DashboardMessages = () => {
     const getConversation = async () => {
       try {
         const resonse = await axios.get(
-          process.env.REACT_APP_BACKEND_URL +`/conversation/get-all-conversation-seller/${seller?._id}`,
+          process.env.REACT_APP_BACKEND_URL +
+            `/conversation/get-all-conversation-seller/${seller?._id}`,
           {
             withCredentials: true,
           }
@@ -56,7 +57,7 @@ const DashboardMessages = () => {
       }
     };
     getConversation();
-  }, [seller,messages]);
+  }, [seller, messages]);
 
   useEffect(() => {
     if (seller) {
@@ -67,7 +68,6 @@ const DashboardMessages = () => {
       });
     }
   }, [seller]);
-
 
   const onlineCheck = (chat) => {
     const chatMembers = chat.members.find((member) => member !== seller?._id);
@@ -80,7 +80,8 @@ const DashboardMessages = () => {
     const getMessage = async () => {
       try {
         const response = await axios.get(
-          process.env.REACT_APP_BACKEND_URL +`/message/get-all-messages/${currentChat?._id}`
+          process.env.REACT_APP_BACKEND_URL +
+            `/message/get-all-messages/${currentChat?._id}`
         );
         setMessages(response.data.messages);
       } catch (error) {
@@ -112,7 +113,10 @@ const DashboardMessages = () => {
     try {
       if (newMessage !== "") {
         await axios
-          .post(process.env.REACT_APP_BACKEND_URL +`/message/create-new-message`, message)
+          .post(
+            process.env.REACT_APP_BACKEND_URL + `/message/create-new-message`,
+            message
+          )
           .then((res) => {
             setMessages([...messages, res.data.message]);
             updateLastMessage();
@@ -133,10 +137,14 @@ const DashboardMessages = () => {
     });
 
     await axios
-      .put(process.env.REACT_APP_BACKEND_URL +`/conversation/update-last-message/${currentChat._id}`, {
-        lastMessage: newMessage,
-        lastMessageId: seller._id,
-      })
+      .put(
+        process.env.REACT_APP_BACKEND_URL +
+          `/conversation/update-last-message/${currentChat._id}`,
+        {
+          lastMessage: newMessage,
+          lastMessageId: seller._id,
+        }
+      )
       .then((res) => {
         console.log(res.data.conversation);
         setNewMessage("");
@@ -149,7 +157,6 @@ const DashboardMessages = () => {
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ beahaviour: "smooth" });
   }, [messages]);
-
 
   return (
     <div className="w-[90%] bg-white m-5 h-[85vh] overflow-y-scroll rounded">
@@ -214,13 +221,15 @@ const MessageList = ({
 
   useEffect(() => {
     const userId = data.members.find((user) => user != me);
-    console.log("데이터는?", userId)
+    console.log("데이터는?", userId);
 
     const getUser = async () => {
       try {
-        const res = await axios.get(process.env.REACT_APP_BACKEND_URL +`/user/user-info/${userId}`);
+        const res = await axios.get(
+          process.env.REACT_APP_BACKEND_URL + `/user/user-info/${userId}`
+        );
         setUser(res.data.user);
-        console.log("res 는 " ,res)
+        console.log("res 는 ", res);
       } catch (error) {
         console.log(error);
       }
@@ -245,7 +254,11 @@ const MessageList = ({
     >
       <div className="relative">
         <img
-          src={process.env.REACT_APP_BACKEND +`/${user?.avatar}`}
+          src={
+            user?.avatar
+              ? process.env.REACT_APP_BACKEND + `/${user?.avatar}`
+              : process.env.REACT_APP_BACKEND + `/kakaoAvatar.jpg` // 기본 이미지 경로
+          }
           alt=""
           className="w-[50px] h-[50px] rounded-full"
         />
@@ -279,14 +292,17 @@ const SellerInbox = ({
   userData,
   activeStatus,
 }) => {
-
   return (
     <div className="w-full min-h-full flex flex-col justify-between">
       {/* message header */}
       <div className="w-full flex p-3 items-center justify-between bg-slate-200">
         <div className="flex">
           <img
-            src={process.env.REACT_APP_BACKEND +`/${userData?.avatar}`}
+            src={
+              userData?.avatar
+                ? process.env.REACT_APP_BACKEND + `/${userData?.avatar}`
+                : process.env.REACT_APP_BACKEND + `/kakaoAvatar.jpg` // 기본 이미지 경로
+            }
             alt=""
             className="w-[60px] h-[60px] rounded-full"
           />
@@ -314,7 +330,11 @@ const SellerInbox = ({
             >
               {item.sender !== sellerId && (
                 <img
-                  src={process.env.REACT_APP_BACKEND +`/${userData?.avatar}`}
+                  src={
+                    userData?.avatar
+                      ? process.env.REACT_APP_BACKEND + `/${userData?.avatar}`
+                      : process.env.REACT_APP_BACKEND + `/kakaoAvatar.jpg` // 기본 이미지 경로
+                  }
                   className="w-[40px] h-[40px] rounded-full mr-3"
                   alt=""
                 />

@@ -14,8 +14,8 @@ app.use(cookieParser());
 app.use(morgan('dev'));
 app.use(
     cors({
-      origin: 'https://ecommerceproject-f1267.web.app' ,
-      // origin: 'http://localhost:3000' ,
+      // origin: 'https://ecommerceproject-f1267.web.app' ,
+      origin: 'http://localhost:3000' ,
       credentials: true,
     })
   );

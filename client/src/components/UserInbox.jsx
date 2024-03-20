@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { AiOutlineArrowRight, AiOutlineSend } from "react-icons/ai";
 import { TfiGallery } from "react-icons/tfi";
 import styles from "../styles/styles";
-const ENDPOINT = process.env.REACT_APP_SOCKET +"/";
+const ENDPOINT = process.env.REACT_APP_SOCKET + "/";
 const socketId = socketIO(ENDPOINT, { transports: ["websocket"] });
 
 const UserInbox = () => {
@@ -44,7 +44,8 @@ const UserInbox = () => {
     const getConversation = async () => {
       try {
         const resonse = await axios.get(
-          process.env.REACT_APP_BACKEND_URL +`/conversation/get-all-conversation-user/${user?._id}`,
+          process.env.REACT_APP_BACKEND_URL +
+            `/conversation/get-all-conversation-user/${user?._id}`,
           {
             withCredentials: true,
           }
@@ -80,7 +81,8 @@ const UserInbox = () => {
     const getMessage = async () => {
       try {
         const response = await axios.get(
-          process.env.REACT_APP_BACKEND_URL +`/message/get-all-messages/${currentChat?._id}`
+          process.env.REACT_APP_BACKEND_URL +
+            `/message/get-all-messages/${currentChat?._id}`
         );
         setMessages(response.data.messages);
       } catch (error) {
@@ -113,7 +115,7 @@ const UserInbox = () => {
       if (newMessage !== "") {
         await axios
           .post(
-            process.env.REACT_APP_BACKEND_URL +`/message/create-new-message`,
+            process.env.REACT_APP_BACKEND_URL + `/message/create-new-message`,
             message
           )
           .then((res) => {
@@ -137,7 +139,8 @@ const UserInbox = () => {
 
     await axios
       .put(
-        process.env.REACT_APP_BACKEND_URL +`/conversation/update-last-message/${currentChat._id}`,
+        process.env.REACT_APP_BACKEND_URL +
+          `/conversation/update-last-message/${currentChat._id}`,
         {
           lastMessage: newMessage,
           lastMessageId: user._id,
@@ -164,23 +167,23 @@ const UserInbox = () => {
             모든 메세지
           </h1>
           <div className="p-12">
-          {/* All messages list */}
-          {conversations &&
-            conversations.map((item, index) => (
-              <MessageList
-                data={item}
-                key={index}
-                index={index}
-                setOpen={setOpen}
-                setCurrentChat={setCurrentChat}
-                me={user?._id}
-                setUserData={setUserData}
-                userData={userData}
-                online={onlineCheck(item)}
-                setActiveStatus={setActiveStatus}
-              />
-            ))}
-            </div>
+            {/* All messages list */}
+            {conversations &&
+              conversations.map((item, index) => (
+                <MessageList
+                  data={item}
+                  key={index}
+                  index={index}
+                  setOpen={setOpen}
+                  setCurrentChat={setCurrentChat}
+                  me={user?._id}
+                  setUserData={setUserData}
+                  userData={userData}
+                  online={onlineCheck(item)}
+                  setActiveStatus={setActiveStatus}
+                />
+              ))}
+          </div>
         </>
       )}
 
@@ -226,7 +229,7 @@ const MessageList = ({
     const getUser = async () => {
       try {
         const res = await axios.get(
-          process.env.REACT_APP_BACKEND_URL +`/shop/get-shop-info/${userId}`
+          process.env.REACT_APP_BACKEND_URL + `/shop/get-shop-info/${userId}`
         );
 
         setUser(res.data.shop);
@@ -253,7 +256,11 @@ const MessageList = ({
     >
       <div className="relative">
         <img
-          src={process.env.REACT_APP_BACKEND + `/${userData?.avatar}`}
+          src={
+            userData?.avatar
+              ? process.env.REACT_APP_BACKEND + `/${userData?.avatar}`
+              : process.env.REACT_APP_BACKEND + `/kakaoAvatar.jpg` // 기본 이미지 경로
+          }
           alt=""
           className="w-[50px] h-[50px] rounded-full"
         />
@@ -297,7 +304,11 @@ const SellerInbox = ({
       <div className="w-full flex p-3 items-center justify-between bg-slate-200">
         <div className="flex">
           <img
-            src={process.env.REACT_APP_BACKEND +`/${userData?.avatar}`}
+            src={
+              userData?.avatar
+                ? process.env.REACT_APP_BACKEND + `/${userData?.avatar}`
+                : process.env.REACT_APP_BACKEND + `/kakaoAvatar.jpg` // 기본 이미지 경로
+            }
             alt=""
             className="w-[60px] h-[60px] rounded-full"
           />
@@ -325,7 +336,11 @@ const SellerInbox = ({
             >
               {item.sender !== sellerId && (
                 <img
-                  src={process.env.REACT_APP_BACKEND +`/${userData?.avatar}`}
+                  src={
+                    userData?.avatar
+                      ? process.env.REACT_APP_BACKEND + `/${userData?.avatar}`
+                      : process.env.REACT_APP_BACKEND + `/kakaoAvatar.jpg` // 기본 이미지 경로
+                  }
                   className="w-[40px] h-[40px] rounded-full mr-3"
                   alt=""
                 />

@@ -26,6 +26,7 @@ const ProductDetails = ({ data }) => {
   const { cart } = useSelector((state) => state.cart);
   const { user, isAuthenticated } = useSelector((state) => state.user);
   const { products } = useSelector((state) => state.product);
+  
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -93,7 +94,8 @@ const ProductDetails = ({ data }) => {
       const sellerId = data.shop._id;
       await axios
         .post(
-          process.env.REACT_APP_BACKEND_URL +`/conversation/create-new-conversation`,
+          process.env.REACT_APP_BACKEND_URL +
+            `/conversation/create-new-conversation`,
           {
             groupTitle,
             userId,
@@ -120,7 +122,10 @@ const ProductDetails = ({ data }) => {
               <div className="w-full 800px:w-[50%]">
                 <img
                   // src={data.image_Url[select].url}
-                  src={process.env.REACT_APP_BACKEND +`/${data && data.images[select]}`}
+                  src={
+                    process.env.REACT_APP_BACKEND +
+                    `/${data && data.images[select]}`
+                  }
                   alt=""
                   className="w-[80%]"
                 />
@@ -133,7 +138,7 @@ const ProductDetails = ({ data }) => {
                         } cursor-pointer`}
                       >
                         <img
-                          src={process.env.REACT_APP_BACKEND +`/${i}`}
+                          src={process.env.REACT_APP_BACKEND + `/${i}`}
                           alt=""
                           className="h-[200px] overflow-hidden mr-3 mt-3"
                           onClick={() => setSelect(index)}
@@ -199,18 +204,16 @@ const ProductDetails = ({ data }) => {
                     )}
                   </div>
                 </div>
-                <div className="grid grid-cols-6 gap-2 mt-5">
-                  <div>
+                <div className="grid grid-cols-6 gap-2 mt-5 800px:grid-cols-2">
+                  <div className="flex">
                     <div
-                      className={`${styles.button} mt-6 rounded-[4px] h-11`}
+                      className={`${styles.button} mt-6 rounded-[4px] h-11 mr-2`}
                       onClick={() => addToCartHandler(data._id)}
                     >
                       <span className="text-[#fff] flex items-center">
                         장바구니 추가 <AiOutlineShoppingCart className="ml-1" />
                       </span>
                     </div>
-                  </div>
-                  <div>
                     <div
                       className={`${styles.button} mt-6 rounded-[4px] h-11`}
                       onClick={handleMessageSubmit}
@@ -240,7 +243,9 @@ const ProductDetails = ({ data }) => {
                       <Ratings rating={data?.ratings} />
                     </div>
                   </Link>
-                  <h5 className="text-[16px] text-[#3eac4d] mt-5">{data?.sold_out} 판매</h5>
+                  <h5 className="text-[16px] text-[#3eac4d] mt-5">
+                    {data?.sold_out} 판매
+                  </h5>
                 </div>
               </div>
             </div>
@@ -267,7 +272,7 @@ const ProductDetailsInfo = ({
   averageRating,
 }) => {
   const [active, setActive] = useState(1);
-console.log(data)
+  console.log(data);
   return (
     <div className="bg-[#f7ebe1] px-3 800px:px-10 py-2 rounded">
       <div className="w-full flex justify-between border-b pt-10 pb-2">
@@ -325,7 +330,11 @@ console.log(data)
             data?.reviews?.map((item, index) => (
               <div className="w-full flex my-2">
                 <img
-                  src={process.env.REACT_APP_BACKEND +`/${item.user.avatar}`}
+                  src={
+                    item.user.avatar
+                      ? process.env.REACT_APP_BACKEND + `/${item.user.avatar}`
+                      : process.env.REACT_APP_BACKEND + "/kakaoAvatar.jpg"
+                  }
                   alt=""
                   className="w-[50px] h-[50px] rounded-full"
                 />
@@ -355,7 +364,7 @@ console.log(data)
                 <img
                   // src={data.shop.shop_avatar.url}
                   // className="w-[50px] h-[50px] rounded-full"
-                  src={process.env.REACT_APP_BACKEND +`/${data?.shop.avatar}`}
+                  src={process.env.REACT_APP_BACKEND + `/${data?.shop.avatar}`}
                   className="w-[50px] h-[50px] rounded-full"
                   alt=""
                 />

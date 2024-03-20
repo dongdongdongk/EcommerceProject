@@ -14,6 +14,7 @@ const messagesSchema = new mongoose.Schema(
     images: [
      {
         type: String,
+        default : "kakaoAvatar.jpg"
      }
     ],
   },

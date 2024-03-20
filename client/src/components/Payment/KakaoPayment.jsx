@@ -90,11 +90,15 @@ const KakaoPayment = (effect, deps) => {
           config
         );
 
+        // 로컬 스토리지에서 cartItems 삭제
+        localStorage.removeItem("cartItems");
+
         // 기존 코드는 유지
-        navigate("/order/success");
+        window.location.replace("/order/success");
+        // navigate("/order/success");
       } else {
         // alert(`결제 실패 : ${error_msg}`);
-        toast.error(`${error_msg}`)
+        toast.error(`${error_msg}`);
       }
     } catch (error) {
       console.error(error);

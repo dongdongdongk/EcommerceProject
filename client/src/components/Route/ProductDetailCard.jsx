@@ -137,17 +137,13 @@ const ProductDetailsCard = ({ setOpen, data }) => {
                 <div className="w-full flex">
                   {data &&
                     data.images.map((i, index) => (
-                      
-                        <img
-                          src={process.env.REACT_APP_BACKEND +`/${i}`}
-                          alt=""
-                          className="h-[200px] overflow-hidden mr-3 mt-3"
-                        />
-                      
+                      <img
+                        src={process.env.REACT_APP_BACKEND + `/${i}`}
+                        alt=""
+                        className="h-[200px] overflow-hidden mr-3 mt-3"
+                      />
                     ))}
-                  
                 </div>
-                
               </div>
 
               <div className="w-full 800px:w-[50%] pt-5 pl-[10px] pr-[10px] mt-5">
@@ -204,20 +200,18 @@ const ProductDetailsCard = ({ setOpen, data }) => {
                     )}
                   </div>
                 </div>
-                <div className="grid grid-cols-4 gap-2 mt-5">
-                  <div>
+                <div className="grid grid-cols-6 gap-2 mt-5 800px:grid-cols-2">
+                  <div className="flex">
                     <div
-                      className={`${styles.button} mt-9 rounded-[4px] h-11`}
+                      className={`${styles.button} mt-6 rounded-[4px] h-11 mr-2`}
                       onClick={() => addToCartHandler(data._id)}
                     >
                       <span className="text-[#fff] flex items-center">
                         장바구니 추가 <AiOutlineShoppingCart className="ml-1" />
                       </span>
                     </div>
-                  </div>
-                  <div>
                     <div
-                      className={`${styles.button} mt-9 rounded-[4px] h-11`}
+                      className={`${styles.button} mt-6 rounded-[4px] h-11`}
                       onClick={handleMessageSubmit}
                     >
                       <span className="text-[#fff] flex items-center">
@@ -245,7 +239,9 @@ const ProductDetailsCard = ({ setOpen, data }) => {
                       <Ratings rating={data?.ratings} />
                     </div>
                   </Link>
-                  <h5 className="text-[16px] text-[#3eac4d] mt-5">{data?.sold_out} 판매</h5>
+                  <h5 className="text-[16px] text-[#3eac4d] mt-5">
+                    {data?.sold_out} 판매
+                  </h5>
                 </div>
               </div>
             </div>

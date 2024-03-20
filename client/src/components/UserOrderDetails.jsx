@@ -29,7 +29,7 @@ const UserOrderDetails = () => {
   const reviewHandler = async (e) => {
     await axios
       .put(
-        process.env.REACT_APP_BACKEND_URL +`/product/create-new-review`,
+        process.env.REACT_APP_BACKEND_URL + `/product/create-new-review`,
         {
           user,
           rating,
@@ -53,7 +53,7 @@ const UserOrderDetails = () => {
 
   const refundHandler = async () => {
     await axios
-      .put(process.env.REACT_APP_BACKEND_URL +`/order/order-refund/${id}`, {
+      .put(process.env.REACT_APP_BACKEND_URL + `/order/order-refund/${id}`, {
         status: "환불 처리 중",
       })
       .then((res) => {
@@ -90,7 +90,7 @@ const UserOrderDetails = () => {
         data?.cart.map((item, index) => (
           <div className="w-full flex items-start mb-5">
             <img
-              src={process.env.REACT_APP_BACKEND +`/${item.images[0]}`}
+              src={process.env.REACT_APP_BACKEND + `/${item.images[0]}`}
               alt=""
               className="w-[80x] h-[80px]"
             />
@@ -126,7 +126,10 @@ const UserOrderDetails = () => {
             <div className="w-full flex justify-end p-3">
               <RxCross1
                 size={30}
-                onClick={() => setOpen(false)}
+                onClick={() => {
+                  setOpen(false);
+                  setComment(""); // 리뷰 작성 중인 내용 초기화
+                }}
                 className="cursor-pointer"
               />
             </div>
@@ -136,7 +139,9 @@ const UserOrderDetails = () => {
             <br />
             <div className="w-full flex">
               <img
-                src={process.env.REACT_APP_BACKEND +`/${selectedItem?.images[0]}`}
+                src={
+                  process.env.REACT_APP_BACKEND + `/${selectedItem?.images[0]}`
+                }
                 alt=""
                 className="w-[80px] h-[80px]"
               />
@@ -197,7 +202,7 @@ const UserOrderDetails = () => {
             </div>
             <div
               className={`${styles.button} text-white text-[20px] ml-3`}
-              onClick={rating > 1 ? reviewHandler : null}
+              onClick={reviewHandler}
             >
               제출
             </div>
