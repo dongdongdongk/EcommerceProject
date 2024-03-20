@@ -150,13 +150,13 @@ const ProductDetailsCard = ({ setOpen, data }) => {
                 
               </div>
 
-              <div className="w-full 800px:w-[50%] pt-5 pl-[10px] pr-[10px]">
+              <div className="w-full 800px:w-[50%] pt-5 pl-[10px] pr-[10px] mt-5">
                 <h1 className={`${styles.productTitle} text-[20px]`}>
                   {data.name}
                 </h1>
-                <p>{data.description}</p>
+                <p className="mt-7">{data.description}</p>
 
-                <div className="flex pt-3">
+                <div className="flex pt-3 mt-7">
                   <h4 className={`${styles.productDiscountPrice}`}>
                     {/* {data.discount_price}$ */}
                     {data.discountPrice}$
@@ -207,7 +207,7 @@ const ProductDetailsCard = ({ setOpen, data }) => {
                 <div className="grid grid-cols-4 gap-2 mt-5">
                   <div>
                     <div
-                      className={`${styles.button} mt-6 rounded-[4px] h-11`}
+                      className={`${styles.button} mt-9 rounded-[4px] h-11`}
                       onClick={() => addToCartHandler(data._id)}
                     >
                       <span className="text-[#fff] flex items-center">
@@ -217,7 +217,7 @@ const ProductDetailsCard = ({ setOpen, data }) => {
                   </div>
                   <div>
                     <div
-                      className={`${styles.button} mt-6 rounded-[4px] h-11`}
+                      className={`${styles.button} mt-9 rounded-[4px] h-11`}
                       onClick={handleMessageSubmit}
                     >
                       <span className="text-[#fff] flex items-center">
@@ -226,7 +226,7 @@ const ProductDetailsCard = ({ setOpen, data }) => {
                     </div>
                   </div>
                 </div>
-                <div className="flex mt-3">
+                <div className="flex mt-7">
                   <Link to={`/shop/preview/${data.shop._id}`} className="flex">
                     <img
                       src={
