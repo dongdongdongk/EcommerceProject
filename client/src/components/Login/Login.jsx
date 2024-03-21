@@ -140,10 +140,16 @@ const Login = () => {
             </form>
                   <KakaoLogin />
                   <GoogleLoginButton  />
-                  <div className={`${styles.noramlFlex} w-full`}>
+                  <div className={`${styles.noramlFlex} w-full mt-2`}>
                         <h4>회원이 아니십니까?</h4>
                         <Link to="/sign-up" className="text-yellow-600 pl-2">
                             회원가입
+                        </Link>
+                  </div>
+                  <div className={`${styles.noramlFlex} w-full mt-1`}>
+                        <h4>판매자이십니까?</h4>
+                        <Link to="/shop-login" className="text-yellow-600 pl-2">
+                            판매자 로그인
                         </Link>
                   </div>
           </div>

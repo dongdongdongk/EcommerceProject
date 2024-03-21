@@ -134,7 +134,7 @@ const ShopLogin = () => {
             <div className={`${styles.noramlFlex} w-full`}>
               <h4>회원이 아니십니까?</h4>
               <Link to="/shop-create" className="text-yellow-600 pl-2">
-                회원가입
+                판매자 회원가입
               </Link>
             </div>
           </form>

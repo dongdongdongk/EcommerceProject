@@ -27,7 +27,7 @@ const GoogleLoginButton = () => {
   return (
     <>
       <div className="row ">
-      <button className="mt-5" onClick={handleGoogleLogin}>
+      <button onClick={handleGoogleLogin}>
         <img
           className="text-center"
           src={process.env.REACT_APP_BACKEND + `/images/google_login.png`}

@@ -49,7 +49,7 @@ const ShopCreate = () => {
         setPhoneNumber();
         setTimeout(() => {
           window.location.replace("/");
-        }, 5000);
+        }, 4000);
       })
       .catch((error) => {
         toast.error(error.response.data.message);

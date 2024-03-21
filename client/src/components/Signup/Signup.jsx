@@ -36,6 +36,9 @@ const Signup = () => {
       setEmail("");
       setPassword("");
       setAvatar();
+      setTimeout(() => {
+        window.location.replace("/");
+      }, 4000);
     }).catch((error) => {
       toast.error(error.response.data.message)
     })

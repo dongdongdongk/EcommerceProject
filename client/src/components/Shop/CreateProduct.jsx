@@ -57,7 +57,6 @@ const CreateProduct = () => {
     }
 
     // 형식 변환 오류를 방지하기 위해 입력된 가격과 재고를 Number로 변환합니다.
-    const parsedOriginalPrice = originalPrice ? parseFloat(originalPrice) : 0;
     const parsedDiscountPrice = parseFloat(discountPrice);
     const parsedStock = parseInt(stock);
 
@@ -70,7 +69,7 @@ const CreateProduct = () => {
     newForm.append("description", description);
     newForm.append("category", category);
     newForm.append("tags", tags);
-    newForm.append("originalPrice", parsedOriginalPrice);
+    newForm.append("originalPrice", originalPrice);
     newForm.append("discountPrice", parsedDiscountPrice);
     newForm.append("stock", parsedStock);
     newForm.append("shopId", seller._id); // 아직 없다
@@ -116,7 +115,7 @@ const CreateProduct = () => {
         <br />
         <div>
           <label className="pb-2">
-            Category <span className="text-red-500">*</span>
+            카테고리 <span className="text-red-500">*</span>
           </label>
           <select
             className="w-full mt-2 border h-[35px] rounded-[5px]"
@@ -146,7 +145,7 @@ const CreateProduct = () => {
         </div>
         <br />
         <div>
-          <label className="pb-2">기본 가격</label>
+          <label className="pb-2">할인 전 가격 ( 할인 중이 아니라면 비워주세요! )</label>
           <input
             type="number"
             name="price"
@@ -159,7 +158,7 @@ const CreateProduct = () => {
         <br />
         <div>
           <label className="pb-2">
-            가격 (할인 적용) <span className="text-red-500">*</span>
+            최종 가격 <span className="text-red-500">*</span> ( 할인이 적용되었거나 적용되지 않은 최종가격을 입력해주세요 ) 
           </label>
           <input
             type="number"
