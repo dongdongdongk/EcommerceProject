@@ -47,6 +47,9 @@ const ShopCreate = () => {
         setZipCode();
         setAddress("");
         setPhoneNumber();
+        setTimeout(() => {
+          window.location.replace("/");
+        }, 5000);
       })
       .catch((error) => {
         toast.error(error.response.data.message);
