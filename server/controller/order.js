@@ -100,9 +100,9 @@ router.put(
         return next(new ErrorHandler("주문을 찾을 수 없습니다", 400));
       }
       if (req.body.status === "배송 파트너로 이관됨") {
-        order.cart.forEach(async (o) => {
-          await updateOrder(o._id, o.qty);
-        });
+        // order.cart.forEach(async (o) => {
+        //   await updateOrder(o._id, o.qty);
+        // });
       }
 
       order.status = req.body.status;
@@ -110,6 +110,9 @@ router.put(
       if (req.body.status === "배송 완료") {
         order.deliveredAt = Date.now();
         order.paymentInfo.status = "배송 완료";
+        order.cart.forEach(async (o) => {
+          await updateOrder(o._id, o.qty);
+        });
       }
 
       await order.save({ validateBeforeSave: false });
